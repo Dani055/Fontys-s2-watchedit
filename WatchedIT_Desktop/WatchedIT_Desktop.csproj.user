@@ -1,8 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <ItemGroup>
-        <Compile Update="Form1.cs">
-            <SubType>Form</SubType>
-        </Compile>
-    </ItemGroup>
+  <ItemGroup>
+    <Compile Update="forms\AddMovie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\AddSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\MovieDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="user_controls\MovieCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>
