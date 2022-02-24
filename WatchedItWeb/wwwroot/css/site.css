@@ -1,0 +1,399 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+@keyframes img-zoomin {
+    0% {
+        transform: scale(1);
+        filter: grayscale(0);
+    }
+
+    20% {
+        filter: grayscale(0.6);
+        transform: scale(1.10);
+    }
+
+    100% {
+        filter: grayscale(0.6);
+        transform: scale(1.15);
+    }
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+a.logo {
+    font-size: 2em;
+    font-family: 'Bebas Neue', cursive;
+    transition: color 0.2s ease-in;
+}
+
+    a.logo:hover {
+        color: orange;
+        border-bottom: 0;
+    }
+
+main {
+    margin-bottom: 1em;
+}
+
+.site {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    margin: 0 auto;
+    padding: 0 2rem;
+    max-width: 80em;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+.media img {
+    width: 100%;
+    height: auto;
+}
+
+main .wrapper {
+    padding-top: 1em;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+h2.heading {
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+h3.category {
+    flex: 0 0 100%;
+    padding-bottom: 1em;
+}
+
+.row h3.load-more {
+    text-align: center;
+    flex: 0 0 100%;
+}
+
+.card-movie {
+    flex: 0 1 23%;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 2px solid gray;
+    margin-bottom: 2em;
+    animation: transform;
+}
+
+    .card-movie:hover img {
+        animation: img-zoomin 3s forwards;
+    }
+
+.arbox {
+    height: 0;
+    overflow: hidden;
+    padding-top: 140%;
+    position: relative;
+}
+
+    .arbox img {
+        width: 100%;
+        height: 100%;
+    }
+
+.card-movie .media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-movie p {
+    text-align: center;
+    padding: 0.6em 0;
+}
+
+footer {
+    background-color: #F24236;
+    color: #FFFEE0;
+    margin-top: auto;
+    bottom: 0;
+    position: relative;
+}
+
+    footer .wrapper {
+        padding: 2em 2rem;
+    }
+
+/* FORMS */
+form.auth {
+    max-width: 30em;
+    margin: 5em auto 0 auto;
+}
+
+textarea {
+    resize: none;
+}
+
+form.auth textarea,
+form.auth input[type="text"],
+form.auth input[type="tel"],
+form.auth input[type="email"],
+form.auth input[type="password"] {
+    display: block;
+    width: 100%;
+    border: 1.5px solid #CCC;
+    padding: 3px;
+    border-radius: 0.3em;
+    outline: none;
+    transition: border 0.3s ease-in;
+}
+
+    form.auth textarea,
+    form.auth input[type="text"]:hover,
+    form.auth input[type="tel"]:hover,
+    form.auth input[type="email"]:hover,
+    form.auth input[type="password"]:hover {
+        border-color: #F24236;
+    }
+
+    form.auth textarea,
+    form.auth input[type="text"]:focus,
+    form.auth input[type="tel"]:focus,
+    form.auth input[type="email"]:focus,
+    form.auth input[type="password"]:focus {
+        border-color: #F24236;
+    }
+
+form.auth textarea,
+input[type="text"]:focus + label,
+input[type="tel"]:focus + label,
+input[type="email"]:focus + label,
+input[type="password"]:focus + label {
+    color: #F24236;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+form.auth fieldset {
+    border: 2px solid #F24236;
+    padding: 2em;
+}
+
+legend {
+    padding: 0 1em;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #F24236
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    flex-direction: column-reverse;
+    max-width: 15em;
+    margin: 0 auto;
+}
+
+    .field + .field {
+        margin-top: 1em;
+    }
+
+form.auth label {
+    transition: color 0.3s ease-in;
+}
+
+form.auth .field-submit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    form.auth .field-submit button {
+        padding: 0.5em 1.2em;
+        border-radius: 0.3em;
+        border: 2px solid #F24236;
+        background-color: #F24236;
+        color: #FFFEE0;
+        margin-top: 1em;
+        transition: background-color 0.2s ease-in, color 0.2s ease-in;
+        cursor: pointer;
+    }
+
+        form.auth .field-submit button:hover {
+            background-color: rgb(255, 249, 249);
+            color: #F24236;
+        }
+
+form.flat {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 1em;
+    flex-wrap: wrap;
+}
+
+    form.flat .media {
+        flex: 0 0 8%;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    form.flat > * {
+        margin-top: 1em;
+    }
+
+    form.flat input {
+        padding: 3px 5px;
+    }
+
+    form.flat textarea.review-desc {
+        flex: 0 0 60%;
+    }
+
+    form.flat textarea {
+        padding: 3px 5px;
+    }
+
+    form.flat .stars {
+        max-width: 60px;
+    }
+
+    form.flat button {
+        padding: 0.5em 1em;
+        border-radius: 3px;
+        border: 2px solid #F24236;
+        background-color: #F24236;
+        color: #FFFEE0;
+        transition: color 0.2s ease-in, background-color 0.2s ease-in;
+    }
+
+        form.flat button:hover {
+            background-color: rgb(255, 249, 249);
+            color: #F24236;
+            cursor: pointer;
+        }
+
+    form.flat input,
+    form.flat textarea {
+        border: 2px solid #ccc;
+        border-radius: 3px;
+    }
+
+        form.flat input:hover,
+        form.flat textarea:hover {
+            border-color: #F24236;
+        }
+
+        form.flat input[type="text"]:focus {
+            border-color: #F24236;
+        }
+
+/* MOVIE DETAILS */
+.movie-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.moviepic {
+    flex: 0 0 39%;
+}
+
+.movie-description {
+    flex: 0 0 59%;
+}
+
+.comments {
+    flex: 0 0 100%;
+}
+
+.desc-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 0 1em 0;
+    border-bottom: 2px solid grey;
+}
+
+.desc-desc {
+    padding: 1em;
+    border-bottom: 2px solid grey;
+}
+
+.desc-actors {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+}
+
+    .desc-actors h4 {
+        padding-bottom: 0.5em;
+    }
+
+    .desc-actors h3 {
+        flex: 0 0 100%;
+        padding-bottom: 1em;
+    }
+
+.producers {
+    flex: 0 0 50%;
+}
+
+.actors {
+    flex: 0 0 50%;
+}
+
+    .producers p, .actors p {
+        padding-bottom: 2px;
+    }
+
+.leave-review {
+    padding: 1em;
+}
+
+.reviews h3 {
+    padding-bottom: 1em;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.review {
+    background-color: rgb(231, 230, 230);
+    padding: 1em;
+}
+
+    .review + .review {
+        margin-top: 2em;
+    }
+
+.review-header .media {
+    flex: 0 0 5%;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.review-header p {
+    margin-left: 1em;
+}
+
+.review-content p {
+    padding: 0 1em;
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "6M4HFtiFidMQdf7Ps9jbHHAQyd1zNhYBh9BkLJKMHI5d9oM3Ef7AWPZgmECNX7SJax6epR4F2eF9F5RiA6MerA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedItWeb\\WatchedItWeb.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nitro\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

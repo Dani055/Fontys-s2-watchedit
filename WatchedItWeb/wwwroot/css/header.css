@@ -1,0 +1,31 @@
+header {
+    background-color: #F24236;
+}
+
+    header a {
+        color: #FFFEE0;
+        transition: color 0.2s ease-in;
+    }
+
+        header a:hover {
+            color: orange;
+            border-bottom: 1px solid orange;
+        }
+
+    header .wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-top: 0.7em;
+        padding-bottom: 0.7em;
+    }
+
+    header nav ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    header ul a {
+        padding: 0.2em 0.5em;
+    }

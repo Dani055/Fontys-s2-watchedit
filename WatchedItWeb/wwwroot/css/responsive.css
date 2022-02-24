@@ -1,0 +1,46 @@
+@media (min-width:1024px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (min-width:800px) and (max-width:1024px) {
+    html {
+        font-size: 13px;
+    }
+
+    .wrapper {
+        max-width: 65em;
+    }
+}
+
+@media (min-width:300px) and (max-width:800px) {
+    html {
+        font-size: 12px;
+    }
+
+    .wrapper {
+        max-width: 55em;
+    }
+}
+
+@media (max-width:670px) {
+    .card-movie {
+        flex: 0 1 48%;
+    }
+
+    .moviepic {
+        flex: 0 0 100%;
+        margin-bottom: 2em;
+    }
+
+    .movie-description {
+        flex: 0 0 100%;
+    }
+}
+
+@media (max-width:400px) {
+    .card-movie {
+        flex: 0 1 98%;
+    }
+}
