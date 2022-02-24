@@ -32,3 +32,4 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\W
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.AddMovie.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.MovieDetails.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.AddSeries.resources
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.SeriesDetails.resources

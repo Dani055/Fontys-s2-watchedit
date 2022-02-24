@@ -33,16 +33,18 @@ namespace WatchedIT_Desktop.forms
             this.lblName = new System.Windows.Forms.Label();
             this.lblYear = new System.Windows.Forms.Label();
             this.lblGenre = new System.Windows.Forms.Label();
-            this.lblRating = new System.Windows.Forms.Label();
-            this.lblDesc = new System.Windows.Forms.Label();
-            this.lblDuration = new System.Windows.Forms.Label();
             this.lblProd = new System.Windows.Forms.Label();
             this.lblStarring = new System.Windows.Forms.Label();
             this.lblProdValue = new System.Windows.Forms.Label();
             this.lblActors = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.lblDuration = new System.Windows.Forms.Label();
+            this.lblRating = new System.Windows.Forms.Label();
+            this.panelDesc = new System.Windows.Forms.Panel();
+            this.lblDesc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
+            this.panelDesc.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbPhoto
@@ -81,37 +83,10 @@ namespace WatchedIT_Desktop.forms
             this.lblGenre.TabIndex = 3;
             this.lblGenre.Text = "Genre";
             // 
-            // lblRating
-            // 
-            this.lblRating.AutoSize = true;
-            this.lblRating.Location = new System.Drawing.Point(1033, 70);
-            this.lblRating.Name = "lblRating";
-            this.lblRating.Size = new System.Drawing.Size(52, 20);
-            this.lblRating.TabIndex = 4;
-            this.lblRating.Text = "Rating";
-            // 
-            // lblDesc
-            // 
-            this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(446, 138);
-            this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(85, 20);
-            this.lblDesc.TabIndex = 5;
-            this.lblDesc.Text = "Description";
-            // 
-            // lblDuration
-            // 
-            this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(450, 268);
-            this.lblDuration.Name = "lblDuration";
-            this.lblDuration.Size = new System.Drawing.Size(67, 20);
-            this.lblDuration.TabIndex = 6;
-            this.lblDuration.Text = "Duration";
-            // 
             // lblProd
             // 
             this.lblProd.AutoSize = true;
-            this.lblProd.Location = new System.Drawing.Point(447, 351);
+            this.lblProd.Location = new System.Drawing.Point(452, 442);
             this.lblProd.Name = "lblProd";
             this.lblProd.Size = new System.Drawing.Size(77, 20);
             this.lblProd.TabIndex = 7;
@@ -120,7 +95,7 @@ namespace WatchedIT_Desktop.forms
             // lblStarring
             // 
             this.lblStarring.AutoSize = true;
-            this.lblStarring.Location = new System.Drawing.Point(874, 351);
+            this.lblStarring.Location = new System.Drawing.Point(879, 442);
             this.lblStarring.Name = "lblStarring";
             this.lblStarring.Size = new System.Drawing.Size(64, 20);
             this.lblStarring.TabIndex = 8;
@@ -129,7 +104,7 @@ namespace WatchedIT_Desktop.forms
             // lblProdValue
             // 
             this.lblProdValue.AutoSize = true;
-            this.lblProdValue.Location = new System.Drawing.Point(452, 385);
+            this.lblProdValue.Location = new System.Drawing.Point(457, 476);
             this.lblProdValue.Name = "lblProdValue";
             this.lblProdValue.Size = new System.Drawing.Size(18, 20);
             this.lblProdValue.TabIndex = 9;
@@ -138,7 +113,7 @@ namespace WatchedIT_Desktop.forms
             // lblActors
             // 
             this.lblActors.AutoSize = true;
-            this.lblActors.Location = new System.Drawing.Point(885, 385);
+            this.lblActors.Location = new System.Drawing.Point(890, 476);
             this.lblActors.Name = "lblActors";
             this.lblActors.Size = new System.Drawing.Size(18, 20);
             this.lblActors.TabIndex = 10;
@@ -162,11 +137,48 @@ namespace WatchedIT_Desktop.forms
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
+            // lblDuration
+            // 
+            this.lblDuration.AutoSize = true;
+            this.lblDuration.Location = new System.Drawing.Point(452, 357);
+            this.lblDuration.Name = "lblDuration";
+            this.lblDuration.Size = new System.Drawing.Size(67, 20);
+            this.lblDuration.TabIndex = 6;
+            this.lblDuration.Text = "Duration";
+            // 
+            // lblRating
+            // 
+            this.lblRating.AutoSize = true;
+            this.lblRating.Location = new System.Drawing.Point(1004, 70);
+            this.lblRating.Name = "lblRating";
+            this.lblRating.Size = new System.Drawing.Size(52, 20);
+            this.lblRating.TabIndex = 4;
+            this.lblRating.Text = "Rating";
+            // 
+            // panelDesc
+            // 
+            this.panelDesc.Controls.Add(this.lblDesc);
+            this.panelDesc.Location = new System.Drawing.Point(452, 127);
+            this.panelDesc.Name = "panelDesc";
+            this.panelDesc.Padding = new System.Windows.Forms.Padding(20);
+            this.panelDesc.Size = new System.Drawing.Size(604, 210);
+            this.panelDesc.TabIndex = 29;
+            // 
+            // lblDesc
+            // 
+            this.lblDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDesc.Location = new System.Drawing.Point(20, 20);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(564, 170);
+            this.lblDesc.TabIndex = 18;
+            this.lblDesc.Text = "Description";
+            // 
             // MovieDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1197, 625);
+            this.ClientSize = new System.Drawing.Size(1099, 625);
+            this.Controls.Add(this.panelDesc);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblActors);
@@ -174,7 +186,6 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblStarring);
             this.Controls.Add(this.lblProd);
             this.Controls.Add(this.lblDuration);
-            this.Controls.Add(this.lblDesc);
             this.Controls.Add(this.lblRating);
             this.Controls.Add(this.lblGenre);
             this.Controls.Add(this.lblYear);
@@ -183,6 +194,7 @@ namespace WatchedIT_Desktop.forms
             this.Name = "MovieDetails";
             this.Text = "MovieDetails";
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
+            this.panelDesc.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,14 +206,15 @@ namespace WatchedIT_Desktop.forms
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.Label lblGenre;
-        private System.Windows.Forms.Label lblRating;
-        private System.Windows.Forms.Label lblDesc;
-        private System.Windows.Forms.Label lblDuration;
         private System.Windows.Forms.Label lblProd;
         private System.Windows.Forms.Label lblStarring;
         private System.Windows.Forms.Label lblProdValue;
         private System.Windows.Forms.Label lblActors;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblDuration;
+        private System.Windows.Forms.Label lblRating;
+        private System.Windows.Forms.Panel panelDesc;
+        private System.Windows.Forms.Label lblDesc;
     }
 }

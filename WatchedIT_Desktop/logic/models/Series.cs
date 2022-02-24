@@ -12,10 +12,12 @@ namespace WatchedIT_Desktop.logic.models
         public string Name { get; set; }
         public DateTime Year { get; set; }
         public string ImageUrl { get; set; }
+        public string Producer { get; set; }
         public string Genre { get; set; }
+        public string Actors { get; set; }
         public string Description { get; set; }
 
-        public Series(int id, string name, DateTime year, string imageurl, string genre, string desc)
+        public Series(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors)
         {
             Id = id;
             Name = name;
@@ -23,6 +25,8 @@ namespace WatchedIT_Desktop.logic.models
             ImageUrl = imageurl;
             Genre = genre;
             Description = desc;
+            Producer = producer;
+            Actors = actors;
         }
     }
 }

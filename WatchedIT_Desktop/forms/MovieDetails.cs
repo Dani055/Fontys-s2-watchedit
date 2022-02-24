@@ -31,7 +31,7 @@ namespace WatchedIT_Desktop.forms
                 lblDuration.Text = movie.Duration.ToString();
                 lblGenre.Text = movie.Genre;
                 lblProdValue.Text = movie.Producer;
-                lblYear.Text = movie.Year.ToString("YYYY");
+                lblYear.Text = movie.Year.ToString("yyyy");
                 pbPhoto.Load(movie.ImageUrl);
             }
         }

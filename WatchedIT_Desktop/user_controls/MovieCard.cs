@@ -49,6 +49,10 @@ namespace WatchedIT_Desktop.user_controls
             {
                 home.GoToMovieDetails(Id);
             }
+            else
+            {
+                home.GoToSeriesDetails(Id);
+            }
             
         }
 
@@ -57,6 +61,10 @@ namespace WatchedIT_Desktop.user_controls
             if (isMovie)
             {
                 home.GoToMovieDetails(Id);
+            }
+            else
+            {
+                home.GoToSeriesDetails(Id);
             }
         }
     }

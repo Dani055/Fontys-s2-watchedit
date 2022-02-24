@@ -128,6 +128,7 @@ namespace WatchedIT_Desktop.logic.services
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
                     m = new Movie(Id, name, year, url, genre, producer, desc, actors, duration);
+                    conn.Close();
                     return m;
                 }
                 conn.Close();

@@ -19,6 +19,9 @@
     <Compile Update="forms\Register.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="forms\SeriesDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="user_controls\MovieCard.cs">
       <SubType>UserControl</SubType>
     </Compile>

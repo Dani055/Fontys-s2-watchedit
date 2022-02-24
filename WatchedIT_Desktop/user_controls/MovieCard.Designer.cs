@@ -36,6 +36,7 @@ namespace WatchedIT_Desktop.user_controls
             // 
             // pbPhoto
             // 
+            this.pbPhoto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPhoto.Dock = System.Windows.Forms.DockStyle.Top;
             this.pbPhoto.Location = new System.Drawing.Point(0, 0);
             this.pbPhoto.Name = "pbPhoto";
@@ -47,6 +48,7 @@ namespace WatchedIT_Desktop.user_controls
             // 
             // lblName
             // 
+            this.lblName.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblName.Location = new System.Drawing.Point(0, 417);
             this.lblName.Name = "lblName";

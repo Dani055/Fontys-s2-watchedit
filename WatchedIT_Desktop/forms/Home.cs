@@ -73,6 +73,13 @@ namespace WatchedIT_Desktop.forms
             md.ShowDialog();
             this.Show();
         }
+        public void GoToSeriesDetails(int id)
+        {
+            SeriesDetails sd = new SeriesDetails(id);
+            this.Hide();
+            sd.ShowDialog();
+            this.Show();
+        }
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
