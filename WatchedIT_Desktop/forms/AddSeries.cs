@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WatchedIT_Desktop.logic;
 using WatchedIT_Desktop.logic.services;
 
 namespace WatchedIT_Desktop.forms
@@ -34,6 +35,7 @@ namespace WatchedIT_Desktop.forms
             string desc = tbDesc.Text;
             string actors = tbActors.Text;
             SeriesService.AddSeries(name, year, url, genre, desc, actors, producers);
+            Utils.UpdateContent = true;
         }
     }
 }

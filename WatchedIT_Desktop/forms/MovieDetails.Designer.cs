@@ -29,6 +29,7 @@ namespace WatchedIT_Desktop.forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MovieDetails));
             this.pbPhoto = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblYear = new System.Windows.Forms.Label();
@@ -49,10 +50,11 @@ namespace WatchedIT_Desktop.forms
             // 
             // pbPhoto
             // 
+            this.pbPhoto.Image = ((System.Drawing.Image)(resources.GetObject("pbPhoto.Image")));
             this.pbPhoto.Location = new System.Drawing.Point(12, 12);
             this.pbPhoto.Name = "pbPhoto";
             this.pbPhoto.Size = new System.Drawing.Size(367, 549);
-            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPhoto.TabIndex = 0;
             this.pbPhoto.TabStop = false;
             // 
@@ -127,6 +129,7 @@ namespace WatchedIT_Desktop.forms
             this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -158,7 +161,7 @@ namespace WatchedIT_Desktop.forms
             // panelDesc
             // 
             this.panelDesc.Controls.Add(this.lblDesc);
-            this.panelDesc.Location = new System.Drawing.Point(452, 127);
+            this.panelDesc.Location = new System.Drawing.Point(452, 111);
             this.panelDesc.Name = "panelDesc";
             this.panelDesc.Padding = new System.Windows.Forms.Padding(20);
             this.panelDesc.Size = new System.Drawing.Size(604, 210);
@@ -177,6 +180,7 @@ namespace WatchedIT_Desktop.forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1099, 625);
             this.Controls.Add(this.panelDesc);
             this.Controls.Add(this.btnEdit);
@@ -192,6 +196,7 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pbPhoto);
             this.Name = "MovieDetails";
+            this.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
             this.Text = "MovieDetails";
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
             this.panelDesc.ResumeLayout(false);

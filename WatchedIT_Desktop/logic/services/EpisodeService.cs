@@ -9,11 +9,11 @@ using WatchedIT_Desktop.logic.models;
 
 namespace WatchedIT_Desktop.logic.services
 {
-    class SeriesService
+    public static class EpisodeService
     {
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
-        public static bool AddSeries(string name, DateTime year, string url, string genre, string desc, string actors, string producer)
+        public static bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
             if (name.Length < 3)
             {
@@ -25,22 +25,36 @@ namespace WatchedIT_Desktop.logic.services
                 MessageBox.Show("You must enter Genre");
                 return false;
             }
+            else if (producer == "")
+            {
+                MessageBox.Show("You must enter Producer");
+                return false;
+            }
+            else if (actors == "")
+            {
+                MessageBox.Show("You must enter Actors");
+                return false;
+            }
 
             try
             {
-                string sql = "INSERT INTO series (name, year, imageUrl, genre, description, actors, producer) VALUES (@name, @year, @imageUrl, @genre, @description, @actors, @producer);";
+                string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@year", year.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@imageUrl", url);
                 cmd.Parameters.AddWithValue("@genre", genre);
+                cmd.Parameters.AddWithValue("@producer", producer);
                 cmd.Parameters.AddWithValue("@description", desc);
                 cmd.Parameters.AddWithValue("@actors", actors);
-                cmd.Parameters.AddWithValue("@producer", producer); ;
+                cmd.Parameters.AddWithValue("@duration", duration);
+                cmd.Parameters.AddWithValue("@season", season);
+                cmd.Parameters.AddWithValue("@episode", episode);
+                cmd.Parameters.AddWithValue("@seriesId", seriesId);
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("Series added successfully");
+                MessageBox.Show("Episode added successfully");
                 conn.Close();
                 return true;
             }
@@ -52,13 +66,14 @@ namespace WatchedIT_Desktop.logic.services
             }
         }
 
-        public static List<Series> GetSeries()
+        public static List<Episode> GetEpisodes(int seriesid)
         {
             try
             {
-                string sql = "SELECT * FROM series";
+                string sql = "SELECT * FROM movie WHERE seriesId = @seriesId";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                List<Series> series = new List<Series>();
+                cmd.Parameters.AddWithValue("@seriesId", seriesid);
+                List<Episode> episodes = new List<Episode>();
                 conn.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -73,14 +88,18 @@ namespace WatchedIT_Desktop.logic.services
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     string producer = reader["producer"].ToString();
+                    TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int season = int.Parse(reader["season"].ToString());
+                    int episode = int.Parse(reader["episode"].ToString());
+                    int seriesId = int.Parse(reader["episode"].ToString());
 
-                    Series s = new Series(id, name, year, url, genre, producer, desc, actors);
-                    series.Add(s);
+                    Episode e = new Episode(id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
+                    episodes.Add(e);
 
                 }
                 reader.Close();
                 conn.Close();
-                return series;
+                return episodes;
             }
             catch (Exception ex)
             {
@@ -89,14 +108,14 @@ namespace WatchedIT_Desktop.logic.services
                 throw;
             }
         }
-        public static Series GetSeriesById(int id)
+        public static Episode GetEpisodeById(int id)
         {
             try
             {
-                string sql = "Select * from series WHERE id = @ID";
+                string sql = "Select * from movie WHERE id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
-                Series s;
+                Episode e;
 
                 conn.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -111,10 +130,14 @@ namespace WatchedIT_Desktop.logic.services
                     string producer = reader["producer"].ToString();
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
+                    TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int season = int.Parse(reader["season"].ToString());
+                    int episode = int.Parse(reader["episode"].ToString());
+                    int seriesId = int.Parse(reader["episode"].ToString());
 
-                    s = new Series(Id, name, year, url, genre, producer, desc, actors);
+                    e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
                     conn.Close();
-                    return s;
+                    return e;
                 }
                 conn.Close();
                 return null;
@@ -125,39 +148,6 @@ namespace WatchedIT_Desktop.logic.services
                 MessageBox.Show(ex.Message);
                 throw;
             }
-
-        }
-
-        public static bool DeleteSeries(int id)
-        {
-            try
-            {
-                string sql = "DELETE FROM series WHERE id = @ID";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@ID", id);
-
-                conn.Open();
-                int result = cmd.ExecuteNonQuery();
-                conn.Close();
-                if (result > 0)
-                {
-                    MessageBox.Show("Series deleted successfully!");
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("Something went wrong!");
-                    return false;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                conn.Close();
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-
         }
     }
 }

@@ -19,11 +19,6 @@ namespace WatchedIT_Desktop.logic.services
                 MessageBox.Show("Name must be at least 3 characters long!");
                 return false;
             }
-            else if (url == "")
-            {
-                MessageBox.Show("You must enter URL");
-                return false;
-            }
             else if (genre == "")
             {
                 MessageBox.Show("You must enter Genre");
@@ -70,7 +65,7 @@ namespace WatchedIT_Desktop.logic.services
         {
             try
             {
-                string sql = "SELECT * FROM movie";
+                string sql = "SELECT * FROM movie where seriesId is NULL";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 List<Movie> movies = new List<Movie>();
                 conn.Open();
@@ -142,5 +137,37 @@ namespace WatchedIT_Desktop.logic.services
             }
 
          }
+
+        public static bool DeleteMovieOrEpisode(int id)
+        {
+            try
+            {
+                string sql = "DELETE FROM movie WHERE id = @ID";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@ID", id);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                conn.Close();
+                if (result > 0)
+                {
+                    MessageBox.Show("Movie deleted successfully!");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong!");
+                    return false;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+
+        }
     }
 }

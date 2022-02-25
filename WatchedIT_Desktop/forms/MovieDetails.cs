@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WatchedIT_Desktop.logic;
 using WatchedIT_Desktop.logic.models;
 using WatchedIT_Desktop.logic.services;
 
@@ -15,10 +16,20 @@ namespace WatchedIT_Desktop.forms
     public partial class MovieDetails : Form
     {
         private Movie movie = null;
-        public MovieDetails(int id)
+        private bool isMovie = true;
+        public MovieDetails(int id, bool ismovie)
         {
             InitializeComponent();
-            movie = MovieService.GetMovieById(id);
+            isMovie = ismovie;
+            if (!isMovie)
+            {
+                movie = EpisodeService.GetEpisodeById(id);
+            }
+            else
+            {
+                movie = MovieService.GetMovieById(id);
+            }
+
             PopulateInfo();
         }
         private void PopulateInfo()
@@ -32,8 +43,26 @@ namespace WatchedIT_Desktop.forms
                 lblGenre.Text = movie.Genre;
                 lblProdValue.Text = movie.Producer;
                 lblYear.Text = movie.Year.ToString("yyyy");
-                pbPhoto.Load(movie.ImageUrl);
+                if (movie.ImageUrl != null)
+                {
+                    pbPhoto.Load(movie.ImageUrl);
+                }
+
             }
+            if (!isMovie)
+            {
+                if (movie is Episode)
+                {
+                    lblName.Text = movie.Name + ": Season " + ((Episode)movie).SeasonNo + " - Episode " + ((Episode)movie).EpisodeNo;
+                }
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            MovieService.DeleteMovieOrEpisode(movie.Id);
+            Utils.UpdateContent = true;
+            this.Dispose();
         }
     }
 }

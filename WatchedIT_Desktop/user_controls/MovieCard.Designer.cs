@@ -29,6 +29,7 @@ namespace WatchedIT_Desktop.user_controls
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MovieCard));
             this.pbPhoto = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
@@ -38,10 +39,11 @@ namespace WatchedIT_Desktop.user_controls
             // 
             this.pbPhoto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPhoto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbPhoto.Image = ((System.Drawing.Image)(resources.GetObject("pbPhoto.Image")));
             this.pbPhoto.Location = new System.Drawing.Point(0, 0);
             this.pbPhoto.Name = "pbPhoto";
             this.pbPhoto.Size = new System.Drawing.Size(290, 417);
-            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPhoto.TabIndex = 0;
             this.pbPhoto.TabStop = false;
             this.pbPhoto.Click += new System.EventHandler(this.pbPhoto_Click);

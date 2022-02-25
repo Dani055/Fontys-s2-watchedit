@@ -149,7 +149,7 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnAddSeries
             // 
-            this.btnAddSeries.Location = new System.Drawing.Point(223, 717);
+            this.btnAddSeries.Location = new System.Drawing.Point(223, 715);
             this.btnAddSeries.Name = "btnAddSeries";
             this.btnAddSeries.Size = new System.Drawing.Size(125, 43);
             this.btnAddSeries.TabIndex = 32;
@@ -194,7 +194,7 @@ namespace WatchedIT_Desktop.forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 782);
+            this.ClientSize = new System.Drawing.Size(559, 781);
             this.Controls.Add(this.tbActors);
             this.Controls.Add(this.lblActors);
             this.Controls.Add(this.tbProd);

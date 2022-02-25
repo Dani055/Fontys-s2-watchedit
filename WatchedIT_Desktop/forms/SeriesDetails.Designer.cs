@@ -29,6 +29,7 @@ namespace WatchedIT_Desktop.forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SeriesDetails));
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.lblActors = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@ namespace WatchedIT_Desktop.forms
             this.btnYeet = new System.Windows.Forms.Button();
             this.btnAddEpisode = new System.Windows.Forms.Button();
             this.panelDesc = new System.Windows.Forms.Panel();
+            this.flwEpisodes = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
             this.panelDesc.SuspendLayout();
             this.SuspendLayout();
@@ -139,10 +141,12 @@ namespace WatchedIT_Desktop.forms
             // 
             // pbPhoto
             // 
+            this.pbPhoto.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbPhoto.ErrorImage")));
+            this.pbPhoto.Image = ((System.Drawing.Image)(resources.GetObject("pbPhoto.Image")));
             this.pbPhoto.Location = new System.Drawing.Point(12, 12);
             this.pbPhoto.Name = "pbPhoto";
             this.pbPhoto.Size = new System.Drawing.Size(367, 549);
-            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbPhoto.TabIndex = 13;
             this.pbPhoto.TabStop = false;
             // 
@@ -154,6 +158,7 @@ namespace WatchedIT_Desktop.forms
             this.btnYeet.TabIndex = 26;
             this.btnYeet.Text = "Delete";
             this.btnYeet.UseVisualStyleBackColor = true;
+            this.btnYeet.Click += new System.EventHandler(this.btnYeet_Click);
             // 
             // btnAddEpisode
             // 
@@ -163,6 +168,7 @@ namespace WatchedIT_Desktop.forms
             this.btnAddEpisode.TabIndex = 27;
             this.btnAddEpisode.Text = "Add episode";
             this.btnAddEpisode.UseVisualStyleBackColor = true;
+            this.btnAddEpisode.Click += new System.EventHandler(this.btnAddEpisode_Click);
             // 
             // panelDesc
             // 
@@ -173,11 +179,20 @@ namespace WatchedIT_Desktop.forms
             this.panelDesc.Size = new System.Drawing.Size(604, 210);
             this.panelDesc.TabIndex = 28;
             // 
+            // flwEpisodes
+            // 
+            this.flwEpisodes.AutoScroll = true;
+            this.flwEpisodes.Location = new System.Drawing.Point(27, 617);
+            this.flwEpisodes.Name = "flwEpisodes";
+            this.flwEpisodes.Size = new System.Drawing.Size(494, 210);
+            this.flwEpisodes.TabIndex = 29;
+            // 
             // SeriesDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1044, 655);
+            this.ClientSize = new System.Drawing.Size(1054, 839);
+            this.Controls.Add(this.flwEpisodes);
             this.Controls.Add(this.panelDesc);
             this.Controls.Add(this.btnAddEpisode);
             this.Controls.Add(this.btnYeet);
@@ -216,5 +231,6 @@ namespace WatchedIT_Desktop.forms
         private System.Windows.Forms.Button btnYeet;
         private System.Windows.Forms.Button btnAddEpisode;
         private System.Windows.Forms.Panel panelDesc;
+        private System.Windows.Forms.FlowLayoutPanel flwEpisodes;
     }
 }

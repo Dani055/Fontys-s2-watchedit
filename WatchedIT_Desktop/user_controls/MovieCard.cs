@@ -26,7 +26,13 @@ namespace WatchedIT_Desktop.user_controls
         public string ImageUrl
         {
             get { return imageUrl; }
-            set { imageUrl = value; pbPhoto.Load(imageUrl); }
+            set { imageUrl = value;
+                if (imageUrl != null)
+                {
+                    pbPhoto.Load(imageUrl);
+                }
+
+            }
         }
         public string MovieName
         {

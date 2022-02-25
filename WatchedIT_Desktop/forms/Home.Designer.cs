@@ -75,7 +75,7 @@ namespace WatchedIT_Desktop.forms
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 70);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(599, 514);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(945, 514);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
             // btnAddMovie
@@ -117,7 +117,7 @@ namespace WatchedIT_Desktop.forms
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 584);
+            this.panel1.Size = new System.Drawing.Size(945, 584);
             this.panel1.TabIndex = 10;
             // 
             // btnShowSeries

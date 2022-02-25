@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WatchedIT_Desktop.logic;
 using WatchedIT_Desktop.logic.models;
 using WatchedIT_Desktop.logic.services;
 using WatchedIT_Desktop.user_controls;
@@ -68,10 +69,15 @@ namespace WatchedIT_Desktop.forms
         }
         public void GoToMovieDetails(int id)
         {
-            MovieDetails md = new MovieDetails(id);
+            MovieDetails md = new MovieDetails(id, true);
             this.Hide();
             md.ShowDialog();
             this.Show();
+            if (Utils.UpdateContent)
+            {
+                GetMovies();
+                Utils.UpdateContent = false;
+            }
         }
         public void GoToSeriesDetails(int id)
         {
@@ -79,6 +85,12 @@ namespace WatchedIT_Desktop.forms
             this.Hide();
             sd.ShowDialog();
             this.Show();
+            if (Utils.UpdateContent)
+            {
+                GetSeries();
+                Utils.UpdateContent = false;
+            }
+
         }
 
         private void btnAddMovie_Click(object sender, EventArgs e)
@@ -87,6 +99,11 @@ namespace WatchedIT_Desktop.forms
             this.Hide();
             am.ShowDialog();
             this.Show();
+            if (Utils.UpdateContent)
+            {
+                this.GetMovies();
+                Utils.UpdateContent = false;
+            }
         }
 
         private void btnAddSeries_Click(object sender, EventArgs e)
@@ -95,6 +112,11 @@ namespace WatchedIT_Desktop.forms
             this.Hide();
             addseries.ShowDialog();
             this.Show();
+            if (Utils.UpdateContent)
+            {
+                this.GetSeries();
+                Utils.UpdateContent = false;
+            }
         }
 
         private void btnShowMovies_Click(object sender, EventArgs e)

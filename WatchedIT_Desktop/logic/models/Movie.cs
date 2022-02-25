@@ -23,7 +23,7 @@ namespace WatchedIT_Desktop.logic.models
             Id = id;
             Name = name;
             Year = year;
-            ImageUrl = imageurl;
+            ImageUrl = imageurl == "" ? null : imageurl;
             Genre = genre;
             Producer = producer;
             Description = desc;

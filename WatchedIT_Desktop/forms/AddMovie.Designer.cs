@@ -47,6 +47,12 @@ namespace WatchedIT_Desktop.forms
             this.tbDesc = new System.Windows.Forms.RichTextBox();
             this.tbDuration = new System.Windows.Forms.TextBox();
             this.btnAddMovie = new System.Windows.Forms.Button();
+            this.lblEpisode = new System.Windows.Forms.Label();
+            this.lblSeason = new System.Windows.Forms.Label();
+            this.tbEpisode = new System.Windows.Forms.NumericUpDown();
+            this.tbSeason = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.tbEpisode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSeason)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAddMovie
@@ -190,7 +196,7 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnAddMovie
             // 
-            this.btnAddMovie.Location = new System.Drawing.Point(207, 823);
+            this.btnAddMovie.Location = new System.Drawing.Point(207, 886);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(125, 43);
             this.btnAddMovie.TabIndex = 17;
@@ -198,11 +204,47 @@ namespace WatchedIT_Desktop.forms
             this.btnAddMovie.UseVisualStyleBackColor = true;
             this.btnAddMovie.Click += new System.EventHandler(this.btnAddMovie_Click);
             // 
+            // lblEpisode
+            // 
+            this.lblEpisode.AutoSize = true;
+            this.lblEpisode.Location = new System.Drawing.Point(260, 827);
+            this.lblEpisode.Name = "lblEpisode";
+            this.lblEpisode.Size = new System.Drawing.Size(62, 20);
+            this.lblEpisode.TabIndex = 44;
+            this.lblEpisode.Text = "Episode";
+            // 
+            // lblSeason
+            // 
+            this.lblSeason.AutoSize = true;
+            this.lblSeason.Location = new System.Drawing.Point(114, 827);
+            this.lblSeason.Name = "lblSeason";
+            this.lblSeason.Size = new System.Drawing.Size(56, 20);
+            this.lblSeason.TabIndex = 43;
+            this.lblSeason.Text = "Season";
+            // 
+            // tbEpisode
+            // 
+            this.tbEpisode.Location = new System.Drawing.Point(327, 827);
+            this.tbEpisode.Name = "tbEpisode";
+            this.tbEpisode.Size = new System.Drawing.Size(59, 27);
+            this.tbEpisode.TabIndex = 42;
+            // 
+            // tbSeason
+            // 
+            this.tbSeason.Location = new System.Drawing.Point(181, 825);
+            this.tbSeason.Name = "tbSeason";
+            this.tbSeason.Size = new System.Drawing.Size(64, 27);
+            this.tbSeason.TabIndex = 41;
+            // 
             // AddMovie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 892);
+            this.ClientSize = new System.Drawing.Size(511, 959);
+            this.Controls.Add(this.lblEpisode);
+            this.Controls.Add(this.lblSeason);
+            this.Controls.Add(this.tbEpisode);
+            this.Controls.Add(this.tbSeason);
             this.Controls.Add(this.btnAddMovie);
             this.Controls.Add(this.tbDuration);
             this.Controls.Add(this.tbDesc);
@@ -223,6 +265,8 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblAddMovie);
             this.Name = "AddMovie";
             this.Text = "AddMovie";
+            ((System.ComponentModel.ISupportInitialize)(this.tbEpisode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSeason)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,5 +292,9 @@ namespace WatchedIT_Desktop.forms
         private System.Windows.Forms.RichTextBox tbDesc;
         private System.Windows.Forms.TextBox tbDuration;
         private System.Windows.Forms.Button btnAddMovie;
+        private System.Windows.Forms.Label lblEpisode;
+        private System.Windows.Forms.Label lblSeason;
+        private System.Windows.Forms.NumericUpDown tbEpisode;
+        private System.Windows.Forms.NumericUpDown tbSeason;
     }
 }
