@@ -14,6 +14,11 @@ namespace WatchedIT_Desktop.logic.services
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
         public static bool AddMovie(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
             if (name.Length < 3)
             {
                 MessageBox.Show("Name must be at least 3 characters long!");
@@ -61,12 +66,89 @@ namespace WatchedIT_Desktop.logic.services
                 return false;
             }
         }
-        public static List<Movie> GetMovies()
+
+        public static bool EditMovieOrEpisode(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, bool isMovie, int season, int episode)
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
+            if (name.Length < 3)
+            {
+                MessageBox.Show("Name must be at least 3 characters long!");
+                return false;
+            }
+            else if (genre == "")
+            {
+                MessageBox.Show("You must enter Genre");
+                return false;
+            }
+            else if (producer == "")
+            {
+                MessageBox.Show("You must enter Producer");
+                return false;
+            }
+            else if (actors == "")
+            {
+                MessageBox.Show("You must enter Actors");
+                return false;
+            }
+
+            try
+            {
+                string sql;
+                if (isMovie)
+                {
+                    sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration WHERE id = @id;";
+                }
+                else
+                {
+                    sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration, season = @season, episode = @episode WHERE id = @id;";
+                }
+                
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@year", year.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@imageUrl", url);
+                cmd.Parameters.AddWithValue("@genre", genre);
+                cmd.Parameters.AddWithValue("@producer", producer);
+                cmd.Parameters.AddWithValue("@description", desc);
+                cmd.Parameters.AddWithValue("@actors", actors);
+                cmd.Parameters.AddWithValue("@duration", duration);
+                if (!isMovie)
+                {
+                    cmd.Parameters.AddWithValue("@season", season);
+                    cmd.Parameters.AddWithValue("@episode", episode);
+                }
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                if (isMovie)
+                {
+                    MessageBox.Show("Movie edited successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Episode edited successfully!");
+                }
+                conn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        public static List<Movie> GetMovies(int offset)
         {
             try
             {
-                string sql = "SELECT * FROM movie where seriesId is NULL";
+                string sql = "SELECT * FROM movie where seriesId is NULL ORDER BY id desc LIMIT 4 OFFSET @offset";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@offset", offset);
                 List<Movie> movies = new List<Movie>();
                 conn.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -77,7 +159,7 @@ namespace WatchedIT_Desktop.logic.services
                     int id = reader.GetInt32("id");
                     string name = reader.GetString("name");
                     DateTime year = DateTime.Parse(reader.GetString("year"));
-                    string url = reader.GetString("imageUrl");
+                    string url = reader["imageUrl"].ToString();
                     string genre = reader.GetString("genre");
                     string producer = reader["producer"].ToString();
                     string desc = reader["description"].ToString();
@@ -116,7 +198,7 @@ namespace WatchedIT_Desktop.logic.services
                     int Id = reader.GetInt32("id");
                     string name = reader.GetString("name");
                     DateTime year = DateTime.Parse(reader.GetString("year"));
-                    string url = reader.GetString("imageUrl");
+                    string url = reader["imageUrl"].ToString();
                     string genre = reader.GetString("genre");
                     string producer = reader["producer"].ToString();
                     string desc = reader["description"].ToString();
@@ -140,6 +222,11 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool DeleteMovieOrEpisode(int id)
         {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
             try
             {
                 string sql = "DELETE FROM movie WHERE id = @ID";
@@ -151,7 +238,7 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Close();
                 if (result > 0)
                 {
-                    MessageBox.Show("Movie deleted successfully!");
+                    MessageBox.Show("Deleted successfully!");
                     return true;
                 }
                 else

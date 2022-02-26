@@ -7,6 +7,12 @@
     <Compile Update="forms\AddSeries.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="forms\EditMovie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="forms\EditSeries.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

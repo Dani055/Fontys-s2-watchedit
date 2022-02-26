@@ -27,6 +27,8 @@ namespace WatchedIT_Desktop
             bool result = UserService.Login(username, password);
             if (result)
             {
+                tbUsername.Text = "";
+                tbPassword.Text = "";
                 Home home = new Home();
                 this.Hide();
                 home.ShowDialog();

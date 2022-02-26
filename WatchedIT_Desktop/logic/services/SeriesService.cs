@@ -15,6 +15,11 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool AddSeries(string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
             if (name.Length < 3)
             {
                 MessageBox.Show("Name must be at least 3 characters long!");
@@ -51,13 +56,57 @@ namespace WatchedIT_Desktop.logic.services
                 return false;
             }
         }
+        public static bool EditSeries(int id, string name, DateTime year, string url, string genre, string desc, string actors, string producer)
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
+            if (name.Length < 3)
+            {
+                MessageBox.Show("Name must be at least 3 characters long!");
+                return false;
+            }
+            else if (genre == "")
+            {
+                MessageBox.Show("You must enter Genre");
+                return false;
+            }
 
-        public static List<Series> GetSeries()
+            try
+            {
+                string sql = "UPDATE series SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors WHERE id = @id;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@name", name);
+                cmd.Parameters.AddWithValue("@year", year.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@imageUrl", url);
+                cmd.Parameters.AddWithValue("@genre", genre);
+                cmd.Parameters.AddWithValue("@description", desc);
+                cmd.Parameters.AddWithValue("@actors", actors);
+                cmd.Parameters.AddWithValue("@producer", producer);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                MessageBox.Show("Series edited successfully");
+                conn.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        public static List<Series> GetSeries(int offset)
         {
             try
             {
-                string sql = "SELECT * FROM series";
+                string sql = "SELECT * FROM series ORDER BY id desc LIMIT 4 OFFSET @offset";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@offset", offset);
                 List<Series> series = new List<Series>();
                 conn.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -130,6 +179,11 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool DeleteSeries(int id)
         {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
             try
             {
                 string sql = "DELETE FROM series WHERE id = @ID";

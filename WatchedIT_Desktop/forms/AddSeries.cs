@@ -30,10 +30,10 @@ namespace WatchedIT_Desktop.forms
                 return;
             }
             string url = tbUrl.Text;
-            string genre = tbGenre.Text;
-            string producers = tbProd.Text;
-            string desc = tbDesc.Text;
-            string actors = tbActors.Text;
+            string genre = tbGenre.Text.Trim();
+            string producers = tbProd.Text.Trim();
+            string desc = tbDesc.Text.Trim();
+            string actors = tbActors.Text.Trim();
             SeriesService.AddSeries(name, year, url, genre, desc, actors, producers);
             Utils.UpdateContent = true;
         }

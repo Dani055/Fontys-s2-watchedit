@@ -15,6 +15,11 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                MessageBox.Show("You are not authorized!");
+                return false;
+            }
             if (name.Length < 3)
             {
                 MessageBox.Show("Name must be at least 3 characters long!");

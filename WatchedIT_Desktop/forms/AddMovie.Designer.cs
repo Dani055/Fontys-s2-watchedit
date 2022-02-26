@@ -263,6 +263,7 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblAddMovie);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "AddMovie";
             this.Text = "AddMovie";
             ((System.ComponentModel.ISupportInitialize)(this.tbEpisode)).EndInit();

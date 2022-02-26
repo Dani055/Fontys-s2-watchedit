@@ -82,6 +82,9 @@ namespace WatchedIT_Desktop
             // lblRegister
             // 
             this.lblRegister.AutoSize = true;
+            this.lblRegister.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblRegister.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblRegister.Location = new System.Drawing.Point(19, 249);
             this.lblRegister.Name = "lblRegister";
             this.lblRegister.Size = new System.Drawing.Size(270, 20);
@@ -100,6 +103,7 @@ namespace WatchedIT_Desktop
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbUsername);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

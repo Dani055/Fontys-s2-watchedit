@@ -8,28 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchedIT_Desktop.logic;
+using WatchedIT_Desktop.logic.models;
 using WatchedIT_Desktop.logic.services;
 
 namespace WatchedIT_Desktop.forms
 {
-    public partial class AddMovie : Form
+    public partial class EditMovie : Form
     {
         private bool isMovie = true;
-        private int seriesId;
-
-        public AddMovie()
+        private Movie movie = null;
+        public EditMovie(bool isMovie, Movie movie)
         {
             InitializeComponent();
+            this.isMovie = isMovie;
+            this.movie = movie;
             HideUI();
-
-        }
-        public AddMovie(bool ismovie, int seriesid)
-        {
-            InitializeComponent();
-            isMovie = ismovie;
-            seriesId = seriesid;
-            HideUI();
-            
+            LoadInfo();
         }
         private void HideUI()
         {
@@ -42,12 +36,29 @@ namespace WatchedIT_Desktop.forms
             }
             else
             {
-                lblAddMovie.Text = "Add episode";
-                btnAddMovie.Text = "Add episode";
+                lblEditMovie.Text = "Edit episode";
+                btnEditMovie.Text = "Edit episode";
 
             }
         }
-        private void btnAddMovie_Click(object sender, EventArgs e)
+        private void LoadInfo()
+        {
+            tbName.Text = movie.Name;
+            tbYear.Text = movie.Year.ToString("yyyy-MM-dd");
+            tbUrl.Text = movie.ImageUrl;
+            tbGenre.Text = movie.Genre;
+            tbProd.Text = movie.Producer;
+            tbDesc.Text = movie.Description;
+            tbActors.Text = movie.Actors;
+            tbDuration.Text = movie.Duration.ToString();
+            if (movie is Episode)
+            {
+                tbSeason.Value = ((Episode)movie).SeasonNo;
+                tbEpisode.Value = ((Episode)movie).EpisodeNo;
+            }
+        }
+
+        private void btnEditMovie_Click(object sender, EventArgs e)
         {
             string name = tbName.Text;
             DateTime year;
@@ -63,24 +74,24 @@ namespace WatchedIT_Desktop.forms
             string desc = tbDesc.Text.Trim();
             string actors = tbActors.Text.Trim();
             TimeSpan duration;
+            int season = 0;
+            int episode = 0;
             s = TimeSpan.TryParse(tbDuration.Text, out duration);
             if (!s)
             {
                 MessageBox.Show("Duration not in correct format");
                 return;
             }
-            if (isMovie)
+            if (!isMovie)
             {
-                MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
+                season = Convert.ToInt32(tbSeason.Value);
+                episode = Convert.ToInt32(tbEpisode.Value);
             }
-            else
+            if (MovieService.EditMovieOrEpisode(movie.Id, name, year, url, genre, producers, desc, actors, duration, isMovie, season, episode))
             {
-                int season = Convert.ToInt32(tbSeason.Value);
-                int episode = Convert.ToInt32(tbEpisode.Value);
-                EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
+                Utils.UpdateContent = true;
+                this.Dispose();
             }
-            Utils.UpdateContent = true;
-
         }
     }
 }

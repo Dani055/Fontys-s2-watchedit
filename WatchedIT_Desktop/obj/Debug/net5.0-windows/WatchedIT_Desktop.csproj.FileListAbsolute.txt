@@ -34,3 +34,5 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\W
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.AddSeries.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.SeriesDetails.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.user_controls.EpisodeCard.resources
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.EditSeries.resources
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.EditMovie.resources

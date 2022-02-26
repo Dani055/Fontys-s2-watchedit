@@ -47,7 +47,9 @@ namespace WatchedIT_Desktop.user_controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Controls.Add(this.lblEpisode);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "EpisodeCard";
             this.Size = new System.Drawing.Size(291, 42);
             this.ResumeLayout(false);

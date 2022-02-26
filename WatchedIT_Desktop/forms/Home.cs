@@ -24,9 +24,9 @@ namespace WatchedIT_Desktop.forms
         public Home()
         {
             InitializeComponent();
-            lblRole.Text = UserService.loggedUser.Username;
-            lblUsername.Text = UserService.loggedUser.IsAdmin.ToString();
+            lblUsername.Text = "Welcome, " + UserService.loggedUser.Username;
             GetMovies();
+            HideUI();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -35,7 +35,14 @@ namespace WatchedIT_Desktop.forms
             closedByButton = true;
             this.Dispose();
         }
-
+        private void HideUI()
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                btnAddSeries.Visible = false;
+                btnAddMovie.Visible = false;
+            }
+        }
         private void Home_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (closedByButton)
@@ -49,7 +56,7 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetMovies()
         {
-            movies = MovieService.GetMovies();
+            movies = MovieService.GetMovies(0);
             flowLayoutPanel1.Controls.Clear();
             foreach (Movie movie in movies)
             {
@@ -57,11 +64,37 @@ namespace WatchedIT_Desktop.forms
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
+        private void GetMoreMovies()
+        {
+            List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
+            foreach (Movie m in loadedMovies)
+            {
+                movies.Add(m);
+            }
+            foreach (Movie movie in loadedMovies)
+            {
+                MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+        }
         private void GetSeries()
         {
-            series = SeriesService.GetSeries();
+            series = SeriesService.GetSeries(0);
             flowLayoutPanel1.Controls.Clear();
             foreach (Series s in series)
+            {
+                MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+        }
+        private void GetMoreSeries()
+        {
+            List<Series> loadedSeries = SeriesService.GetSeries(series.Count);
+            foreach (Series s in loadedSeries)
+            {
+                series.Add(s);
+            }
+            foreach (Series s in loadedSeries)
             {
                 MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
                 flowLayoutPanel1.Controls.Add(card);
@@ -101,6 +134,7 @@ namespace WatchedIT_Desktop.forms
             this.Show();
             if (Utils.UpdateContent)
             {
+                currentlyShowing = "Movies";
                 this.GetMovies();
                 Utils.UpdateContent = false;
             }
@@ -114,6 +148,7 @@ namespace WatchedIT_Desktop.forms
             this.Show();
             if (Utils.UpdateContent)
             {
+                currentlyShowing = "Series";
                 this.GetSeries();
                 Utils.UpdateContent = false;
             }
@@ -124,6 +159,7 @@ namespace WatchedIT_Desktop.forms
             if (currentlyShowing != "Movies")
             {
                 currentlyShowing = "Movies";
+                movies.Clear();
                 GetMovies();
             }
         }
@@ -133,7 +169,20 @@ namespace WatchedIT_Desktop.forms
             if (currentlyShowing != "Series")
             {
                 currentlyShowing = "Series";
+                series.Clear();
                 GetSeries();
+            }
+        }
+
+        private void lblLoadMore_Click(object sender, EventArgs e)
+        {
+            if (currentlyShowing == "Movies")
+            {
+                GetMoreMovies();
+            }
+            else
+            {
+                GetMoreSeries();
             }
         }
     }

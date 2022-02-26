@@ -57,6 +57,7 @@ namespace WatchedIT_Desktop.forms
             this.btnEdit.TabIndex = 25;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -162,7 +163,7 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnAddEpisode
             // 
-            this.btnAddEpisode.Location = new System.Drawing.Point(243, 567);
+            this.btnAddEpisode.Location = new System.Drawing.Point(242, 567);
             this.btnAddEpisode.Name = "btnAddEpisode";
             this.btnAddEpisode.Size = new System.Drawing.Size(112, 29);
             this.btnAddEpisode.TabIndex = 27;
@@ -206,6 +207,7 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pbPhoto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "SeriesDetails";
             this.Text = "SeriesDetails";
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();

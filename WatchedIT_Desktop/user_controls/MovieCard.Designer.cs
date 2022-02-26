@@ -37,6 +37,7 @@ namespace WatchedIT_Desktop.user_controls
             // 
             // pbPhoto
             // 
+            this.pbPhoto.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pbPhoto.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPhoto.Dock = System.Windows.Forms.DockStyle.Top;
             this.pbPhoto.Image = ((System.Drawing.Image)(resources.GetObject("pbPhoto.Image")));

@@ -153,7 +153,7 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(169, 354);
+            this.btnRegister.Location = new System.Drawing.Point(153, 355);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(94, 29);
             this.btnRegister.TabIndex = 13;
@@ -164,7 +164,9 @@ namespace WatchedIT_Desktop.forms
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(89, 401);
+            this.lblLogin.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblLogin.Location = new System.Drawing.Point(84, 404);
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(219, 20);
             this.lblLogin.TabIndex = 14;
@@ -191,6 +193,7 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblPass);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblHeading);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Register";
             this.Text = "Register";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Register_FormClosing);

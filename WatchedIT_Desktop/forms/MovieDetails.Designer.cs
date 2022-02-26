@@ -123,7 +123,7 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(55, 567);
+            this.btnDelete.Location = new System.Drawing.Point(56, 573);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(94, 29);
             this.btnDelete.TabIndex = 11;
@@ -133,12 +133,13 @@ namespace WatchedIT_Desktop.forms
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(179, 567);
+            this.btnEdit.Location = new System.Drawing.Point(182, 573);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(94, 29);
             this.btnEdit.TabIndex = 12;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // lblDuration
             // 
@@ -195,6 +196,7 @@ namespace WatchedIT_Desktop.forms
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pbPhoto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MovieDetails";
             this.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
             this.Text = "MovieDetails";

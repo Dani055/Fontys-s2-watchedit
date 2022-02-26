@@ -29,8 +29,16 @@ namespace WatchedIT_Desktop.forms
             {
                 movie = MovieService.GetMovieById(id);
             }
-
+            HideUI();
             PopulateInfo();
+        }
+        private void HideUI()
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                btnDelete.Visible = false;
+                btnEdit.Visible = false;
+            }
         }
         private void PopulateInfo()
         {
@@ -49,6 +57,11 @@ namespace WatchedIT_Desktop.forms
                 }
 
             }
+            else
+            {
+                MessageBox.Show("Movie not found!");
+                this.Dispose();
+            }
             if (!isMovie)
             {
                 if (movie is Episode)
@@ -63,6 +76,27 @@ namespace WatchedIT_Desktop.forms
             MovieService.DeleteMovieOrEpisode(movie.Id);
             Utils.UpdateContent = true;
             this.Dispose();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditMovie em = new EditMovie(isMovie, movie);
+            this.Hide();
+            em.ShowDialog();
+            this.Show();
+            if (Utils.UpdateContent)
+            {
+                if (!isMovie)
+                {
+                    movie = EpisodeService.GetEpisodeById(movie.Id);
+                }
+                else
+                {
+                    movie = MovieService.GetMovieById(movie.Id);
+                }
+
+                PopulateInfo();
+            }
         }
     }
 }

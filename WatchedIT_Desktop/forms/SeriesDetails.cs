@@ -22,6 +22,16 @@ namespace WatchedIT_Desktop.forms
         {
             InitializeComponent();
             PopulateInfo(id);
+            HideUI();
+        }
+        private void HideUI()
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                btnYeet.Visible = false;
+                btnEdit.Visible = false;
+                btnAddEpisode.Visible = false;
+            }
         }
         private void PopulateInfo(int id)
         {
@@ -75,6 +85,19 @@ namespace WatchedIT_Desktop.forms
             SeriesService.DeleteSeries(series.Id);
             Utils.UpdateContent = true;
             this.Dispose();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditSeries es = new EditSeries(series);
+            this.Hide();
+            es.ShowDialog();
+            this.Show();
+            if (Utils.UpdateContent)
+            {
+                PopulateInfo(series.Id);
+                Utils.UpdateContent = false;
+            }
         }
     }
 }
