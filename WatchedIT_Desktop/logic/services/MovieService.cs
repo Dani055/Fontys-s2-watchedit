@@ -256,5 +256,44 @@ namespace WatchedIT_Desktop.logic.services
             }
 
         }
+        public static List<Movie> SearchMovies(string keyword)
+        {
+            try
+            {
+                string sql = "SELECT * FROM movie where seriesId is NULL and name like @keyword";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+                List<Movie> movies = new List<Movie>();
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    int id = reader.GetInt32("id");
+                    string name = reader.GetString("name");
+                    DateTime year = DateTime.Parse(reader.GetString("year"));
+                    string url = reader["imageUrl"].ToString();
+                    string genre = reader.GetString("genre");
+                    string producer = reader["producer"].ToString();
+                    string desc = reader["description"].ToString();
+                    string actors = reader["actors"].ToString();
+                    TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+
+                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration);
+                    movies.Add(m);
+
+                }
+                reader.Close();
+                conn.Close();
+                return movies;
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
     }
 }

@@ -64,8 +64,22 @@ namespace WatchedIT_Desktop.forms
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
+        private void SearchMovies(string keyword)
+        {
+            movies = MovieService.SearchMovies(keyword);
+            flowLayoutPanel1.Controls.Clear();
+            foreach (Movie movie in movies)
+            {
+                MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+        }
         private void GetMoreMovies()
         {
+            if (tbSearch.Text != "")
+            {
+                return;
+            }
             List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
             foreach (Movie m in loadedMovies)
             {
@@ -89,12 +103,26 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetMoreSeries()
         {
+            if (tbSearch.Text != "")
+            {
+                return;
+            }
             List<Series> loadedSeries = SeriesService.GetSeries(series.Count);
             foreach (Series s in loadedSeries)
             {
                 series.Add(s);
             }
             foreach (Series s in loadedSeries)
+            {
+                MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
+                flowLayoutPanel1.Controls.Add(card);
+            }
+        }
+        private void SearchSeries(string keyword)
+        {
+            series = SeriesService.SearchSeries(keyword);
+            flowLayoutPanel1.Controls.Clear();
+            foreach (Series s in series)
             {
                 MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
                 flowLayoutPanel1.Controls.Add(card);
@@ -183,6 +211,19 @@ namespace WatchedIT_Desktop.forms
             else
             {
                 GetMoreSeries();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string keyword = tbSearch.Text.Trim();
+            if (currentlyShowing == "Movies")
+            {
+                SearchMovies(keyword);
+            }
+            else
+            {
+                SearchSeries(keyword);
             }
         }
     }

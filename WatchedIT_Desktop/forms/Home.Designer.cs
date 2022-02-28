@@ -35,13 +35,13 @@ namespace WatchedIT_Desktop.forms
             this.btnAddSeries = new System.Windows.Forms.Button();
             this.btnShowMovies = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblLoadMore = new System.Windows.Forms.Label();
             this.btnShowSeries = new System.Windows.Forms.Button();
             this.lblSearch = new System.Windows.Forms.Label();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblLoadMore = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -106,6 +106,37 @@ namespace WatchedIT_Desktop.forms
             this.panel1.Size = new System.Drawing.Size(1209, 553);
             this.panel1.TabIndex = 16;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1209, 516);
+            this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblLoadMore);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 516);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1209, 37);
+            this.panel2.TabIndex = 7;
+            // 
+            // lblLoadMore
+            // 
+            this.lblLoadMore.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblLoadMore.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblLoadMore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblLoadMore.Location = new System.Drawing.Point(0, 0);
+            this.lblLoadMore.Name = "lblLoadMore";
+            this.lblLoadMore.Size = new System.Drawing.Size(1209, 37);
+            this.lblLoadMore.TabIndex = 0;
+            this.lblLoadMore.Text = "Load more...";
+            this.lblLoadMore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLoadMore.Click += new System.EventHandler(this.lblLoadMore_Click);
+            // 
             // btnShowSeries
             // 
             this.btnShowSeries.Location = new System.Drawing.Point(140, 18);
@@ -140,37 +171,7 @@ namespace WatchedIT_Desktop.forms
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "Go!";
             this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lblLoadMore);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 516);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1209, 37);
-            this.panel2.TabIndex = 7;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1209, 516);
-            this.flowLayoutPanel1.TabIndex = 17;
-            // 
-            // lblLoadMore
-            // 
-            this.lblLoadMore.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lblLoadMore.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblLoadMore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblLoadMore.Location = new System.Drawing.Point(0, 0);
-            this.lblLoadMore.Name = "lblLoadMore";
-            this.lblLoadMore.Size = new System.Drawing.Size(1209, 37);
-            this.lblLoadMore.TabIndex = 0;
-            this.lblLoadMore.Text = "Load more...";
-            this.lblLoadMore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLoadMore.Click += new System.EventHandler(this.lblLoadMore_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // Home
             // 
