@@ -1,0 +1,58 @@
+﻿@page
+@model WatchedItWeb.Pages.Movies.AddMovieModel
+@{
+}
+
+<div class="wrapper">
+    <form action="" class="auth">
+        <fieldset>
+            <legend>Add movie</legend>
+            <div class="field">
+                <input type="text" name="name" id="name">
+                <label for="name">Name</label>
+            </div>
+            <div class="field">
+                <input type="text" name="year" id="year">
+                <label for="year">Year</label>
+            </div>
+            <div class="field">
+                <input type="text" name="imageUrl" id="imageUrl">
+                <label for="imageUrl">Image URL</label>
+            </div>
+            <div class="field">
+                <input type="text" name="genre" id="genre">
+                <label for="genre">Genre</label>
+            </div>
+            <div class="field">
+                <input type="text" name="producer" id="producer">
+                <label for="producer">Producers</label>
+            </div>
+            <div class="field">
+                <textarea name="description" id="description" rows="10"></textarea>
+                <label for="description">Description</label>
+            </div>
+            <div class="field">
+                <textarea name="actors" id="actors" rows="8"></textarea>
+                <label for="actors">Actors</label>
+            </div>
+            <div class="field">
+                <input type="text" name="duration" id="duration">
+                <label for="duration">Duration HH:MM:SS</label>
+            </div>
+            <div class="field-special">
+                <div class="field-special-half">
+                    <input type="text" name="season" id="season">
+                    <label for="season">S</label>
+                </div>
+                <div class="field-special-half">
+                    <input type="text" name="episode" id="episode">
+                    <label for="episode">EP</label>
+                </div>
+            </div>
+            <div class="field-submit">
+                <button type="submit">Add</button>
+            </div>
+        </fieldset>
+
+    </form>
+</div>      

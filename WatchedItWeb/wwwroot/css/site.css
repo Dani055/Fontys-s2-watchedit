@@ -93,7 +93,11 @@ h3.category {
     margin-bottom: 2em;
     animation: transform;
 }
+.movies-header{
+    position: relative;
+    margin: 1em 0;
 
+}
     .card-movie:hover img {
         animation: img-zoomin 3s forwards;
     }
@@ -136,9 +140,10 @@ footer {
     }
 
 /* FORMS */
+
 form.auth {
     max-width: 30em;
-    margin: 5em auto 0 auto;
+    margin: 5em auto;
 }
 
 textarea {
@@ -159,7 +164,7 @@ form.auth input[type="password"] {
     transition: border 0.3s ease-in;
 }
 
-    form.auth textarea,
+    form.auth textarea:hover,
     form.auth input[type="text"]:hover,
     form.auth input[type="tel"]:hover,
     form.auth input[type="email"]:hover,
@@ -167,7 +172,7 @@ form.auth input[type="password"] {
         border-color: #F24236;
     }
 
-    form.auth textarea,
+    form.auth textarea:focus,
     form.auth input[type="text"]:focus,
     form.auth input[type="tel"]:focus,
     form.auth input[type="email"]:focus,
@@ -175,7 +180,7 @@ form.auth input[type="password"] {
         border-color: #F24236;
     }
 
-form.auth textarea,
+form.auth textarea:focus + label,
 input[type="text"]:focus + label,
 input[type="tel"]:focus + label,
 input[type="email"]:focus + label,
@@ -201,15 +206,28 @@ legend {
     color: #F24236
 }
 
-.field {
+form.auth .field {
     display: flex;
     flex-direction: column;
     flex-direction: column-reverse;
-    max-width: 15em;
+    max-width: 18em;
     margin: 0 auto;
 }
 
-    .field + .field {
+form.auth .field-special {
+    margin: 1.5em auto 0 auto;
+    display: flex;
+    max-width: 18em;
+}
+.field-special-half label {
+    padding: 0 1em;
+}
+form.auth .field-special-half {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+    form.auth .field + .field {
         margin-top: 1em;
     }
 
@@ -221,6 +239,7 @@ form.auth .field-submit {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 1em;
 }
 
     form.auth .field-submit button {
@@ -282,11 +301,11 @@ form.flat {
         transition: color 0.2s ease-in, background-color 0.2s ease-in;
     }
 
-        form.flat button:hover {
-            background-color: rgb(255, 249, 249);
-            color: #F24236;
-            cursor: pointer;
-        }
+form.flat button:hover {
+    background-color: rgb(255, 249, 249);
+    color: #F24236;
+    cursor: pointer;
+}
 
     form.flat input,
     form.flat textarea {
@@ -303,7 +322,23 @@ form.flat {
             border-color: #F24236;
         }
 
-/* MOVIE DETAILS */
+    form.search{
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+
+    }
+    form.search input{
+        padding: 5px;
+    }
+    form.search button{
+        margin-left: 10px;
+        padding: 0 1em;
+    }
+
+ /*MOVIE DETAILS */
+
 .movie-details {
     display: flex;
     flex-wrap: wrap;
@@ -374,7 +409,22 @@ form.flat {
     align-items: center;
     margin-bottom: 1em;
 }
-
+.add-episode{
+    padding: 1em;
+    margin: 2em 0 4em 0;
+}
+.add-episode a {
+    padding: 1em;
+    border-radius: 3px;
+    border: 2px solid #F24236;
+    background-color: #F24236;
+    color: #FFFEE0;
+    transition: color 0.2s ease-in, background-color 0.2s ease-in;
+}
+.add-episode a:hover {
+    background-color: white;
+    color: #F24236;
+}
 .review {
     background-color: rgb(231, 230, 230);
     padding: 1em;
@@ -396,4 +446,17 @@ form.flat {
 
 .review-content p {
     padding: 0 1em;
+}
+.movie-details .episodes{
+    display: flex;
+    flex-direction: column;
+}
+.movie-details .episodes a{
+    font-size: 1.2em;
+}
+.movie-details .episodes a:hover {
+    color: #F24236;
+}
+.movie-details .episodes a + a{
+    margin-top: 0.6em
 }

@@ -41,3 +41,7 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Lo
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Movies\AllMovies.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Register.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Movies\MovieDetails.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Series\AllSeries.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Movies\AddMovie.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Series\AddSeries.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0\Razor\Pages\Series\SeriesDetails.cshtml.g.cs

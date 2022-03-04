@@ -14,7 +14,7 @@
     }
 }
 
-@media (min-width:300px) and (max-width:800px) {
+@media (max-width:800px) {
     html {
         font-size: 12px;
     }
