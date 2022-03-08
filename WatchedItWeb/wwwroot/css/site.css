@@ -409,11 +409,11 @@ form.flat button:hover {
     align-items: center;
     margin-bottom: 1em;
 }
-.add-episode{
+.controls{
     padding: 1em;
     margin: 2em 0 4em 0;
 }
-.add-episode a {
+.controls a {
     padding: 1em;
     border-radius: 3px;
     border: 2px solid #F24236;
@@ -421,7 +421,7 @@ form.flat button:hover {
     color: #FFFEE0;
     transition: color 0.2s ease-in, background-color 0.2s ease-in;
 }
-.add-episode a:hover {
+.controls a:hover {
     background-color: white;
     color: #F24236;
 }

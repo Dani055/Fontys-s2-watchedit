@@ -11,6 +11,7 @@ namespace WatchedItWeb.Pages.Movies
     {
         public void OnGet()
         {
+
         }
     }
 }
