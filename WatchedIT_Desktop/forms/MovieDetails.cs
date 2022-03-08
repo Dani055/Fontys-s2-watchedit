@@ -73,9 +73,11 @@ namespace WatchedIT_Desktop.forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MovieService.DeleteMovieOrEpisode(movie.Id);
-            Utils.UpdateContent = true;
-            this.Dispose();
+            if (MovieService.DeleteMovieOrEpisode(movie.Id))
+            {
+                Utils.UpdateContent = true;
+                this.Dispose();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

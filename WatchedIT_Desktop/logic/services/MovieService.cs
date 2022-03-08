@@ -14,34 +14,29 @@ namespace WatchedIT_Desktop.logic.services
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
         public static bool AddMovie(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
-            if (name.Length < 3)
-            {
-                MessageBox.Show("Name must be at least 3 characters long!");
-                return false;
-            }
-            else if (genre == "")
-            {
-                MessageBox.Show("You must enter Genre");
-                return false;
-            }
-            else if (producer == "")
-            {
-                MessageBox.Show("You must enter Producer");
-                return false;
-            }
-            else if (actors == "")
-            {
-                MessageBox.Show("You must enter Actors");
-                return false;
-            }
-
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+                if (name.Length < 3)
+                {
+                    throw new Exception("Name must be at least 3 characters long!");
+                }
+                else if (genre == "")
+                {
+                    throw new Exception("You must enter Genre");
+                }
+                else if (producer == "")
+                {
+                    throw new Exception("You must enter Producer");
+                }
+                else if (actors == "")
+                {
+                    throw new Exception("You must enter Actors");
+                }
+
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -56,47 +51,44 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
                 MessageBox.Show("Movie added successfully");
-                conn.Close();   
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
         public static bool EditMovieOrEpisode(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, bool isMovie, int season, int episode)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
-            if (name.Length < 3)
-            {
-                MessageBox.Show("Name must be at least 3 characters long!");
-                return false;
-            }
-            else if (genre == "")
-            {
-                MessageBox.Show("You must enter Genre");
-                return false;
-            }
-            else if (producer == "")
-            {
-                MessageBox.Show("You must enter Producer");
-                return false;
-            }
-            else if (actors == "")
-            {
-                MessageBox.Show("You must enter Actors");
-                return false;
-            }
-
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+                if (name.Length < 3)
+                {
+                    throw new Exception("Name must be at least 3 characters long!");
+                }
+                else if (genre == "")
+                {
+                    throw new Exception("You must enter Genre");
+                }
+                else if (producer == "")
+                {
+                    throw new Exception("You must enter Producer");
+                }
+                else if (actors == "")
+                {
+                    throw new Exception("You must enter Actors");
+                }
+
                 string sql;
                 if (isMovie)
                 {
@@ -132,14 +124,16 @@ namespace WatchedIT_Desktop.logic.services
                 {
                     MessageBox.Show("Episode edited successfully!");
                 }
-                conn.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static List<Movie> GetMovies(int offset)
@@ -155,7 +149,6 @@ namespace WatchedIT_Desktop.logic.services
 
                 while (reader.Read())
                 {
-
                     int id = reader.GetInt32("id");
                     string name = reader.GetString("name");
                     DateTime year = DateTime.Parse(reader.GetString("year"));
@@ -171,14 +164,16 @@ namespace WatchedIT_Desktop.logic.services
 
                 }
                 reader.Close();
-                conn.Close();
                 return movies;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static Movie GetMovieById(int id)
@@ -205,37 +200,36 @@ namespace WatchedIT_Desktop.logic.services
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
                     m = new Movie(Id, name, year, url, genre, producer, desc, actors, duration);
-                    conn.Close();
                     return m;
                 }
-                conn.Close();
                 return null;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
             }
-
+            finally
+            {
+                conn.Close();
+            }
          }
 
         public static bool DeleteMovieOrEpisode(int id)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+
                 string sql = "DELETE FROM movie WHERE id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                conn.Close();
                 if (result > 0)
                 {
                     MessageBox.Show("Deleted successfully!");
@@ -250,9 +244,12 @@ namespace WatchedIT_Desktop.logic.services
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
 
         }
@@ -285,14 +282,16 @@ namespace WatchedIT_Desktop.logic.services
 
                 }
                 reader.Close();
-                conn.Close();
                 return movies;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

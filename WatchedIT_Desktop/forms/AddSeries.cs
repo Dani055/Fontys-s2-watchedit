@@ -34,8 +34,11 @@ namespace WatchedIT_Desktop.forms
             string producers = tbProd.Text.Trim();
             string desc = tbDesc.Text.Trim();
             string actors = tbActors.Text.Trim();
-            SeriesService.AddSeries(name, year, url, genre, desc, actors, producers);
-            Utils.UpdateContent = true;
+            if (SeriesService.AddSeries(name, year, url, genre, desc, actors, producers))
+            {
+                Utils.UpdateContent = true;
+            }
+
         }
     }
 }

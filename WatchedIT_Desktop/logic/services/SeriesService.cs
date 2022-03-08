@@ -15,24 +15,21 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool AddSeries(string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
-            if (name.Length < 3)
-            {
-                MessageBox.Show("Name must be at least 3 characters long!");
-                return false;
-            }
-            else if (genre == "")
-            {
-                MessageBox.Show("You must enter Genre");
-                return false;
-            }
-
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+                if (name.Length < 3)
+                {
+                    throw new Exception("Name must be at least 3 characters long!");
+                }
+                else if (genre == "")
+                {
+                    throw new Exception("You must enter Genre");
+                }
+
                 string sql = "INSERT INTO series (name, year, imageUrl, genre, description, actors, producer) VALUES (@name, @year, @imageUrl, @genre, @description, @actors, @producer);";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -46,36 +43,35 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
                 MessageBox.Show("Series added successfully");
-                conn.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static bool EditSeries(int id, string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
-            if (name.Length < 3)
-            {
-                MessageBox.Show("Name must be at least 3 characters long!");
-                return false;
-            }
-            else if (genre == "")
-            {
-                MessageBox.Show("You must enter Genre");
-                return false;
-            }
-
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+                if (name.Length < 3)
+                {
+                    throw new Exception("Name must be at least 3 characters long!");
+                }
+                else if (genre == "")
+                {
+                    throw new Exception("You must enter Genre");
+                }
+
                 string sql = "UPDATE series SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors WHERE id = @id;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -90,14 +86,16 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
                 MessageBox.Show("Series edited successfully");
-                conn.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static List<Series> GetSeries(int offset)
@@ -128,14 +126,16 @@ namespace WatchedIT_Desktop.logic.services
 
                 }
                 reader.Close();
-                conn.Close();
                 return series;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static List<Series> SearchSeries(string keyword)
@@ -166,14 +166,16 @@ namespace WatchedIT_Desktop.logic.services
 
                 }
                 reader.Close();
-                conn.Close();
                 return series;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static Series GetSeriesById(int id)
@@ -200,37 +202,35 @@ namespace WatchedIT_Desktop.logic.services
                     string actors = reader["actors"].ToString();
 
                     s = new Series(Id, name, year, url, genre, producer, desc, actors);
-                    conn.Close();
                     return s;
                 }
-                conn.Close();
                 return null;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
             }
-
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public static bool DeleteSeries(int id)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
                 string sql = "DELETE FROM series WHERE id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                conn.Close();
                 if (result > 0)
                 {
                     MessageBox.Show("Series deleted successfully!");
@@ -245,11 +245,13 @@ namespace WatchedIT_Desktop.logic.services
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return false;
             }
-
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

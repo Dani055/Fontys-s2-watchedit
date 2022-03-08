@@ -44,55 +44,50 @@ namespace WatchedIT_Desktop.logic.services
                         UserService.loggedUser = user;
                     }
                     reader.Close();
-                    conn.Close();
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show("Wrong username or password!");
+                    reader.Close();
+                    throw new Exception("Wrong username or password!");
                 }
-                reader.Close();
-                conn.Close();
-                return false;
-
             }
             catch (Exception ex)
-            {
-                conn.Close();
+            {  
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+               conn.Close();
             }
         }
 
         public static bool Register(string username, string password, string firstname, string lastname, string email, string imageurl)
         {
-            if (username.Length < 3)
-            {
-                MessageBox.Show("Username must be at least 3 characters long!");
-                return false;
-            }
-            else if (password.Length < 3)
-            {
-                MessageBox.Show("Password must be at least 3 characters long!");
-                return false;
-            }
-            else if (firstname.Length <= 0)
-            {
-                MessageBox.Show("You must enter a first name!");
-                return false;
-            }
-            else if (lastname.Length <= 0)
-            {
-                MessageBox.Show("You must enter a first name!");
-                return false;
-            }
-            else if (email.Length <= 5)
-            {
-                MessageBox.Show("Email must be valid!");
-                return false;
-            }
             try
             {
+                if (username.Length < 3)
+                {
+                    throw new Exception("Username must be at least 3 characters long!");
+                }
+                else if (password.Length < 3)
+                {
+                    throw new Exception("Password must be at least 3 characters long!");
+                }
+                else if (firstname.Length <= 0)
+                {
+                    throw new Exception("You must enter a first name!");
+                }
+                else if (lastname.Length <= 0)
+                {
+                    throw new Exception("You must enter a last name!");
+                }
+                else if (email.Length <= 5)
+                {
+                    throw new Exception("Email must be valid! must be valid!");
+                }
+
                 string sql = "INSERT INTO user (username, password, firstName, lastName, email, imageUrl) VALUES(@username, @password, @firstname, @lastname, @email, @imageurl); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@username", username);
@@ -105,15 +100,17 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
                 MessageBox.Show("User registered successfully");
-                conn.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
-            }     
+            }
+            finally
+            {
+                conn.Close();
+            }
         }                           
     }                               
 }                                   

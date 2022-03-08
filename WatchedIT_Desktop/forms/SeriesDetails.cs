@@ -36,7 +36,6 @@ namespace WatchedIT_Desktop.forms
         private void PopulateInfo(int id)
         {
             series = SeriesService.GetSeriesById(id);
-            episodes = EpisodeService.GetEpisodes(series.Id);
             if (series != null)
             {
                 lblName.Text = series.Name;
@@ -50,11 +49,21 @@ namespace WatchedIT_Desktop.forms
                     pbPhoto.Load(series.ImageUrl);
                 }
             }
-            flwEpisodes.Controls.Clear();
-            foreach (Episode episode in episodes)
+            else
             {
-                EpisodeCard card = new EpisodeCard(episode.Id, episode.Name, episode.SeasonNo, episode.EpisodeNo, this);
-                flwEpisodes.Controls.Add(card);
+                MessageBox.Show("Series not found!");
+                this.Dispose();
+                return;
+            }
+            episodes = EpisodeService.GetEpisodes(series.Id);
+            flwEpisodes.Controls.Clear();
+            if (episodes != null)
+            {
+                foreach (Episode episode in episodes)
+                {
+                    EpisodeCard card = new EpisodeCard(episode.Id, episode.Name, episode.SeasonNo, episode.EpisodeNo, this);
+                    flwEpisodes.Controls.Add(card);
+                }
             }
         }
 
@@ -82,9 +91,11 @@ namespace WatchedIT_Desktop.forms
 
         private void btnYeet_Click(object sender, EventArgs e)
         {
-            SeriesService.DeleteSeries(series.Id);
-            Utils.UpdateContent = true;
-            this.Dispose();
+            if (SeriesService.DeleteSeries(series.Id))
+            {
+                Utils.UpdateContent = true;
+                this.Dispose();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

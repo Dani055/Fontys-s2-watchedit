@@ -15,34 +15,30 @@ namespace WatchedIT_Desktop.logic.services
 
         public static bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                MessageBox.Show("You are not authorized!");
-                return false;
-            }
-            if (name.Length < 3)
-            {
-                MessageBox.Show("Name must be at least 3 characters long!");
-                return false;
-            }
-            else if (genre == "")
-            {
-                MessageBox.Show("You must enter Genre");
-                return false;
-            }
-            else if (producer == "")
-            {
-                MessageBox.Show("You must enter Producer");
-                return false;
-            }
-            else if (actors == "")
-            {
-                MessageBox.Show("You must enter Actors");
-                return false;
-            }
 
             try
             {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+                if (name.Length < 3)
+                {
+                    throw new Exception("Name must be at least 3 characters long!");
+                }
+                else if (genre == "")
+                {
+                    throw new Exception("You must enter Genre");
+                }
+                else if (producer == "")
+                {
+                    throw new Exception("You must enter Producer");
+                }
+                else if (actors == "")
+                {
+                    throw new Exception("You must enter Actors");
+                }
+
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@name", name);
@@ -60,14 +56,16 @@ namespace WatchedIT_Desktop.logic.services
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
                 MessageBox.Show("Episode added successfully");
-                conn.Close();
                 return true;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -103,14 +101,16 @@ namespace WatchedIT_Desktop.logic.services
 
                 }
                 reader.Close();
-                conn.Close();
                 return episodes;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
         public static Episode GetEpisodeById(int id)
@@ -141,17 +141,18 @@ namespace WatchedIT_Desktop.logic.services
                     int seriesId = int.Parse(reader["episode"].ToString());
 
                     e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
-                    conn.Close();
                     return e;
                 }
-                conn.Close();
                 return null;
             }
             catch (Exception ex)
             {
-                conn.Close();
                 MessageBox.Show(ex.Message);
-                throw;
+                return null;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

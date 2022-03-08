@@ -58,21 +58,13 @@ namespace WatchedIT_Desktop.forms
         {
             movies = MovieService.GetMovies(0);
             flowLayoutPanel1.Controls.Clear();
-            foreach (Movie movie in movies)
-            {
-                MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
-                flowLayoutPanel1.Controls.Add(card);
-            }
+            DisplayMovies();
         }
         private void SearchMovies(string keyword)
         {
             movies = MovieService.SearchMovies(keyword);
             flowLayoutPanel1.Controls.Clear();
-            foreach (Movie movie in movies)
-            {
-                MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
-                flowLayoutPanel1.Controls.Add(card);
-            }
+            DisplayMovies();
         }
         private void GetMoreMovies()
         {
@@ -91,15 +83,22 @@ namespace WatchedIT_Desktop.forms
                 flowLayoutPanel1.Controls.Add(card);
             }
         }
+        private void DisplayMovies()
+        {
+            if (movies != null)
+            {
+                foreach (Movie movie in movies)
+                {
+                    MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
+                    flowLayoutPanel1.Controls.Add(card);
+                }
+            }
+        }
         private void GetSeries()
         {
             series = SeriesService.GetSeries(0);
             flowLayoutPanel1.Controls.Clear();
-            foreach (Series s in series)
-            {
-                MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
-                flowLayoutPanel1.Controls.Add(card);
-            }
+            DisplaySeries();
         }
         private void GetMoreSeries()
         {
@@ -122,17 +121,27 @@ namespace WatchedIT_Desktop.forms
         {
             series = SeriesService.SearchSeries(keyword);
             flowLayoutPanel1.Controls.Clear();
-            foreach (Series s in series)
+            DisplaySeries();
+        }
+        private void DisplaySeries()
+        {
+            if (series != null)
             {
-                MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
-                flowLayoutPanel1.Controls.Add(card);
+                foreach (Series s in series)
+                {
+                    MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
+                    flowLayoutPanel1.Controls.Add(card);
+                }
             }
         }
         public void GoToMovieDetails(int id)
         {
             MovieDetails md = new MovieDetails(id, true);
             this.Hide();
-            md.ShowDialog();
+            if (!md.IsDisposed)
+            {
+                md.ShowDialog();
+            }
             this.Show();
             if (Utils.UpdateContent)
             {
@@ -144,7 +153,10 @@ namespace WatchedIT_Desktop.forms
         {
             SeriesDetails sd = new SeriesDetails(id);
             this.Hide();
-            sd.ShowDialog();
+            if (!sd.IsDisposed)
+            {
+                sd.ShowDialog();
+            }
             this.Show();
             if (Utils.UpdateContent)
             {
@@ -187,7 +199,6 @@ namespace WatchedIT_Desktop.forms
             if (currentlyShowing != "Movies")
             {
                 currentlyShowing = "Movies";
-                movies.Clear();
                 GetMovies();
             }
         }
@@ -197,7 +208,6 @@ namespace WatchedIT_Desktop.forms
             if (currentlyShowing != "Series")
             {
                 currentlyShowing = "Series";
-                series.Clear();
                 GetSeries();
             }
         }

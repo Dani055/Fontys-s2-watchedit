@@ -69,17 +69,23 @@ namespace WatchedIT_Desktop.forms
                 MessageBox.Show("Duration not in correct format");
                 return;
             }
+
+            bool result = false;
             if (isMovie)
             {
-                MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
+                result = MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
             }
             else
             {
                 int season = Convert.ToInt32(tbSeason.Value);
                 int episode = Convert.ToInt32(tbEpisode.Value);
-                EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
+                result = EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
             }
-            Utils.UpdateContent = true;
+            if (result)
+            {
+                Utils.UpdateContent = true;
+            }
+            
 
         }
     }
