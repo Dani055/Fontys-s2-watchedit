@@ -1,11 +1,33 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0-windows7.0": {
+      "WatchedIT_Desktop/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/WatchedIT_Desktop.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WatchedIT_Desktop.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "WatchedIT_Desktop/1.0.0": {
+      "type": "project",
+      "path": "../WatchedIT_Desktop/WatchedIT_Desktop.csproj",
+      "msbuildProject": "../WatchedIT_Desktop/WatchedIT_Desktop.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0-windows7.0": [
+      "WatchedIT_Desktop >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Nitro\\.nuget\\packages\\": {}
@@ -24,16 +46,20 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0"
+        "net5.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "projectReferences": {}
+        "net5.0-windows7.0": {
+          "targetAlias": "net5.0-windows",
+          "projectReferences": {
+            "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj": {
+              "projectPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -43,8 +69,8 @@
       }
     },
     "frameworks": {
-      "net5.0": {
-        "targetAlias": "net5.0",
+      "net5.0-windows7.0": {
+        "targetAlias": "net5.0-windows",
         "imports": [
           "net461",
           "net462",

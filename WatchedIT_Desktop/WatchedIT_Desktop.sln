@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchedIT_Desktop", "WatchedIT_Desktop.csproj", "{CFCA1567-CE2C-4B33-82DD-6B8B531B3C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchedIT_Desktop", "WatchedIT_Desktop.csproj", "{CFCA1567-CE2C-4B33-82DD-6B8B531B3C93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchedItWeb", "..\WatchedItWeb\WatchedItWeb.csproj", "{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CFCA1567-CE2C-4B33-82DD-6B8B531B3C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFCA1567-CE2C-4B33-82DD-6B8B531B3C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFCA1567-CE2C-4B33-82DD-6B8B531B3C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
