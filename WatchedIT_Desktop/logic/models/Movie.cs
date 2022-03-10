@@ -18,6 +18,10 @@ namespace WatchedIT_Desktop.logic.models
         public string Actors { get; set; }
         public TimeSpan Duration { get; set; }
 
+        public Movie()
+        {
+
+        }
         public Movie(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
             Id = id;

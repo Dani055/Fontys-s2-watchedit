@@ -17,6 +17,10 @@ namespace WatchedIT_Desktop.logic.models
         public string Actors { get; set; }
         public string Description { get; set; }
 
+        public Series()
+        {
+
+        }
         public Series(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors)
         {
             Id = id;

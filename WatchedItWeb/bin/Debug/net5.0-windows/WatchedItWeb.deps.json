@@ -382,9 +382,6 @@
         }
       },
       "WatchedIT_Desktop/1.0.0": {
-        "dependencies": {
-          "AspNetCoreHero.ToastNotification": "1.1.0"
-        },
         "runtime": {
           "WatchedIT_Desktop.dll": {}
         },

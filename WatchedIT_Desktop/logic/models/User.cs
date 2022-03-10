@@ -17,6 +17,10 @@ namespace WatchedIT_Desktop.logic.models
         public string Email { get; set; }
         public string ImageUrl { get; set; }
 
+        public User()
+        {
+
+        }
         public User(int id, bool isadmin, string username, string pass, string firstname, string lastname, string email, string imageurl)
         {
             Id = id;

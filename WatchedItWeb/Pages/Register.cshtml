@@ -5,32 +5,36 @@
 
 
 <div class="wrapper">
-    <form action="" class="auth">
+    <form method="post" class="auth">
         <fieldset>
             <legend>Register</legend>
             <div class="field">
-                <input type="text" name="username" id="username">
-                <label for="username">Username</label>
+                <input type="text" asp-for="user.Username">
+                <label asp-for="user.Username">Username</label>
             </div>
             <div class="field">
-                <input type="password" name="password" id="password">
-                <label for="password">Password</label>
+                <input type="password" asp-for="user.Password">
+                <label asp-for="user.Password">Password</label>
             </div>
             <div class="field">
                 <input type="password" name="confirm-password" id="confirm-password">
                 <label for="confirm-password">Confirm password</label>
             </div>
             <div class="field">
-                <input type="text" name="first-name" id="first-name">
-                <label for="first-name">First name</label>
+                <input type="text" asp-for="user.FirstName">
+                <label asp-for="user.FirstName">First name</label>
             </div>
             <div class="field">
-                <input type="text" name="last-name" id="last-name">
-                <label for="last-name">Last name</label>
+                <input type="text" asp-for="user.LastName">
+                <label asp-for="user.LastName">Last name</label>
             </div>
             <div class="field">
-                <input type="email" name="email" id="email">
-                <label for="email">Email</label>
+                <input type="email" asp-for="user.Email">
+                <label asp-for="user.Email">Email</label>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="user.ImageUrl">
+                <label asp-for="user.ImageUrl">Profile Picture URL</label>
             </div>
             <div class="field-submit">
                 <button type="submit">Register</button>

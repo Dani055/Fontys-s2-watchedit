@@ -24,8 +24,6 @@ namespace WatchedItWeb.Pages
 
         public void OnGet()
         {
-            
-            _notyf.Success("Success Notification");
         }
     }
 }
