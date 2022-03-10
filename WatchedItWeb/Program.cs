@@ -21,6 +21,7 @@ namespace WatchedItWeb
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }

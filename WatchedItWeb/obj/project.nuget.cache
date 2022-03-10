@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "SUHGXfB3qCXyUK5qW0YWaBN8oT7DrBu34BVsr6+eqnVRehUQkITCpx79uWTWwE0rix/hjKVqZfzP/EkJAjK/AA==",
+  "dgSpecHash": "HYGitSA21vsIVa9k5uOHL20iO3zzCrVrGuYe7uM+++3gL7gTbNzEPvV1DM5y8qYOAeAMTl1q1iuMJiOZ2mNc0w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedItWeb\\WatchedItWeb.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Nitro\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
+    "C:\\Users\\Nitro\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Nitro\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
   ],
   "logs": []

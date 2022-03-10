@@ -43,7 +43,6 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\AddMovie.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\AllMovies.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\MovieDetails.cshtml.g.cs
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Privacy.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Register.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Series\AddSeries.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Series\AllSeries.cshtml.g.cs
@@ -60,3 +59,10 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Watche
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\ref\WatchedItWeb.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.pdb
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.genruntimeconfig.cache
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedItWeb.StaticWebAssets.xml
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\AspNetCoreHero.ToastNotification.Views.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\AspNetCoreHero.ToastNotification.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\staticwebassets\WatchedItWeb.StaticWebAssets.xml
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Logout.cshtml.g.cs
