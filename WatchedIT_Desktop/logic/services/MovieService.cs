@@ -50,13 +50,7 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("Movie added successfully");
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -116,20 +110,7 @@ namespace WatchedIT_Desktop.logic.services
                 }
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                if (isMovie)
-                {
-                    MessageBox.Show("Movie edited successfully!");
-                }
-                else
-                {
-                    MessageBox.Show("Episode edited successfully!");
-                }
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -166,11 +147,6 @@ namespace WatchedIT_Desktop.logic.services
                 reader.Close();
                 return movies;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -204,11 +180,6 @@ namespace WatchedIT_Desktop.logic.services
                 }
                 return null;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -230,22 +201,8 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                if (result > 0)
-                {
-                    MessageBox.Show("Deleted successfully!");
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("Something went wrong!");
-                    return false;
-                }
+                return true;
                 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -283,11 +240,6 @@ namespace WatchedIT_Desktop.logic.services
                 }
                 reader.Close();
                 return movies;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
             }
             finally
             {

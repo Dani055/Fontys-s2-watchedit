@@ -21,14 +21,22 @@ namespace WatchedIT_Desktop.forms
         {
             InitializeComponent();
             isMovie = ismovie;
-            if (!isMovie)
+            try
             {
-                movie = EpisodeService.GetEpisodeById(id);
+                if (!isMovie)
+                {
+                    movie = EpisodeService.GetEpisodeById(id);
+                }
+                else
+                {
+                    movie = MovieService.GetMovieById(id);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                movie = MovieService.GetMovieById(id);
+                Utils.ShowError(ex.Message);
             }
+
             HideUI();
             PopulateInfo();
         }
@@ -73,11 +81,27 @@ namespace WatchedIT_Desktop.forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MovieService.DeleteMovieOrEpisode(movie.Id))
+            try
             {
-                Utils.UpdateContent = true;
-                this.Dispose();
+                if (MovieService.DeleteMovieOrEpisode(movie.Id))
+                {
+                    if (isMovie)
+                    {
+                        Utils.ShowInfo("Movie deleted successfully!");
+                    }
+                    else
+                    {
+                        Utils.ShowInfo("Episode deleted successfully!");
+                    }
+                    Utils.UpdateContent = true;
+                    this.Dispose();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -88,14 +112,22 @@ namespace WatchedIT_Desktop.forms
             this.Show();
             if (Utils.UpdateContent)
             {
-                if (!isMovie)
+                try
                 {
-                    movie = EpisodeService.GetEpisodeById(movie.Id);
+                    if (!isMovie)
+                    {
+                        movie = EpisodeService.GetEpisodeById(movie.Id);
+                    }
+                    else
+                    {
+                        movie = MovieService.GetMovieById(movie.Id);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    movie = MovieService.GetMovieById(movie.Id);
+                    Utils.ShowError(ex.Message);
                 }
+
 
                 PopulateInfo();
             }

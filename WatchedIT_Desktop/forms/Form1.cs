@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchedIT_Desktop.forms;
+using WatchedIT_Desktop.logic;
 using WatchedIT_Desktop.logic.services;
 
 namespace WatchedIT_Desktop
@@ -24,16 +25,24 @@ namespace WatchedIT_Desktop
             string username = tbUsername.Text;
             string password = tbPassword.Text;
 
-            bool result = UserService.Login(username, password);
-            if (result)
+            try
             {
-                tbUsername.Text = "";
-                tbPassword.Text = "";
-                Home home = new Home();
-                this.Hide();
-                home.ShowDialog();
-                this.Show();
+                bool result = UserService.Login(username, password);
+                if (result)
+                {
+                    tbUsername.Text = "";
+                    tbPassword.Text = "";
+                    Home home = new Home();
+                    this.Hide();
+                    home.ShowDialog();
+                    this.Show();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
         }
 
         private void lblRegister_Click(object sender, EventArgs e)

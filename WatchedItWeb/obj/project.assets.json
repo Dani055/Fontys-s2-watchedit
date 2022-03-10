@@ -37,9 +37,6 @@
       "WatchedIT_Desktop/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
-        "dependencies": {
-          "AspNetCoreHero.ToastNotification": "1.1.0"
-        },
         "compile": {
           "bin/placeholder/WatchedIT_Desktop.dll": {}
         },

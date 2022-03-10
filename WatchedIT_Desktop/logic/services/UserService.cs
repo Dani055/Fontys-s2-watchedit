@@ -52,11 +52,6 @@ namespace WatchedIT_Desktop.logic.services
                     throw new Exception("Wrong username or password!");
                 }
             }
-            catch (Exception ex)
-            {  
-                MessageBox.Show(ex.Message);
-                return false;
-            }
             finally
             {
                conn.Close();
@@ -99,13 +94,7 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("User registered successfully");
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {

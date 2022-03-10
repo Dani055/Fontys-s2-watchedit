@@ -87,11 +87,28 @@ namespace WatchedIT_Desktop.forms
                 season = Convert.ToInt32(tbSeason.Value);
                 episode = Convert.ToInt32(tbEpisode.Value);
             }
-            if (MovieService.EditMovieOrEpisode(movie.Id, name, year, url, genre, producers, desc, actors, duration, isMovie, season, episode))
+
+            try
             {
-                Utils.UpdateContent = true;
-                this.Dispose();
+                if (MovieService.EditMovieOrEpisode(movie.Id, name, year, url, genre, producers, desc, actors, duration, isMovie, season, episode))
+                {
+                    if (isMovie)
+                    {
+                        Utils.ShowInfo("Movie edited successfully!");
+                    }
+                    else
+                    {
+                        Utils.ShowInfo("Episode edited successfully!");
+                    }
+                    Utils.UpdateContent = true;
+                    this.Dispose();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
         }
     }
 }

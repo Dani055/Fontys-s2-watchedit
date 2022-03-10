@@ -71,22 +71,35 @@ namespace WatchedIT_Desktop.forms
             }
 
             bool result = false;
-            if (isMovie)
+            try
             {
-                result = MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
+                if (isMovie)
+                {
+                    result = MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
+                }
+                else
+                {
+                    int season = Convert.ToInt32(tbSeason.Value);
+                    int episode = Convert.ToInt32(tbEpisode.Value);
+                    result = EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
+                }
+                if (result)
+                {
+                    Utils.UpdateContent = true;
+                    if (isMovie)
+                    {
+                        Utils.ShowInfo("Movie added successfully!");
+                    }
+                    else
+                    {
+                        Utils.ShowInfo("Episode added successfully!");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                int season = Convert.ToInt32(tbSeason.Value);
-                int episode = Convert.ToInt32(tbEpisode.Value);
-                result = EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
+                Utils.ShowError(ex.Message);
             }
-            if (result)
-            {
-                Utils.UpdateContent = true;
-            }
-            
-
         }
     }
 }

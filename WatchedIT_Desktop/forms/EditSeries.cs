@@ -48,11 +48,20 @@ namespace WatchedIT_Desktop.forms
             string desc = tbDesc.Text.Trim();
             string actors = tbActors.Text.Trim();
 
-            if (SeriesService.EditSeries(loadedSeries.Id, name, year, url, genre, desc, actors, producers))
+            try
             {
-                Utils.UpdateContent = true;
-                this.Dispose();
+                if (SeriesService.EditSeries(loadedSeries.Id, name, year, url, genre, desc, actors, producers))
+                {
+                    Utils.ShowInfo("Series edited successfully!");
+                    Utils.UpdateContent = true;
+                    this.Dispose();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
             
         }
     }

@@ -42,13 +42,7 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("Series added successfully");
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -85,13 +79,7 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("Series edited successfully");
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -128,11 +116,6 @@ namespace WatchedIT_Desktop.logic.services
                 reader.Close();
                 return series;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -168,11 +151,6 @@ namespace WatchedIT_Desktop.logic.services
                 reader.Close();
                 return series;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -206,11 +184,6 @@ namespace WatchedIT_Desktop.logic.services
                 }
                 return null;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -231,22 +204,8 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                if (result > 0)
-                {
-                    MessageBox.Show("Series deleted successfully!");
-                    return true;
-                }
-                else
-                {
-                    MessageBox.Show("Something went wrong!");
-                    return false;
-                }
+                return true;
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {

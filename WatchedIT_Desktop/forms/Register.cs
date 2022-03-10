@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WatchedIT_Desktop.logic;
 using WatchedIT_Desktop.logic.services;
 
 namespace WatchedIT_Desktop.forms
@@ -47,12 +48,21 @@ namespace WatchedIT_Desktop.forms
             string email = tbEmail.Text;
             string imageurl = tbImageurl.Text;
 
-            bool result = UserService.Register(username, password, firstname, lastname, email, imageurl);
-            if (result)
+            try
             {
-                this.closedByButton = true;
-                this.Dispose();
+                bool result = UserService.Register(username, password, firstname, lastname, email, imageurl);
+                if (result)
+                {
+                    Utils.ShowInfo("User registered successfully!");
+                    this.closedByButton = true;
+                    this.Dispose();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
         }
     }
 }

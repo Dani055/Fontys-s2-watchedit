@@ -56,13 +56,27 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetMovies()
         {
-            movies = MovieService.GetMovies(0);
+            try
+            {
+                movies = MovieService.GetMovies(0);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
             flowLayoutPanel1.Controls.Clear();
             DisplayMovies();
         }
         private void SearchMovies(string keyword)
         {
-            movies = MovieService.SearchMovies(keyword);
+            try
+            {
+                movies = MovieService.SearchMovies(keyword);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
             flowLayoutPanel1.Controls.Clear();
             DisplayMovies();
         }
@@ -72,16 +86,25 @@ namespace WatchedIT_Desktop.forms
             {
                 return;
             }
-            List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
-            foreach (Movie m in loadedMovies)
+            try
             {
-                movies.Add(m);
+                List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
+
+                foreach (Movie m in loadedMovies)
+                {
+                    movies.Add(m);
+                }
+                foreach (Movie movie in loadedMovies)
+                {
+                    MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
+                    flowLayoutPanel1.Controls.Add(card);
+                }
             }
-            foreach (Movie movie in loadedMovies)
+            catch (Exception ex)
             {
-                MovieCard card = new MovieCard(movie.Id, movie.ImageUrl, movie.Name, this, true);
-                flowLayoutPanel1.Controls.Add(card);
+                Utils.ShowError(ex.Message);
             }
+
         }
         private void DisplayMovies()
         {
@@ -96,7 +119,15 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetSeries()
         {
-            series = SeriesService.GetSeries(0);
+            try
+            {
+                series = SeriesService.GetSeries(0);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
             flowLayoutPanel1.Controls.Clear();
             DisplaySeries();
         }
@@ -106,20 +137,37 @@ namespace WatchedIT_Desktop.forms
             {
                 return;
             }
-            List<Series> loadedSeries = SeriesService.GetSeries(series.Count);
-            foreach (Series s in loadedSeries)
+
+            try
             {
-                series.Add(s);
+                List<Series> loadedSeries = SeriesService.GetSeries(series.Count);
+                foreach (Series s in loadedSeries)
+                {
+                    series.Add(s);
+                }
+                foreach (Series s in loadedSeries)
+                {
+                    MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
+                    flowLayoutPanel1.Controls.Add(card);
+                }
             }
-            foreach (Series s in loadedSeries)
+            catch (Exception ex)
             {
-                MovieCard card = new MovieCard(s.Id, s.ImageUrl, s.Name, this, false);
-                flowLayoutPanel1.Controls.Add(card);
+                Utils.ShowError(ex.Message);
             }
+
         }
         private void SearchSeries(string keyword)
         {
-            series = SeriesService.SearchSeries(keyword);
+            try
+            {
+                series = SeriesService.SearchSeries(keyword);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+            
             flowLayoutPanel1.Controls.Clear();
             DisplaySeries();
         }

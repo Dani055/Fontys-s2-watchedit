@@ -55,13 +55,7 @@ namespace WatchedIT_Desktop.logic.services
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
-                MessageBox.Show("Episode added successfully");
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
             }
             finally
             {
@@ -103,11 +97,6 @@ namespace WatchedIT_Desktop.logic.services
                 reader.Close();
                 return episodes;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
             finally
             {
                 conn.Close();
@@ -143,11 +132,6 @@ namespace WatchedIT_Desktop.logic.services
                     e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
                     return e;
                 }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
                 return null;
             }
             finally

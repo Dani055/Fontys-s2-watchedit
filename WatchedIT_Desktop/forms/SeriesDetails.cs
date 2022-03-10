@@ -35,7 +35,15 @@ namespace WatchedIT_Desktop.forms
         }
         private void PopulateInfo(int id)
         {
-            series = SeriesService.GetSeriesById(id);
+            try
+            {
+                series = SeriesService.GetSeriesById(id);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
             if (series != null)
             {
                 lblName.Text = series.Name;
@@ -55,7 +63,16 @@ namespace WatchedIT_Desktop.forms
                 this.Dispose();
                 return;
             }
-            episodes = EpisodeService.GetEpisodes(series.Id);
+
+            try
+            {
+                episodes = EpisodeService.GetEpisodes(series.Id);
+            }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+            
             flwEpisodes.Controls.Clear();
             if (episodes != null)
             {
@@ -91,11 +108,20 @@ namespace WatchedIT_Desktop.forms
 
         private void btnYeet_Click(object sender, EventArgs e)
         {
-            if (SeriesService.DeleteSeries(series.Id))
+            try
             {
-                Utils.UpdateContent = true;
-                this.Dispose();
+                if (SeriesService.DeleteSeries(series.Id))
+                {
+                    Utils.ShowInfo("Series deleted successfully!");
+                    Utils.UpdateContent = true;
+                    this.Dispose();
+                }
             }
+            catch (Exception ex)
+            {
+                Utils.ShowError(ex.Message);
+            }
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
