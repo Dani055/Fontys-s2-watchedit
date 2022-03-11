@@ -9,7 +9,7 @@ using WatchedIT_Desktop.logic.models;
 
 namespace WatchedIT_Desktop.logic.services
 {
-    class SeriesService
+    public static class SeriesService
     {
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 

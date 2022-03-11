@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WatchedIT_Desktop.logic;
-using WatchedIT_Desktop.logic.models;
-using WatchedIT_Desktop.logic.services;
+using ClassLibraries;
+using ClassLibraries.models;
+using ClassLibraries.services;
 using WatchedIT_Desktop.user_controls;
 
 namespace WatchedIT_Desktop.forms
@@ -62,7 +62,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
             flowLayoutPanel1.Controls.Clear();
             DisplayMovies();
@@ -75,7 +75,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
             flowLayoutPanel1.Controls.Clear();
             DisplayMovies();
@@ -102,7 +102,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
         }
@@ -125,7 +125,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
             flowLayoutPanel1.Controls.Clear();
@@ -153,7 +153,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
         }
@@ -165,7 +165,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
             
             flowLayoutPanel1.Controls.Clear();

@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WatchedIT_Desktop\WatchedIT_Desktop.csproj" />
+    <ProjectReference Include="..\ClassLibraries\ClassLibraries.csproj" />
   </ItemGroup>
 
 </Project>

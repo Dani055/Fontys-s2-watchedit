@@ -4,6 +4,66 @@
     "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedItWeb\\WatchedItWeb.csproj": {}
   },
   "projects": {
+    "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\ClassLibraries.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\ClassLibraries.csproj",
+        "projectName": "ClassLibraries",
+        "projectPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\ClassLibraries.csproj",
+        "packagesPath": "C:\\Users\\Nitro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Nitro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.28, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedItWeb\\WatchedItWeb.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -28,8 +88,8 @@
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
-              "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj": {
-                "projectPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj"
+              "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\ClassLibraries.csproj": {
+                "projectPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\ClassLibraries\\ClassLibraries.csproj"
               }
             }
           }
@@ -71,69 +131,6 @@
             },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj",
-        "projectName": "WatchedIT_Desktop",
-        "projectPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\WatchedIT_Desktop.csproj",
-        "packagesPath": "C:\\Users\\Nitro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\WatchedIT_Desktop\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Nitro\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0-windows7.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0-windows7.0": {
-            "targetAlias": "net5.0-windows",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0-windows7.0": {
-          "targetAlias": "net5.0-windows",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.14, 5.0.14]"
-            }
-          ],
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.WindowsDesktop.App.WindowsForms": {
-              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WatchedIT_Desktop.logic.models;
-using WatchedIT_Desktop.logic.services;
+using ClassLibraries.models;
+using ClassLibraries.services;
 
 namespace WatchedItWeb.Pages
 {

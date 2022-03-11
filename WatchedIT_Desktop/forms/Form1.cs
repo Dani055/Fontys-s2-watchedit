@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassLibraries;
+using ClassLibraries.models;
+using ClassLibraries.services;
 using WatchedIT_Desktop.forms;
-using WatchedIT_Desktop.logic;
-using WatchedIT_Desktop.logic.services;
 
 namespace WatchedIT_Desktop
 {
@@ -40,7 +41,7 @@ namespace WatchedIT_Desktop
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
         }

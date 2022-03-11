@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WatchedIT_Desktop.logic;
-using WatchedIT_Desktop.logic.models;
-using WatchedIT_Desktop.logic.services;
+using ClassLibraries;
+using ClassLibraries.models;
+using ClassLibraries.services;
 using WatchedIT_Desktop.user_controls;
 
 namespace WatchedIT_Desktop.forms
@@ -41,7 +41,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
             if (series != null)
@@ -70,7 +70,7 @@ namespace WatchedIT_Desktop.forms
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
             
             flwEpisodes.Controls.Clear();
@@ -112,14 +112,14 @@ namespace WatchedIT_Desktop.forms
             {
                 if (SeriesService.DeleteSeries(series.Id))
                 {
-                    Utils.ShowInfo("Series deleted successfully!");
+                    MessageHelper.ShowInfo("Series deleted successfully!");
                     Utils.UpdateContent = true;
                     this.Dispose();
                 }
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
         }

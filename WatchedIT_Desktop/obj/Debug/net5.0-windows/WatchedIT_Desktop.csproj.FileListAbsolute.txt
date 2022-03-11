@@ -13,7 +13,6 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\B
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\Ubiety.Dns.Core.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\K4os.Compression.LZ4.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\K4os.Hash.xxHash.dll
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\MySql.Data.xml
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.csproj.AssemblyReference.cache
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.Form1.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.Home.resources
@@ -36,3 +35,5 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\W
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.user_controls.EpisodeCard.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.EditSeries.resources
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\obj\Debug\net5.0-windows\WatchedIT_Desktop.forms.EditMovie.resources
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\ClassLibraries.pdb
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedIT_Desktop\bin\Debug\net5.0-windows\ClassLibraries.dll

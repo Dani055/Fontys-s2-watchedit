@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WatchedIT_Desktop.logic;
-using WatchedIT_Desktop.logic.services;
+using ClassLibraries;
+using ClassLibraries.models;
+using ClassLibraries.services;
 
 namespace WatchedIT_Desktop.forms
 {
@@ -88,17 +89,17 @@ namespace WatchedIT_Desktop.forms
                     Utils.UpdateContent = true;
                     if (isMovie)
                     {
-                        Utils.ShowInfo("Movie added successfully!");
+                        MessageHelper.ShowInfo("Movie added successfully!");
                     }
                     else
                     {
-                        Utils.ShowInfo("Episode added successfully!");
+                        MessageHelper.ShowInfo("Episode added successfully!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Utils.ShowError(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
         }
     }

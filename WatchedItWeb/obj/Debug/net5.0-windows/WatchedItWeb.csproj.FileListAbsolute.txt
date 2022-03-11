@@ -1,7 +1,3 @@
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.deps.json
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.runtimeconfig.json
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.runtimeconfig.dev.json
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.exe
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\appsettings.Development.json
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\appsettings.json
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedItWeb.exe
@@ -13,7 +9,6 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ref\Wa
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedItWeb.pdb
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedItWeb.Views.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedItWeb.Views.pdb
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\MySql.Data.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\Google.Protobuf.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ZstdNet.dll
@@ -22,8 +17,6 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\Bouncy
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\Ubiety.Dns.Core.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\K4os.Compression.LZ4.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\K4os.Hash.xxHash.dll
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\WatchedIT_Desktop.pdb
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\MySql.Data.xml
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.csproj.AssemblyReference.cache
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.AssemblyInfoInputs.cache
@@ -66,3 +59,8 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\Newton
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\WatchedItWeb.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\staticwebassets\WatchedItWeb.StaticWebAssets.xml
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Logout.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ClassLibraries.dll
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ClassLibraries.pdb

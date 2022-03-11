@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WatchedIT_Desktop.logic.services;
+using ClassLibraries.services;
 
 namespace WatchedItWeb.Pages
 {
