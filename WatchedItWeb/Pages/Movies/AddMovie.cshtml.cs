@@ -63,7 +63,7 @@ namespace WatchedItWeb.Pages.Movies
                 {
                     MovieService.AddMovie(movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString());
                     _notyf.Success("Movie added!");
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Movies/AllMovies");
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace WatchedItWeb.Pages.Movies
                     int season = Convert.ToInt32(Request.Form["season"]);
                     EpisodeService.AddEpisode(movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId);
                     _notyf.Success("Episode added!");
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("/Serie/SeriesDetails" , new { seriesId = seriesId });
                 }
 
             }

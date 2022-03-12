@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{seriesId}"
 @using ClassLibraries.services
 @using ClassLibraries.models
 @model WatchedItWeb.Pages.Serie.SeriesDetailsModel
@@ -44,7 +44,6 @@
                         <a asp-page="/Movies/AddMovie" asp-route-m="false" asp-route-seriesId="@Model.series.Id">Add episode</a>
                         <a asp-page="/Serie/EditSeries" asp-route-seriesId="@Model.series.Id">Edit</a>
                         <form method="post">
-                            <input type="hidden" value="@Model.series.Id" name="seriesId"/>
                             <button type="submit" asp-page-handler="OnDelete">Delete</button>
                         </form>
                 </div>
@@ -54,7 +53,7 @@
         <div class="episodes">
             @foreach (Episode e in Model.episodes)
             {
-                <a asp-page="/Movies/MovieDetails">@e.Name - Season @e.SeasonNo Episode @e.EpisodeNo</a>
+                <a asp-page="/Movies/MovieDetails" asp-route-m="false" asp-route-movieId="@e.Id">@e.Name - Season @e.SeasonNo Episode @e.EpisodeNo</a>
             }
 
         </div>

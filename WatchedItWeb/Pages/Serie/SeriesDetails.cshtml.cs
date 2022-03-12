@@ -44,7 +44,6 @@ namespace WatchedItWeb.Pages.Serie
         {
             try
             {
-                int seriesId = Convert.ToInt32(Request.Form["seriesId"]);
                 SeriesService.DeleteSeries(seriesId);
                 _notyf.Success("Series deleted");
                 return RedirectToPage("/Serie/AllSeries");

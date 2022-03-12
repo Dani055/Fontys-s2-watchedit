@@ -1,19 +1,12 @@
-﻿@page
+﻿@page "{seriesId}"
 @model WatchedItWeb.Pages.Serie.EditSeriesModel
 @{
 }
-@*value="@Model.series.Name"
-value="@Model.series.Year"
-value="@Model.series.ImageUrl"
-value="@Model.series.Genre"
-value="@Model.series.Producer"
-value="@Model.series.Description"
-value="@Model.series.Actors"*@
+
 <div class="wrapper">
     <form method="post" class="auth">
         <fieldset>
             <legend>Edit series</legend>
-            <input type="hidden" name="seriesId" value="@Model.series.Id">
             <div class="field">
                 <input type="text" asp-for="series.Name">
                 <label asp-for="series.Name">Name</label>

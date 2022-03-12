@@ -65,3 +65,4 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\AllSeries.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\SeriesDetails.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\EditSeries.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\EditMovie.cshtml.g.cs

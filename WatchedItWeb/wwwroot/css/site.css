@@ -152,6 +152,7 @@ textarea {
 }
 
 form.auth textarea,
+form.auth input[type="number"],
 form.auth input[type="text"],
 form.auth input[type="tel"],
 form.auth input[type="email"],
@@ -168,6 +169,7 @@ form.auth input[type="password"] {
     form.auth textarea:hover,
     form.auth input[type="text"]:hover,
     form.auth input[type="tel"]:hover,
+    form.auth input[type="number"]:hover,
     form.auth input[type="email"]:hover,
     form.auth input[type="password"]:hover {
         border-color: #F24236;
@@ -175,6 +177,7 @@ form.auth input[type="password"] {
 
     form.auth textarea:focus,
     form.auth input[type="text"]:focus,
+    form.auth input[type="number"]:focus,
     form.auth input[type="tel"]:focus,
     form.auth input[type="email"]:focus,
     form.auth input[type="password"]:focus {
@@ -183,6 +186,7 @@ form.auth input[type="password"] {
 
 form.auth textarea:focus + label,
 input[type="text"]:focus + label,
+form.auth input[type="number"],
 input[type="tel"]:focus + label,
 input[type="email"]:focus + label,
 input[type="password"]:focus + label {

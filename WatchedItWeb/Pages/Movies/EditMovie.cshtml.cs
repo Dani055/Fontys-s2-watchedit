@@ -10,15 +10,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WatchedItWeb.Pages.Movies
 {
-    public class MovieDetailsModel : PageModel
+    public class EditMovieModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
-        public int movieId { get; set; }
+        [BindProperty]
+        public Movie movie { get; set; }
+        private readonly INotyfService _notyf;
         [BindProperty(SupportsGet = true)]
         public bool m { get; set; }
-        private readonly INotyfService _notyf;
-        public Movie movie { get; set; }
-        public MovieDetailsModel(INotyfService notyf)
+
+        [BindProperty(SupportsGet = true)]
+        public int movieId { get; set; }
+        public EditMovieModel(INotyfService notyf)
         {
             _notyf = notyf;
         }
@@ -34,7 +36,7 @@ namespace WatchedItWeb.Pages.Movies
                 {
                     movie = EpisodeService.GetEpisodeById(movieId);
                 }
-        
+
                 if (movie == null)
                 {
                     _notyf.Error("Resource not found!");
@@ -48,30 +50,28 @@ namespace WatchedItWeb.Pages.Movies
                 return RedirectToPage("/Index");
             }
         }
-
-        public IActionResult OnPostOnDelete()
+        public IActionResult OnPost()
         {
             try
             {
-                MovieService.DeleteMovieOrEpisode(movieId);
+                int episode = Convert.ToInt32(Request.Form["episode"]);
+                int season = Convert.ToInt32(Request.Form["season"]);
+                MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
                 if (m)
                 {
-                    _notyf.Success("Movie deleted");
-                    return RedirectToPage("/Movies/AllMovies");
+                    _notyf.Success("Movie edited.");
                 }
                 else
                 {
-                    int seriesId = Convert.ToInt32(Request.Form["seriesId"]);
-                    _notyf.Success("Episode deleted");
-                    return RedirectToPage("/Serie/SeriesDetails", new { seriesId = seriesId });
+                    _notyf.Success("Episode edited.");
                 }
+                return RedirectToPage("/Movies/MovieDetails", new { m = m, movieId = movieId });
             }
             catch (Exception ex)
             {
                 _notyf.Error(ex.Message);
                 return Page();
             }
-
         }
     }
 }

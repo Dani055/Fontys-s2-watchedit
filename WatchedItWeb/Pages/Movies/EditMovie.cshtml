@@ -1,5 +1,5 @@
-﻿@page
-@model WatchedItWeb.Pages.Movies.AddMovieModel
+﻿@page "{m}/{movieId}"
+@model WatchedItWeb.Pages.Movies.EditMovieModel
 @using ClassLibraries.models
 @{
 }
@@ -7,7 +7,7 @@
 <div class="wrapper">
     <form method="post" class="auth">
         <fieldset>
-            <legend>Add @(Model.m == false ? "Episode" : "Movie")</legend>
+            <legend>Edit @(Model.movie.GetType() == typeof(Episode) ? "Episode" : "Movie")</legend>
             <div class="field">
                 <input type="text" asp-for="movie.Name">
                 <label asp-for="movie.Name">Name</label>
@@ -44,17 +44,17 @@
             {
                 <div class="field-special">
                     <div class="field-special-half">
-                        <input type="number" name="season" id="season">
+                        <input type="number" name="season" id="season" value="@(((Episode)Model.movie).SeasonNo)" />
                         <label for="season">S</label>
                     </div>
                     <div class="field-special-half">
-                        <input type="number" name="episode" id="episode">
+                        <input type="number" name="episode" id="episode" value="@(((Episode)Model.movie).EpisodeNo)" />
                         <label for="episode">EP</label>
                     </div>
                 </div>
             }
             <div class="field-submit">
-                <button type="submit">Add</button>
+                <button type="submit">Edit</button>
             </div>
         </fieldset>
     </form>

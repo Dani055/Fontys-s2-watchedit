@@ -41,7 +41,6 @@ namespace WatchedItWeb.Pages.Serie
         {
             try
             {
-                int seriesId = Convert.ToInt32(Request.Form["seriesId"]);
                 SeriesService.EditSeries(seriesId, series.Name, series.Year.ToString(), series.ImageUrl, series.Genre, series.Description, series.Actors, series.Producer);
                 _notyf.Success("Series Edited!");
                 return RedirectToPage("/Serie/SeriesDetails", new { seriesId = seriesId });

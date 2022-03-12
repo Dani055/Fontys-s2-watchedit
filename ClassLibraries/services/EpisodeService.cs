@@ -137,9 +137,15 @@ namespace ClassLibraries.services
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int season = int.Parse(reader["season"].ToString());
+                    bool res;
+                    int seriesId;
+                    res = int.TryParse(reader["seriesId"].ToString(), out seriesId);
+                    if (!res)
+                    {
+                        throw new Exception("Trying to get episode, but object is a movie");
+                    }
                     int episode = int.Parse(reader["episode"].ToString());
-                    int seriesId = int.Parse(reader["episode"].ToString());
+                    int season = int.Parse(reader["season"].ToString());
 
                     e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
                     return e;

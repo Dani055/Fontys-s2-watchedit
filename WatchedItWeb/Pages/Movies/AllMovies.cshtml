@@ -16,7 +16,7 @@
         @foreach (Movie m in Model.movies)
         {
             <div class="card-movie">
-                <a asp-page="/Movies/MovieDetails">
+                <a asp-page="/Movies/MovieDetails" asp-route-m="true" asp-route-movieId="@m.Id">
                     <div class="arbox">
                         <div class="media">
                             <img src="@m.ImageUrl" alt="">

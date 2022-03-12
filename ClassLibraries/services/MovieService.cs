@@ -180,6 +180,11 @@ namespace ClassLibraries.services
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    string seriesId = reader["seriesId"].ToString();
+                    if (seriesId != null && seriesId != "")
+                    {
+                        throw new Exception("Trying to get movie but object is an episode.");
+                    }
                     m = new Movie(Id, name, year, url, genre, producer, desc, actors, duration);
                     return m;
                 }
