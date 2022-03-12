@@ -1,0 +1,51 @@
+﻿@page
+@model WatchedItWeb.Pages.Serie.EditSeriesModel
+@{
+}
+@*value="@Model.series.Name"
+value="@Model.series.Year"
+value="@Model.series.ImageUrl"
+value="@Model.series.Genre"
+value="@Model.series.Producer"
+value="@Model.series.Description"
+value="@Model.series.Actors"*@
+<div class="wrapper">
+    <form method="post" class="auth">
+        <fieldset>
+            <legend>Edit series</legend>
+            <input type="hidden" name="seriesId" value="@Model.series.Id">
+            <div class="field">
+                <input type="text" asp-for="series.Name">
+                <label asp-for="series.Name">Name</label>
+            </div>
+            <div class="field">
+                <input type="date" asp-for="series.Year">
+                <label asp-for="series.Year">Year</label>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="series.ImageUrl">
+                <label asp-for="series.ImageUrl">Image URL</label>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="series.Genre">
+                <label asp-for="series.Genre">Genre</label>
+            </div>
+            <div class="field">
+                <input type="text" asp-for="series.Producer">
+                <label asp-for="series.Producer">Producers</label>
+            </div>
+            <div class="field">
+                <textarea asp-for="series.Description" rows="10"></textarea>
+                <label asp-for="series.Description">Description</label>
+            </div>
+            <div class="field">
+                <textarea asp-for="series.Actors" rows="8"></textarea>
+                <label asp-for="series.Actors">Actors</label>
+            </div>
+            <div class="field-submit">
+                <button type="submit">Edit</button>
+            </div>
+        </fieldset>
+
+    </form>
+</div>      

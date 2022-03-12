@@ -2,23 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using ClassLibraries.models;
+using ClassLibraries;
+using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ClassLibraries.models;
-using ClassLibraries.services;
-using AspNetCoreHero.ToastNotification.Abstractions;
 
-namespace WatchedItWeb.Pages.Movies
+namespace WatchedItWeb.Pages.Serie
 {
-    public class AllMoviesModel : PageModel
+    public class AllSeriesModel : PageModel
     {
         private readonly INotyfService _notyf;
-        public List<Movie> movies = new List<Movie>();
+        public List<Series> series = new List<Series>();
         [BindProperty(SupportsGet = true)]
         public int CurrentPage { get; set; } = 0;
         [BindProperty(SupportsGet = true)]
         public string keyword { get; set; }
-        public AllMoviesModel(INotyfService notyf)
+
+        public AllSeriesModel(INotyfService notyf)
         {
             _notyf = notyf;
         }
@@ -28,15 +30,15 @@ namespace WatchedItWeb.Pages.Movies
             {
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    movies = MovieService.SearchMovies(keyword);
+                    series = SeriesService.SearchSeries(keyword);
                 }
                 else
                 {
-                    List<Movie> loadedMovies = new List<Movie>();
+                    List<Series> loadedSeries = new List<Series>();
                     for (int i = 0; i <= CurrentPage; i++)
                     {
-                        loadedMovies = MovieService.GetMovies(i * 4);
-                        movies.AddRange(loadedMovies);
+                        loadedSeries = SeriesService.GetSeries(i * 4);
+                        series.AddRange(loadedSeries);
                     }
                 }
             }
@@ -44,11 +46,6 @@ namespace WatchedItWeb.Pages.Movies
             {
                 _notyf.Error(ex.Message);
             }
-
-        }
-        public void OnPost()
-        {
-
         }
     }
 }

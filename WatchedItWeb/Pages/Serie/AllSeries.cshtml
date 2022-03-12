@@ -1,28 +1,28 @@
-﻿
-@page
+﻿@page
 @using ClassLibraries.models
-@model WatchedItWeb.Pages.Movies.AllMoviesModel
-
+@model WatchedItWeb.Pages.Serie.AllSeriesModel
+@{
+}
 
 <div class="wrapper">
     <div class="movies-header">
-        <h2 class="heading">All movies</h2>
+        <h2 class="heading">All series</h2>
         <form class="search">
             <input type="text" asp-for="keyword" placeholder="Search...">
             <button type="submit">Go</button>
         </form>
     </div>
     <div class="row">
-        @foreach (Movie m in Model.movies)
+        @foreach (Series s in Model.series)
         {
             <div class="card-movie">
-                <a asp-page="/Movies/MovieDetails">
+                <a asp-page="/Serie/SeriesDetails" asp-route-seriesId="@s.Id">
                     <div class="arbox">
                         <div class="media">
-                            <img src="@m.ImageUrl" alt="">
+                            <img src="@s.ImageUrl" alt="">
                         </div>
                     </div>
-                    <p>@m.Name</p>
+                    <p>@s.Name</p>
                 </a>
             </div>
         }

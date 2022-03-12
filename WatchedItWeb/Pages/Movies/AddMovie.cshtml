@@ -4,55 +4,57 @@
 }
 
 <div class="wrapper">
-    <form action="" class="auth">
+    <form method="post" class="auth">
         <fieldset>
             <legend>Add movie</legend>
             <div class="field">
-                <input type="text" name="name" id="name">
-                <label for="name">Name</label>
+                <input type="text" asp-for="movie.Name">
+                <label asp-for="movie.Name">Name</label>
             </div>
             <div class="field">
-                <input type="text" name="year" id="year">
-                <label for="year">Year</label>
+                <input type="date" asp-for="movie.Year">
+                <label asp-for="movie.Year">Year</label>
             </div>
             <div class="field">
-                <input type="text" name="imageUrl" id="imageUrl">
-                <label for="imageUrl">Image URL</label>
+                <input type="text" asp-for="movie.ImageUrl">
+                <label asp-for="movie.ImageUrl">Image URL</label>
             </div>
             <div class="field">
-                <input type="text" name="genre" id="genre">
-                <label for="genre">Genre</label>
+                <input type="text" asp-for="movie.Genre">
+                <label asp-for="movie.Genre">Genre</label>
             </div>
             <div class="field">
-                <input type="text" name="producer" id="producer">
-                <label for="producer">Producers</label>
+                <input type="text" asp-for="movie.Producer">
+                <label asp-for="movie.Producer">Producers</label>
             </div>
             <div class="field">
-                <textarea name="description" id="description" rows="10"></textarea>
-                <label for="description">Description</label>
+                <textarea asp-for="movie.Description" rows="10"></textarea>
+                <label asp-for="movie.Description">Description</label>
             </div>
             <div class="field">
-                <textarea name="actors" id="actors" rows="8"></textarea>
-                <label for="actors">Actors</label>
+                <textarea asp-for="movie.Actors" rows="8"></textarea>
+                <label asp-for="movie.Actors">Actors</label>
             </div>
             <div class="field">
-                <input type="text" name="duration" id="duration">
-                <label for="duration">Duration HH:MM:SS</label>
+                <input type="time" asp-for="movie.Duration">
+                <label asp-for="movie.Duration">Duration HH:MM:SS</label>
             </div>
-            <div class="field-special">
-                <div class="field-special-half">
-                    <input type="text" name="season" id="season">
-                    <label for="season">S</label>
+            @if (!Model.m)
+            {
+                <div class="field-special">
+                    <div class="field-special-half">
+                        <input type="text" name="season" id="season">
+                        <label for="season">S</label>
+                    </div>
+                    <div class="field-special-half">
+                        <input type="text" name="episode" id="episode">
+                        <label for="episode">EP</label>
+                    </div>
                 </div>
-                <div class="field-special-half">
-                    <input type="text" name="episode" id="episode">
-                    <label for="episode">EP</label>
-                </div>
-            </div>
+            }
             <div class="field-submit">
                 <button type="submit">Add</button>
             </div>
         </fieldset>
-
     </form>
 </div>      

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchedIT_Desktop", "Watche
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WatchedItWeb", "..\WatchedItWeb\WatchedItWeb.csproj", "{150B47EC-8124-49E7-9FEC-B3BBB86B4AFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraries", "..\ClassLibraries\ClassLibraries.csproj", "{BEE05DDD-0955-453B-B943-69410D0EF587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibraries", "..\ClassLibraries\ClassLibraries.csproj", "{BEE05DDD-0955-453B-B943-69410D0EF587}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

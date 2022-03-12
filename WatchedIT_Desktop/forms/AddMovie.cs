@@ -51,38 +51,27 @@ namespace WatchedIT_Desktop.forms
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
             string name = tbName.Text;
-            DateTime year;
-            bool s = DateTime.TryParse(tbYear.Text, out year);
-            if (!s)
-            {
-                MessageBox.Show("Date not in correct format");
-                return;
-            }
+            string yearStr = tbYear.Text;
+            string durationStr = tbDuration.Text;
             string url = tbUrl.Text;
             string genre = tbGenre.Text.Trim();
             string producers = tbProd.Text.Trim();
             string desc = tbDesc.Text.Trim();
             string actors = tbActors.Text.Trim();
-            TimeSpan duration;
-            s = TimeSpan.TryParse(tbDuration.Text, out duration);
-            if (!s)
-            {
-                MessageBox.Show("Duration not in correct format");
-                return;
-            }
+
 
             bool result = false;
             try
             {
                 if (isMovie)
                 {
-                    result = MovieService.AddMovie(name, year, url, genre, producers, desc, actors, duration);
+                    result = MovieService.AddMovie(name, yearStr, url, genre, producers, desc, actors, durationStr);
                 }
                 else
                 {
                     int season = Convert.ToInt32(tbSeason.Value);
                     int episode = Convert.ToInt32(tbEpisode.Value);
-                    result = EpisodeService.AddEpisode(name, year, url, genre, producers, desc, actors, duration, season, episode, seriesId);
+                    result = EpisodeService.AddEpisode(name, yearStr, url, genre, producers, desc, actors, durationStr, season, episode, seriesId);
                 }
                 if (result)
                 {

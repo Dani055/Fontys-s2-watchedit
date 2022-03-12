@@ -23,14 +23,17 @@
                             <a asp-page="/Movies/AllMovies">All movies</a>
                         </li>
                         <li>
-                            <a asp-page="/Series/AllSeries">All series</a>
+                            <a asp-page="/Serie/AllSeries">All series</a>
                         </li>
-                        <li>
-                            <a asp-page="/Movies/AddMovie">Add movie</a>
-                        </li>
-                        <li>
-                            <a asp-page="/Series/AddSeries">Add series</a>
-                        </li>
+                        @if (UserService.loggedUser?.IsAdmin == true)
+                        {
+                            <li>
+                                <a asp-page="/Movies/AddMovie" asp-route-m="true">Add movie</a>
+                            </li>
+                            <li>
+                                <a asp-page="/Serie/AddSeries">Add series</a>
+                            </li>
+                        }
                         @if (UserService.loggedUser == null)
                         {
                             <li>
@@ -42,6 +45,9 @@
                         }
                         else
                         {
+                            <li>
+                                <p>Welcome, @UserService.loggedUser.Username</p>
+                            </li>
                             <li>
                                 <a asp-page="/Logout">Logout</a>
                             </li>

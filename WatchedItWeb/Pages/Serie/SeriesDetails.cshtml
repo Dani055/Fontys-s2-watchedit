@@ -1,0 +1,62 @@
+﻿@page
+@using ClassLibraries.services
+@using ClassLibraries.models
+@model WatchedItWeb.Pages.Serie.SeriesDetailsModel
+@{
+}
+
+<div class="wrapper">
+    <div class="movie-details">
+        <div class="moviepic">
+            <div class="media">
+                <img src="@Model.series.ImageUrl" alt="">
+            </div>
+        </div>
+        <div class="movie-description">
+            <h3>@Model.series.Name</h3>
+            <div class="desc-header">
+                <p>@Model.series.Year.Year</p>
+                <p>@Model.series.Genre</p>
+                <p>Rating goes here</p>
+            </div>
+            <div class="desc-desc">
+                <p>@Model.series.Description</p>
+            </div>
+            <div class="desc-actors">
+                <div class="producers">
+                    <h4>Producers:</h4>
+                    @foreach (string item in Model.series.Producer.Split("\r\n"))
+                    {
+                        <p>@item</p>
+                    }
+                </div>
+                <div class="actors">
+                    <h4>Starring:</h4>
+                    @foreach (string item in Model.series.Actors.Split("\r\n"))
+                    {
+                        <p>@item</p>
+                    }
+                </div>
+            </div>
+            @if (UserService.loggedUser?.IsAdmin == true)
+            {
+                <div class="controls">
+                        <a asp-page="/Movies/AddMovie" asp-route-m="false" asp-route-seriesId="@Model.series.Id">Add episode</a>
+                        <a asp-page="/Serie/EditSeries" asp-route-seriesId="@Model.series.Id">Edit</a>
+                        <form method="post">
+                            <input type="hidden" value="@Model.series.Id" name="seriesId"/>
+                            <button type="submit" asp-page-handler="OnDelete">Delete</button>
+                        </form>
+                </div>
+            }
+
+        </div>
+        <div class="episodes">
+            @foreach (Episode e in Model.episodes)
+            {
+                <a asp-page="/Movies/MovieDetails">@e.Name - Season @e.SeasonNo Episode @e.EpisodeNo</a>
+            }
+
+        </div>
+    </div>
+</div>

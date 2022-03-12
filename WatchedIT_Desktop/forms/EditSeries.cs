@@ -35,13 +35,7 @@ namespace WatchedIT_Desktop.forms
         private void btnEditSeries_Click(object sender, EventArgs e)
         {
             string name = tbName.Text;
-            DateTime year;
-            bool s = DateTime.TryParse(tbYear.Text, out year);
-            if (!s)
-            {
-                MessageBox.Show("Date not in correct format");
-                return;
-            }
+            string yearStr = tbYear.Text;
             string url = tbUrl.Text;
             string genre = tbGenre.Text.Trim();
             string producers = tbProd.Text.Trim();
@@ -50,7 +44,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                if (SeriesService.EditSeries(loadedSeries.Id, name, year, url, genre, desc, actors, producers))
+                if (SeriesService.EditSeries(loadedSeries.Id, name, yearStr, url, genre, desc, actors, producers))
                 {
                     MessageHelper.ShowInfo("Series edited successfully!");
                     Utils.UpdateContent = true;

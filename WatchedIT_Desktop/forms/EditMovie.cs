@@ -62,27 +62,17 @@ namespace WatchedIT_Desktop.forms
         private void btnEditMovie_Click(object sender, EventArgs e)
         {
             string name = tbName.Text;
-            DateTime year;
-            bool s = DateTime.TryParse(tbYear.Text, out year);
-            if (!s)
-            {
-                MessageBox.Show("Date not in correct format");
-                return;
-            }
+            string yearStr = tbYear.Text;
             string url = tbUrl.Text;
             string genre = tbGenre.Text.Trim();
             string producers = tbProd.Text.Trim();
             string desc = tbDesc.Text.Trim();
             string actors = tbActors.Text.Trim();
-            TimeSpan duration;
+            string durationStr = tbDuration.Text;
+
             int season = 0;
             int episode = 0;
-            s = TimeSpan.TryParse(tbDuration.Text, out duration);
-            if (!s)
-            {
-                MessageBox.Show("Duration not in correct format");
-                return;
-            }
+
             if (!isMovie)
             {
                 season = Convert.ToInt32(tbSeason.Value);
@@ -91,7 +81,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                if (MovieService.EditMovieOrEpisode(movie.Id, name, year, url, genre, producers, desc, actors, duration, isMovie, season, episode))
+                if (MovieService.EditMovieOrEpisode(movie.Id, name, yearStr, url, genre, producers, desc, actors, durationStr, isMovie, season, episode))
                 {
                     if (isMovie)
                     {

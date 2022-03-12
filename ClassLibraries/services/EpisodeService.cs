@@ -12,7 +12,7 @@ namespace ClassLibraries.services
     {
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
-        public static bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
+        public static bool AddEpisode(string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, int season, int episode, int seriesId)
         {
 
             try
@@ -36,6 +36,19 @@ namespace ClassLibraries.services
                 else if (actors == "")
                 {
                     throw new Exception("You must enter Actors");
+                }
+                DateTime year;
+                bool s = DateTime.TryParse(yearStr, out year);
+                if (!s)
+                {
+                    throw new Exception("Date not in correct format! Use YYYY-DD-MM");
+                }
+
+                TimeSpan duration;
+                s = TimeSpan.TryParse(durationStr, out duration);
+                if (!s)
+                {
+                    throw new Exception("Duration not in correct format! Use HH:MM:SS");
                 }
 
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";

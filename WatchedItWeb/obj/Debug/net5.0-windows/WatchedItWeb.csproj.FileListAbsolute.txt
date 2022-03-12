@@ -37,9 +37,6 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\AllMovies.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Movies\MovieDetails.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Register.cshtml.g.cs
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Series\AddSeries.cshtml.g.cs
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Series\AllSeries.cshtml.g.cs
-C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Series\SeriesDetails.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Shared\_Layout.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\_ViewImports.cshtml.g.cs
@@ -64,3 +61,7 @@ C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\System
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ClassLibraries.dll
 C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\bin\Debug\net5.0-windows\ClassLibraries.pdb
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\AddSeries.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\AllSeries.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\SeriesDetails.cshtml.g.cs
+C:\Users\Nitro\Desktop\s2-watchedit\WatchedItWeb\obj\Debug\net5.0-windows\Razor\Pages\Serie\EditSeries.cshtml.g.cs

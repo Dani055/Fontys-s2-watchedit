@@ -12,22 +12,13 @@ namespace ClassLibraries.services
     {
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
-        public static bool AddSeries(string name, DateTime year, string url, string genre, string desc, string actors, string producer)
+        public static bool AddSeries(string name, string yearStr, string url, string genre, string desc, string actors, string producer)
         {
             try
             {
-                if (!UserService.loggedUser.IsAdmin)
-                {
-                    throw new Exception("You are not authorized!");
-                }
-                if (name.Length < 3)
-                {
-                    throw new Exception("Name must be at least 3 characters long!");
-                }
-                else if (genre == "")
-                {
-                    throw new Exception("You must enter Genre");
-                }
+                DateTime year;
+                ValidateSeries(name, genre, yearStr);
+                DateTime.TryParse(yearStr, out year);
 
                 string sql = "INSERT INTO series (name, year, imageUrl, genre, description, actors, producer) VALUES (@name, @year, @imageUrl, @genre, @description, @actors, @producer);";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -48,22 +39,13 @@ namespace ClassLibraries.services
                 conn.Close();
             }
         }
-        public static bool EditSeries(int id, string name, DateTime year, string url, string genre, string desc, string actors, string producer)
+        public static bool EditSeries(int id, string name, string yearStr, string url, string genre, string desc, string actors, string producer)
         {
             try
             {
-                if (!UserService.loggedUser.IsAdmin)
-                {
-                    throw new Exception("You are not authorized!");
-                }
-                if (name.Length < 3)
-                {
-                    throw new Exception("Name must be at least 3 characters long!");
-                }
-                else if (genre == "")
-                {
-                    throw new Exception("You must enter Genre");
-                }
+                DateTime year;
+                ValidateSeries(name, genre, yearStr);
+                DateTime.TryParse(yearStr, out year);
 
                 string sql = "UPDATE series SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors WHERE id = @id;";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -84,6 +66,28 @@ namespace ClassLibraries.services
             {
                 conn.Close();
             }
+        }
+        public static bool ValidateSeries(string name, string genre, string yearStr)
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                throw new Exception("You are not authorized!");
+            }
+            if (name.Length < 3)
+            {
+                throw new Exception("Name must be at least 3 characters long!");
+            }
+            else if (genre == "")
+            {
+                throw new Exception("You must enter Genre");
+            }
+            DateTime year;
+            bool s = DateTime.TryParse(yearStr, out year);
+            if (!s)
+            {
+                throw new Exception("Date not in correct format! Use YYYY-DD-MM");
+            }
+            return true;
         }
         public static List<Series> GetSeries(int offset)
         {

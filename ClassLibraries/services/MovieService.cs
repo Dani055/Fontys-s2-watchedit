@@ -11,30 +11,15 @@ namespace ClassLibraries.services
     public static class MovieService
     {
         private static MySqlConnection conn = new MySqlConnection(Utils.conString);
-        public static bool AddMovie(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
+        public static bool AddMovie(string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr)
         {
             try
             {
-                if (!UserService.loggedUser.IsAdmin)
-                {
-                    throw new Exception("You are not authorized!");
-                }
-                if (name.Length < 3)
-                {
-                    throw new Exception("Name must be at least 3 characters long!");
-                }
-                else if (genre == "")
-                {
-                    throw new Exception("You must enter Genre");
-                }
-                else if (producer == "")
-                {
-                    throw new Exception("You must enter Producer");
-                }
-                else if (actors == "")
-                {
-                    throw new Exception("You must enter Actors");
-                }
+                DateTime year;
+                TimeSpan duration;
+                ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
+                DateTime.TryParse(yearStr, out year);
+                TimeSpan.TryParse(durationStr, out duration);
 
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -56,31 +41,52 @@ namespace ClassLibraries.services
                 conn.Close();
             }
         }
+        public static bool ValidateMovie(string name, string genre, string producer, string actors, string yearStr, string durationStr)
+        {
+            if (!UserService.loggedUser.IsAdmin)
+            {
+                throw new Exception("You are not authorized!");
+            }
+            if (name.Length < 3)
+            {
+                throw new Exception("Name must be at least 3 characters long!");
+            }
+            else if (genre == "")
+            {
+                throw new Exception("You must enter Genre");
+            }
+            else if (producer == "")
+            {
+                throw new Exception("You must enter Producer");
+            }
+            else if (actors == "")
+            {
+                throw new Exception("You must enter Actors");
+            }
+            DateTime year;
+            bool s = DateTime.TryParse(yearStr, out year);
+            if (!s)
+            {
+                throw new Exception("Date not in correct format! Use YYYY-DD-MM");
+            }
 
-        public static bool EditMovieOrEpisode(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, bool isMovie, int season, int episode)
+            TimeSpan duration;
+            s = TimeSpan.TryParse(durationStr, out duration);
+            if (!s)
+            {
+                throw new Exception("Duration not in correct format! Use HH:MM:SS");
+            }
+            return true;
+        }
+        public static bool EditMovieOrEpisode(int id, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, bool isMovie, int season, int episode)
         {
             try
             {
-                if (!UserService.loggedUser.IsAdmin)
-                {
-                    throw new Exception("You are not authorized!");
-                }
-                if (name.Length < 3)
-                {
-                    throw new Exception("Name must be at least 3 characters long!");
-                }
-                else if (genre == "")
-                {
-                    throw new Exception("You must enter Genre");
-                }
-                else if (producer == "")
-                {
-                    throw new Exception("You must enter Producer");
-                }
-                else if (actors == "")
-                {
-                    throw new Exception("You must enter Actors");
-                }
+                DateTime year;
+                TimeSpan duration;
+                ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
+                DateTime.TryParse(yearStr, out year);
+                TimeSpan.TryParse(durationStr, out duration);
 
                 string sql;
                 if (isMovie)

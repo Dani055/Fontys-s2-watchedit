@@ -66,7 +66,7 @@ main .wrapper {
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-bottom: 1em;
 }
 
@@ -80,9 +80,10 @@ h3.category {
     padding-bottom: 1em;
 }
 
-.row h3.load-more {
+.row a.load-more {
     text-align: center;
     flex: 0 0 100%;
+    font-size: 1.2em;
 }
 
 .card-movie {
@@ -412,8 +413,10 @@ form.flat button:hover {
 .controls{
     padding: 1em;
     margin: 2em 0 4em 0;
+    display:flex;
+    align-items: stretch;
 }
-.controls a {
+.controls a, .controls button {
     padding: 1em;
     border-radius: 3px;
     border: 2px solid #F24236;
@@ -421,9 +424,16 @@ form.flat button:hover {
     color: #FFFEE0;
     transition: color 0.2s ease-in, background-color 0.2s ease-in;
 }
-.controls a:hover {
+.controls a + a{
+    margin-left: 0.5em;
+}
+.controls form{
+    margin-left:0.5em
+}
+.controls a:hover, .controls button:hover {
     background-color: white;
     color: #F24236;
+    cursor: pointer;
 }
 .review {
     background-color: rgb(231, 230, 230);
