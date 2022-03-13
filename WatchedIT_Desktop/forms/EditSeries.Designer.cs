@@ -45,6 +45,7 @@ namespace WatchedIT_Desktop.forms
             this.lblYear = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblEditSeries = new System.Windows.Forms.Label();
+            this.lblMand = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbActors
@@ -60,9 +61,9 @@ namespace WatchedIT_Desktop.forms
             this.lblActors.AutoSize = true;
             this.lblActors.Location = new System.Drawing.Point(127, 560);
             this.lblActors.Name = "lblActors";
-            this.lblActors.Size = new System.Drawing.Size(51, 20);
+            this.lblActors.Size = new System.Drawing.Size(61, 20);
             this.lblActors.TabIndex = 50;
-            this.lblActors.Text = "Actors";
+            this.lblActors.Text = "Actors *";
             // 
             // tbProd
             // 
@@ -76,13 +77,13 @@ namespace WatchedIT_Desktop.forms
             this.lblProd.AutoSize = true;
             this.lblProd.Location = new System.Drawing.Point(97, 316);
             this.lblProd.Name = "lblProd";
-            this.lblProd.Size = new System.Drawing.Size(68, 20);
+            this.lblProd.Size = new System.Drawing.Size(78, 20);
             this.lblProd.TabIndex = 48;
-            this.lblProd.Text = "Producer";
+            this.lblProd.Text = "Producer *";
             // 
             // btnEditSeries
             // 
-            this.btnEditSeries.Location = new System.Drawing.Point(241, 717);
+            this.btnEditSeries.Location = new System.Drawing.Point(239, 743);
             this.btnEditSeries.Name = "btnEditSeries";
             this.btnEditSeries.Size = new System.Drawing.Size(125, 43);
             this.btnEditSeries.TabIndex = 47;
@@ -140,9 +141,9 @@ namespace WatchedIT_Desktop.forms
             this.lblGenre.AutoSize = true;
             this.lblGenre.Location = new System.Drawing.Point(97, 259);
             this.lblGenre.Name = "lblGenre";
-            this.lblGenre.Size = new System.Drawing.Size(48, 20);
+            this.lblGenre.Size = new System.Drawing.Size(58, 20);
             this.lblGenre.TabIndex = 40;
-            this.lblGenre.Text = "Genre";
+            this.lblGenre.Text = "Genre *";
             // 
             // lblUrl
             // 
@@ -156,20 +157,20 @@ namespace WatchedIT_Desktop.forms
             // lblYear
             // 
             this.lblYear.AutoSize = true;
-            this.lblYear.Location = new System.Drawing.Point(55, 141);
+            this.lblYear.Location = new System.Drawing.Point(46, 141);
             this.lblYear.Name = "lblYear";
-            this.lblYear.Size = new System.Drawing.Size(139, 20);
+            this.lblYear.Size = new System.Drawing.Size(153, 20);
             this.lblYear.TabIndex = 38;
-            this.lblYear.Text = "Year(YYYY-DD-MM)";
+            this.lblYear.Text = "Year * (YYYY-DD-MM)";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(99, 80);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(49, 20);
+            this.lblName.Size = new System.Drawing.Size(59, 20);
             this.lblName.TabIndex = 37;
-            this.lblName.Text = "Name";
+            this.lblName.Text = "Name *";
             // 
             // lblEditSeries
             // 
@@ -180,11 +181,23 @@ namespace WatchedIT_Desktop.forms
             this.lblEditSeries.TabIndex = 52;
             this.lblEditSeries.Text = "Edit series";
             // 
+            // lblMand
+            // 
+            this.lblMand.AutoSize = true;
+            this.lblMand.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblMand.ForeColor = System.Drawing.Color.Maroon;
+            this.lblMand.Location = new System.Drawing.Point(220, 708);
+            this.lblMand.Name = "lblMand";
+            this.lblMand.Size = new System.Drawing.Size(162, 20);
+            this.lblMand.TabIndex = 53;
+            this.lblMand.Text = "* Fields are mandatory!";
+            // 
             // EditSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 784);
+            this.ClientSize = new System.Drawing.Size(579, 808);
+            this.Controls.Add(this.lblMand);
             this.Controls.Add(this.lblEditSeries);
             this.Controls.Add(this.tbActors);
             this.Controls.Add(this.lblActors);
@@ -227,5 +240,6 @@ namespace WatchedIT_Desktop.forms
         private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblEditSeries;
+        private System.Windows.Forms.Label lblMand;
     }
 }
