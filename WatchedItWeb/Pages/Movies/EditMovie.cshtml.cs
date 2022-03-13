@@ -53,16 +53,26 @@ namespace WatchedItWeb.Pages.Movies
         public IActionResult OnPost()
         {
             try
-            {
-                int episode = Convert.ToInt32(Request.Form["episode"]);
-                int season = Convert.ToInt32(Request.Form["season"]);
-                MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
+            {                
                 if (m)
                 {
+                    MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, 0, 0);
                     _notyf.Success("Movie edited.");
                 }
                 else
                 {
+                    if (String.IsNullOrEmpty(Request.Form["episode"]))
+                    {
+                        throw new Exception("You must enter an episode");
+                    }
+                    if (String.IsNullOrEmpty(Request.Form["season"]))
+                    {
+                        throw new Exception("You must enter an episode");
+                    }
+
+                    int episode = Convert.ToInt32(Request.Form["episode"]);
+                    int season = Convert.ToInt32(Request.Form["season"]);
+                    MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
                     _notyf.Success("Episode edited.");
                 }
                 return RedirectToPage("/Movies/MovieDetails", new { m = m, movieId = movieId });

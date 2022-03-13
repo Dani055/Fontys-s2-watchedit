@@ -36,7 +36,9 @@ a.logo {
 main {
     margin-bottom: 1em;
 }
-
+p.info {
+    color: #F24236;
+}
 .site {
     min-height: 100vh;
     position: relative;

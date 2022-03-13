@@ -17,7 +17,7 @@ namespace ClassLibraries.services
             try
             {
                 DateTime year;
-                ValidateSeries(name, genre, yearStr);
+                ValidateSeries(name, genre,producer, actors, yearStr);
                 DateTime.TryParse(yearStr, out year);
 
                 string sql = "INSERT INTO series (name, year, imageUrl, genre, description, actors, producer) VALUES (@name, @year, @imageUrl, @genre, @description, @actors, @producer);";
@@ -44,7 +44,7 @@ namespace ClassLibraries.services
             try
             {
                 DateTime year;
-                ValidateSeries(name, genre, yearStr);
+                ValidateSeries(name, genre, producer, actors, yearStr);
                 DateTime.TryParse(yearStr, out year);
 
                 string sql = "UPDATE series SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors WHERE id = @id;";
@@ -67,25 +67,37 @@ namespace ClassLibraries.services
                 conn.Close();
             }
         }
-        public static bool ValidateSeries(string name, string genre, string yearStr)
+        public static bool ValidateSeries(string name, string genre, string producer, string actors, string yearStr)
         {
             if (!UserService.loggedUser.IsAdmin)
             {
                 throw new Exception("You are not authorized!");
             }
-            if (name.Length < 3)
+            if (String.IsNullOrEmpty (name) || name.Length < 3)
             {
                 throw new Exception("Name must be at least 3 characters long!");
             }
-            else if (genre == "")
+            else if (String.IsNullOrEmpty(genre))
             {
                 throw new Exception("You must enter Genre");
+            }
+            else if (String.IsNullOrEmpty(producer))
+            {
+                throw new Exception("You must enter a producer");
+            }
+            else if (String.IsNullOrEmpty(actors))
+            {
+                throw new Exception("You must enter actors");
             }
             DateTime year;
             bool s = DateTime.TryParse(yearStr, out year);
             if (!s)
             {
                 throw new Exception("Date not in correct format! Use YYYY-DD-MM");
+            }
+            else if (year == DateTime.MinValue)
+            {
+                throw new Exception("You must enter a date.");
             }
             return true;
         }

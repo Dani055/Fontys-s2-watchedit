@@ -47,19 +47,19 @@ namespace ClassLibraries.services
             {
                 throw new Exception("You are not authorized!");
             }
-            if (name.Length < 3)
+            if (String.IsNullOrEmpty(name) || name.Length < 3)
             {
                 throw new Exception("Name must be at least 3 characters long!");
             }
-            else if (genre == "")
+            else if (String.IsNullOrEmpty(genre))
             {
                 throw new Exception("You must enter Genre");
             }
-            else if (producer == "")
+            else if (String.IsNullOrEmpty(producer))
             {
                 throw new Exception("You must enter Producer");
             }
-            else if (actors == "")
+            else if (String.IsNullOrEmpty(actors))
             {
                 throw new Exception("You must enter Actors");
             }
@@ -69,12 +69,20 @@ namespace ClassLibraries.services
             {
                 throw new Exception("Date not in correct format! Use YYYY-DD-MM");
             }
+            else if (year == DateTime.MinValue)
+            {
+                throw new Exception("You must enter a date!");
+            }
 
             TimeSpan duration;
             s = TimeSpan.TryParse(durationStr, out duration);
             if (!s)
             {
                 throw new Exception("Duration not in correct format! Use HH:MM:SS");
+            }
+            else if (duration == TimeSpan.Zero)
+            {
+                throw new Exception("You must enter duration");
             }
             return true;
         }

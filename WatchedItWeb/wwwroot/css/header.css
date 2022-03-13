@@ -4,7 +4,7 @@ header {
 
     header a {
         color: #FFFEE0;
-        transition: color 0.2s ease-in;
+        transition: color 0.2s ease-in, background-color 0.2s ease-in;
     }
 
         header a:hover {
@@ -24,8 +24,30 @@ header {
     header nav ul {
         display: flex;
         flex-wrap: wrap;
+        align-items: center;
     }
-
+    header ul li + li{
+        margin-left: 0.6em;
+    }
     header ul a {
         padding: 0.2em 0.5em;
+    }
+    header a.alt-link {
+        background-color: #FFFEE0;
+        color: #F24236;
+        border-radius: 4px;
+        border: 2px solid #FFFEE0;
+        padding: 0.5em;
+    }
+        header a.alt-link:hover {
+            background-color: transparent;
+            color: #FFFEE0;
+        }
+    header ul li p {
+        color: #FFFEE0;
+        padding-right: 0.6em;
+    }
+
+    header ul li a.admin-control {
+        color: rgb(181, 181, 181);
     }

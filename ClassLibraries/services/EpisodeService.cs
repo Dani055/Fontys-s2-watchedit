@@ -17,39 +17,11 @@ namespace ClassLibraries.services
 
             try
             {
-                if (!UserService.loggedUser.IsAdmin)
-                {
-                    throw new Exception("You are not authorized!");
-                }
-                if (name.Length < 3)
-                {
-                    throw new Exception("Name must be at least 3 characters long!");
-                }
-                else if (genre == "")
-                {
-                    throw new Exception("You must enter Genre");
-                }
-                else if (producer == "")
-                {
-                    throw new Exception("You must enter Producer");
-                }
-                else if (actors == "")
-                {
-                    throw new Exception("You must enter Actors");
-                }
                 DateTime year;
-                bool s = DateTime.TryParse(yearStr, out year);
-                if (!s)
-                {
-                    throw new Exception("Date not in correct format! Use YYYY-DD-MM");
-                }
-
                 TimeSpan duration;
-                s = TimeSpan.TryParse(durationStr, out duration);
-                if (!s)
-                {
-                    throw new Exception("Duration not in correct format! Use HH:MM:SS");
-                }
+                MovieService.ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
+                DateTime.TryParse(yearStr, out year);
+                TimeSpan.TryParse(durationStr, out duration);
 
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);

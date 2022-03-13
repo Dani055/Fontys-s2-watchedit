@@ -9,11 +9,11 @@
             <legend>Edit series</legend>
             <div class="field">
                 <input type="text" asp-for="series.Name">
-                <label asp-for="series.Name">Name</label>
+                <label asp-for="series.Name">Name *</label>
             </div>
             <div class="field">
                 <input type="date" asp-for="series.Year">
-                <label asp-for="series.Year">Year</label>
+                <label asp-for="series.Year">Year *</label>
             </div>
             <div class="field">
                 <input type="text" asp-for="series.ImageUrl">
@@ -21,11 +21,11 @@
             </div>
             <div class="field">
                 <input type="text" asp-for="series.Genre">
-                <label asp-for="series.Genre">Genre</label>
+                <label asp-for="series.Genre">Genre *</label>
             </div>
             <div class="field">
                 <input type="text" asp-for="series.Producer">
-                <label asp-for="series.Producer">Producers</label>
+                <label asp-for="series.Producer">Producers *</label>
             </div>
             <div class="field">
                 <textarea asp-for="series.Description" rows="10"></textarea>
@@ -33,9 +33,10 @@
             </div>
             <div class="field">
                 <textarea asp-for="series.Actors" rows="8"></textarea>
-                <label asp-for="series.Actors">Actors</label>
+                <label asp-for="series.Actors">Actors *</label>
             </div>
             <div class="field-submit">
+                <p class="info"></p>
                 <button type="submit">Edit</button>
             </div>
         </fieldset>

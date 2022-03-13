@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,6 +67,14 @@ namespace WatchedItWeb.Pages.Movies
                 }
                 else
                 {
+                    if (String.IsNullOrEmpty(Request.Form["episode"]))
+                    {
+                        throw new Exception("You must enter an episode.");
+                    }
+                    if (String.IsNullOrEmpty(Request.Form["season"]))
+                    {
+                        throw new Exception("You must enter a season.");
+                    }
                     int episode = Convert.ToInt32(Request.Form["episode"]);
                     int season = Convert.ToInt32(Request.Form["season"]);
                     EpisodeService.AddEpisode(movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId);
