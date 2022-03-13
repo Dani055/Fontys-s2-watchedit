@@ -228,6 +228,7 @@ namespace ClassLibraries.services
             }
 
         }
+
         public static List<Movie> SearchMovies(string keyword)
         {
             try
@@ -264,5 +265,55 @@ namespace ClassLibraries.services
                 conn.Close();
             }
         }
+
+        //FOR UNIT TESTING
+        public static bool DeleteLastMovie()
+        {
+            try
+            {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+
+                string sql = "delete from Movie order by id desc limit 1";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        public static int GetLastMovieID()
+        {
+            try
+            {
+                if (!UserService.loggedUser.IsAdmin)
+                {
+                    throw new Exception("You are not authorized!");
+                }
+
+                string sql = "SELECT MAX(ID) FROM Movie";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                int id = reader.GetInt32("MAX(ID)");
+                return id;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        //
     }
 }

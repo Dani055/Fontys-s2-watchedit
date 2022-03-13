@@ -69,17 +69,17 @@ namespace ClassLibraries.services
                 {
                     throw new Exception("Password must be at least 3 characters long!");
                 }
-                else if (firstname.Length <= 0)
+                else if (String.IsNullOrEmpty(firstname))
                 {
                     throw new Exception("You must enter a first name!");
                 }
-                else if (lastname.Length <= 0)
+                else if (String.IsNullOrEmpty(lastname))
                 {
                     throw new Exception("You must enter a last name!");
                 }
                 else if (email.Length <= 5)
                 {
-                    throw new Exception("Email must be valid! must be valid!");
+                    throw new Exception("Email must be valid!");
                 }
 
                 string sql = "INSERT INTO user (username, password, firstName, lastName, email, imageUrl) VALUES(@username, @password, @firstname, @lastname, @email, @imageurl); ";
@@ -90,6 +90,29 @@ namespace ClassLibraries.services
                 cmd.Parameters.AddWithValue("@lastName", lastname);
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@imageUrl", imageurl);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                return true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public static bool DeleteUser(string username)
+        {
+            try
+            {
+                if (username.Length < 3)
+                {
+                    throw new Exception("Username must be at least 3 characters long!");
+                }
+                
+                string sql = "DELETE FROM user WHERE username = @username ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@username", username);
 
                 conn.Open();
                 int result = cmd.ExecuteNonQuery();
