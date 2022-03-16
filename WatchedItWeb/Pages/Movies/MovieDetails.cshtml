@@ -1,0 +1,112 @@
+﻿@page "{m}/{movieId}"
+@model WatchedItWeb.Pages.Movies.MovieDetailsModel
+@using ClassLibraries.services
+@using ClassLibraries.models
+@{
+}
+<div class="wrapper">
+    <div class="movie-details">
+        <div class="moviepic">
+            <div class="media">
+                <img src="@Model.movie.ImageUrl" alt="">
+            </div>
+        </div>
+        <div class="movie-description">
+            <h3>@Model.movie.Name - @if (Model.movie is Episode){
+                @:Season
+                @(((Episode)Model.movie).SeasonNo.ToString());
+                @:Episode
+                @(((Episode)Model.movie).EpisodeNo.ToString());
+            }</h3>
+            <div class="desc-header">
+                <p>@Model.movie.Year.Year</p>
+                <p>@Model.movie.Genre</p>
+                <p>Raring goes here</p>
+            </div>
+            <div class="desc-desc">
+                <p>@Model.movie.Description</p>
+            </div>
+            <div class="desc-actors">
+                <h3>@Model.movie.Duration.Hours Hours @Model.movie.Duration.Minutes minutes</h3>
+                <div class="producers">
+                    <h4>Producers:</h4>
+                    @foreach (string item in Model.movie.Producer.Split("\r\n"))
+                    {
+                        <p>@item</p>
+                    }
+                </div>
+                <div class="actors">
+                    <h4>Starring:</h4>
+                    @foreach (string item in Model.movie.Actors.Split("\r\n"))
+                    {
+                        <p>@item</p>
+                    }
+                </div>
+            </div>
+            @if (UserService.loggedUser?.IsAdmin == true)
+            {
+                <div class="controls">
+                    <a asp-page="/Movies/EditMovie" asp-route-movieId="@Model.movie.Id" asp-route-m="@(Model.movie.GetType() == typeof(Episode) ? false : true)">Edit</a>
+                    <form method="post">
+                        @if (Model.movie is Episode)
+                        {
+                            <input type="hidden" name="seriesId" value="@(((Episode)Model.movie).SeriesId)" />
+                        }
+                        <button type="submit" asp-page-handler="OnDelete">Delete</button>
+                    </form>
+                </div>
+            }
+
+            <div class="leave-review">
+                <h4>Leave review</h4>
+                <form action="" class="flat">
+                    <div class="media">
+                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    </div>
+                    <textarea placeholder="Description" class="review-desc" type="text"></textarea>
+                    <input placeholder="rating" class="stars" type="text" name="" id="" max="">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+        <div class="reviews">
+            <h3>Reviews</h3>
+            <div class="review">
+                <div class="review-header">
+                    <div class="media">
+                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    </div>
+                    <p>Jane Doe</p>
+                    <p>5/5</p>
+                </div>
+                <div class="review-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
+                </div>
+            </div>
+            <div class="review">
+                <div class="review-header">
+                    <div class="media">
+                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    </div>
+                    <p>Jane Doe</p>
+                    <p>5/5</p>
+                </div>
+                <div class="review-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
+                </div>
+            </div>
+            <div class="review">
+                <div class="review-header">
+                    <div class="media">
+                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    </div>
+                    <p>Jane Doe</p>
+                    <p>5/5</p>
+                </div>
+                <div class="review-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

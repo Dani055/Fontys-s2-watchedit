@@ -1,0 +1,75 @@
+﻿@using ClassLibraries.services;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WatchedItWeb</title>
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/header.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/responsive.css">
+
+</head>
+<body>
+    <div class="site">
+        <header>
+            <div class="wrapper">
+                <a class="logo" asp-page="/Index">W a t c h e d I T</a>
+                <nav>
+                    <ul>
+                        @if (UserService.loggedUser?.IsAdmin == true)
+                        {
+                            <li>
+                                <a class="admin-control" asp-page="/Movies/AddMovie" asp-route-m="true">Add movie</a>
+                            </li>
+                            <li>
+                                <a class="admin-control" asp-page="/Serie/AddSeries">Add series</a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-page="/Movies/AllMovies">All movies</a>
+                        </li>
+                        <li>
+                            <a asp-page="/Serie/AllSeries">All series</a>
+                        </li>
+                        @if (UserService.loggedUser == null)
+                        {
+                            <li>
+                                <a asp-page="/Login">Login</a>
+                            </li>
+                            <li>
+                                <a asp-page="/Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <p>Welcome, @UserService.loggedUser.Username</p>
+                            </li>
+                            <li>
+                                <a class="alt-link" asp-page="/Logout">Logout</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main role="main">
+            @RenderBody()
+        </main>
+
+        <footer>
+            <div class="wrapper">
+                <p>WatchedIT</p>
+                <p>Copyright © since 2002 - WatchedIT</p>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

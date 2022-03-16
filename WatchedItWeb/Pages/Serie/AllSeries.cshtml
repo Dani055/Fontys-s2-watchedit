@@ -1,0 +1,34 @@
+﻿@page
+@using ClassLibraries.models
+@model WatchedItWeb.Pages.Serie.AllSeriesModel
+@{
+}
+
+<div class="wrapper">
+    <div class="movies-header">
+        <h2 class="heading">All series</h2>
+        <form class="search">
+            <input type="text" asp-for="keyword" placeholder="Search...">
+            <button type="submit">Go</button>
+        </form>
+    </div>
+    <div class="row">
+        @foreach (Series s in Model.series)
+        {
+            <div class="card-movie">
+                <a asp-page="/Serie/SeriesDetails" asp-route-seriesId="@s.Id">
+                    <div class="arbox">
+                        <div class="media">
+                            <img src="@s.ImageUrl" alt="">
+                        </div>
+                    </div>
+                    <p>@s.Name</p>
+                </a>
+            </div>
+        }
+        @if (Model.keyword == null)
+        {
+            <a asp-route-currentpage="@(Model.CurrentPage + 1)" class="load-more">Load more...</a>
+        }
+    </div>
+</div>
