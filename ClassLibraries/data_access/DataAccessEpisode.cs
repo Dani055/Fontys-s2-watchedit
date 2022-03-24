@@ -10,10 +10,10 @@ namespace ClassLibraries.data_access
 {
     public static class DataAccessEpisode
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
         public static bool AddEpisodeQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
@@ -42,6 +42,7 @@ namespace ClassLibraries.data_access
         }
         public static bool EditEpisodeQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration, season = @season, episode = @episode WHERE id = @id;";
@@ -70,6 +71,7 @@ namespace ClassLibraries.data_access
         }
         public static List<Episode> GetEpisodesQuery(int seriesid)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM movie WHERE seriesId = @seriesId";
@@ -91,11 +93,12 @@ namespace ClassLibraries.data_access
                     string actors = reader["actors"].ToString();
                     string producer = reader["producer"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int rating = reader.GetInt16("rating");
                     int season = int.Parse(reader["season"].ToString());
                     int episode = int.Parse(reader["episode"].ToString());
                     int seriesId = int.Parse(reader["episode"].ToString());
 
-                    Episode e = new Episode(id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
+                    Episode e = new Episode(id, name, year, url, genre, producer, desc, actors, duration, rating, seriesId, season, episode);
                     episodes.Add(e);
 
                 }
@@ -109,6 +112,7 @@ namespace ClassLibraries.data_access
         }
         public static Episode GetEpisodeByIdQuery(int id)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "Select * from movie WHERE id = @ID";
@@ -130,6 +134,7 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int rating = reader.GetInt16("rating");
                     bool res;
                     int seriesId;
                     res = int.TryParse(reader["seriesId"].ToString(), out seriesId);
@@ -140,7 +145,7 @@ namespace ClassLibraries.data_access
                     int episode = int.Parse(reader["episode"].ToString());
                     int season = int.Parse(reader["season"].ToString());
 
-                    e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, seriesId, season, episode);
+                    e = new Episode(Id, name, year, url, genre, producer, desc, actors, duration, rating, seriesId, season, episode);
                     return e;
                 }
                 return null;

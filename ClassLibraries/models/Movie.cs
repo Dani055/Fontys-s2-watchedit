@@ -17,12 +17,12 @@ namespace ClassLibraries.models
         public string Description { get; set; }
         public string Actors { get; set; }
         public TimeSpan Duration { get; set; }
-
+        public int Rating { get; set; }
         public Movie()
         {
 
         }
-        public Movie(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration)
+        public Movie(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration, int rating)
         {
             Id = id;
             Name = name;
@@ -33,6 +33,7 @@ namespace ClassLibraries.models
             Description = desc;
             Actors = actors;
             Duration = duration;
+            Rating = rating;
         }
 
     }

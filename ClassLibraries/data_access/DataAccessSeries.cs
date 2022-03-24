@@ -10,10 +10,10 @@ namespace ClassLibraries.data_access
 {
     public static class DataAccessSeries
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
         public static bool AddSeriesQuery(string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "INSERT INTO series (name, year, imageUrl, genre, description, actors, producer) VALUES (@name, @year, @imageUrl, @genre, @description, @actors, @producer);";
@@ -37,6 +37,7 @@ namespace ClassLibraries.data_access
         }
         public static bool EditSeriesQuery(int id, string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "UPDATE series SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors WHERE id = @id;";
@@ -61,6 +62,7 @@ namespace ClassLibraries.data_access
         }
         public static List<Series> GetSeriesQuery(int offset)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM series ORDER BY id desc LIMIT 4 OFFSET @offset";
@@ -97,6 +99,7 @@ namespace ClassLibraries.data_access
         }
         public static List<Series> SearchSeriesQuery(string keyword)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM series WHERE name like @keyword";
@@ -133,6 +136,7 @@ namespace ClassLibraries.data_access
         }
         public static Series GetSeriesByIdQuery(int id)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "Select * from series WHERE id = @ID";
@@ -166,6 +170,7 @@ namespace ClassLibraries.data_access
         }
         public static bool DeleteSeriesQuery(int id)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
 
@@ -185,6 +190,7 @@ namespace ClassLibraries.data_access
         }
         public static bool DeleteLastSeriesQuery()
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 
@@ -204,6 +210,7 @@ namespace ClassLibraries.data_access
         }
         public static int GetLastSeriesIdQuery()
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
 

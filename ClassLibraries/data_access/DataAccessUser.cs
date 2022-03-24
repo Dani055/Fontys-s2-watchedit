@@ -11,10 +11,10 @@ namespace ClassLibraries.data_access
 {
     public static class DataAccessUser
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
         public static User LoginQuery (string username, string password)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM user WHERE username = @username and password = @password";
@@ -54,6 +54,7 @@ namespace ClassLibraries.data_access
         }
         public static bool RegisterQuery(string username, string password, string firstname, string lastname, string email, string imageurl)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "INSERT INTO user (username, password, firstName, lastName, email, imageUrl) VALUES(@username, @password, @firstname, @lastname, @email, @imageurl); ";
@@ -76,6 +77,7 @@ namespace ClassLibraries.data_access
         }
         public static bool DeleteQuery(string username)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "DELETE FROM user WHERE username = @username ";

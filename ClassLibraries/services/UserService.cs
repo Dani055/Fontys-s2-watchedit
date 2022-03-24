@@ -33,11 +33,11 @@ namespace ClassLibraries.services
         }
         public static bool ValidateUser(string username, string password, string firstname, string lastname, string email, string imageurl)
         {
-            if (username.Length < 3)
+            if (String.IsNullOrEmpty(username) || username.Length < 3)
             {
                 throw new Exception("Username must be at least 3 characters long!");
             }
-            else if (password.Length < 3)
+            else if (String.IsNullOrEmpty(username) || password.Length < 3)
             {
                 throw new Exception("Password must be at least 3 characters long!");
             }
@@ -49,7 +49,7 @@ namespace ClassLibraries.services
             {
                 throw new Exception("You must enter a last name!");
             }
-            else if (email.Length <= 5)
+            else if (String.IsNullOrEmpty(username) || email.Length <= 5)
             {
                 throw new Exception("Email must be valid!");
             }

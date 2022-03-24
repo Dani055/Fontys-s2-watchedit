@@ -10,9 +10,9 @@ namespace ClassLibraries.data_access
 {
     public static class DataAccessMovie
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
         public static bool AddMovieQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration); ";
@@ -38,6 +38,7 @@ namespace ClassLibraries.data_access
 
         public static bool EditMovieQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration WHERE id = @id;";
@@ -63,6 +64,7 @@ namespace ClassLibraries.data_access
         }
         public static List<Movie> GetMoviesQuery(int offset)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM movie where seriesId is NULL ORDER BY id desc LIMIT 4 OFFSET @offset";
@@ -83,8 +85,9 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int rating = reader.GetInt16("rating");
 
-                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration);
+                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
                     movies.Add(m);
 
                 }
@@ -98,6 +101,7 @@ namespace ClassLibraries.data_access
         }
         public static Movie GetMovieByIdQuery(int id)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "Select * from movie WHERE id = @ID";
@@ -119,12 +123,13 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int rating = reader.GetInt16("rating");
                     string seriesId = reader["seriesId"].ToString();
                     if (seriesId != null && seriesId != "")
                     {
                         throw new Exception("Trying to get movie but object is an episode.");
                     }
-                    m = new Movie(Id, name, year, url, genre, producer, desc, actors, duration);
+                    m = new Movie(Id, name, year, url, genre, producer, desc, actors, duration, rating);
                     return m;
                 }
                 return null;
@@ -136,6 +141,7 @@ namespace ClassLibraries.data_access
         }
         public static bool DeleteMovieOrEpisodeQuery(int id)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "DELETE FROM movie WHERE id = @ID";
@@ -154,6 +160,7 @@ namespace ClassLibraries.data_access
         }
         public static List<Movie> SearchMoviesQuery(string keyword)
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT * FROM movie where seriesId is NULL and name like @keyword";
@@ -176,8 +183,9 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    int rating = reader.GetInt16("rating");
 
-                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration);
+                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
                     movies.Add(m);
 
                 }
@@ -191,6 +199,7 @@ namespace ClassLibraries.data_access
         }
         public static bool DeleteLastMovieQuery()
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "delete from Movie order by id desc limit 1";
@@ -208,6 +217,7 @@ namespace ClassLibraries.data_access
         }
         public static int GetLastMovieIdQuery()
         {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
                 string sql = "SELECT MAX(ID) FROM Movie";

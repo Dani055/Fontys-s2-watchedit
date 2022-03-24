@@ -59,6 +59,7 @@ namespace WatchedIT_Desktop.forms
                 lblGenre.Text = movie.Genre;
                 lblProdValue.Text = movie.Producer;
                 lblYear.Text = movie.Year.ToString("yyyy");
+                lblRating.Text = movie.Rating.ToString() + " / 5";
                 if (movie.ImageUrl != null)
                 {
                     pbPhoto.Load(movie.ImageUrl);

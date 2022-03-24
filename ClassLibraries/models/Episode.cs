@@ -11,11 +11,11 @@ namespace ClassLibraries.models
         public int SeriesId { get; }
         public int SeasonNo { get; set; }
         public int EpisodeNo { get; set; }
-        public Episode() : base(0, "", DateTime.MinValue, "", "", "", "", "", TimeSpan.MinValue)
+        public Episode() : base()
         {
 
         }
-        public Episode(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration, int seriesId, int season, int episode) : base(id, name, year, imageurl, genre, producer, desc, actors, duration)
+        public Episode(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration, int rating, int seriesId, int season, int episode) : base(id, name, year, imageurl, genre, producer, desc, actors, duration, rating)
         {
             SeriesId = seriesId;
             SeasonNo = season;
