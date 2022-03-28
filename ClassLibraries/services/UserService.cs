@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ClassLibraries.data_access;
 using ClassLibraries.models;
@@ -49,8 +50,8 @@ namespace ClassLibraries.services
             {
                 throw new Exception("You must enter a last name!");
             }
-            else if (String.IsNullOrEmpty(username) || email.Length <= 5)
-            {
+            else if (!Regex.IsMatch(email, @"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"))
+            {      
                 throw new Exception("Email must be valid!");
             }
             return true;
