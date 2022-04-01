@@ -22,7 +22,7 @@ namespace WatchedItWeb.Pages.Serie
         }
         public IActionResult OnGet()
         {
-            if (UserService.loggedUser?.IsAdmin == false || UserService.loggedUser == null)
+            if (HttpContext.Session.IsAdmin() != true)
             {
                 return RedirectToPage("/Index");
             }
@@ -32,7 +32,7 @@ namespace WatchedItWeb.Pages.Serie
         {
             try
             {
-                SeriesService.AddSeries(series.Name, series.Year.ToString(), series.ImageUrl, series.Genre, series.Description, series.Actors, series.Producer);
+                SeriesService.AddSeries(HttpContext.Session.GetLoggedUser(), series.Name, series.Year.ToString(), series.ImageUrl, series.Genre, series.Description, series.Actors, series.Producer);
                 _notyf.Success("Series addded!");
                 return RedirectToPage("/Index");
             }

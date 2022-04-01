@@ -26,9 +26,13 @@ namespace WatchedItWeb.Pages.Movies
         }
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.IsAdmin() != true)
+            {
+                return RedirectToPage("/Index");
+            }
             try
             {
-                if (seriesId == 0 && !m)
+                if (seriesId <= 0 && !m)
                 {
                     return RedirectToPage("/Index");
                 }
@@ -61,7 +65,7 @@ namespace WatchedItWeb.Pages.Movies
             {
                 if (m)
                 {
-                    MovieService.AddMovie(movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString());
+                    MovieService.AddMovie(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString());
                     _notyf.Success("Movie added!");
                     return RedirectToPage("/Movies/AllMovies");
                 }
@@ -77,7 +81,7 @@ namespace WatchedItWeb.Pages.Movies
                     }
                     int episode = Convert.ToInt32(Request.Form["episode"]);
                     int season = Convert.ToInt32(Request.Form["season"]);
-                    EpisodeService.AddEpisode(movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId);
+                    EpisodeService.AddEpisode(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId); ;
                     _notyf.Success("Episode added!");
                     return RedirectToPage("/Serie/SeriesDetails" , new { seriesId = seriesId });
                 }

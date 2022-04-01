@@ -11,19 +11,20 @@ namespace ClassLibraries.services
 {
     public class SeriesService
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
 
-        public static bool AddSeries(string name, string yearStr, string url, string genre, string desc, string actors, string producer)
+        public static bool AddSeries(User loggedUser, string name, string yearStr, string url, string genre, string desc, string actors, string producer)
         {
             DateTime year;
+            UserService.IsAdmin(loggedUser);
             ValidateSeries(name, genre, producer, actors, yearStr);
             DateTime.TryParse(yearStr, out year);
 
             return DataAccessSeries.AddSeriesQuery(name, year, url, genre, desc, actors, producer);
         }
-        public static bool EditSeries(int id, string name, string yearStr, string url, string genre, string desc, string actors, string producer)
+        public static bool EditSeries(User loggedUser, int id, string name, string yearStr, string url, string genre, string desc, string actors, string producer)
         {
             DateTime year;
+            UserService.IsAdmin(loggedUser);
             ValidateSeries(name, genre, producer, actors, yearStr);
             DateTime.TryParse(yearStr, out year);
 
@@ -31,10 +32,6 @@ namespace ClassLibraries.services
         }
         public static bool ValidateSeries(string name, string genre, string producer, string actors, string yearStr)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
             if (String.IsNullOrEmpty (name) || name.Length < 3)
             {
                 throw new Exception("Name must be at least 3 characters long!");
@@ -76,31 +73,22 @@ namespace ClassLibraries.services
             return DataAccessSeries.GetSeriesByIdQuery(id);
         }
 
-        public static bool DeleteSeries(int id)
+        public static bool DeleteSeries(User loggedUser, int id)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessSeries.DeleteSeriesQuery(id);
         }
 
         //FOR UNIT TESTING
-        public static bool DeleteLastSeries()
+        public static bool DeleteLastSeries(User loggedUser)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessSeries.DeleteLastSeriesQuery();
 
         }
-        public static int GetLastSeriesId()
+        public static int GetLastSeriesId(User loggedUser)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessSeries.GetLastSeriesIdQuery();
         }
         //

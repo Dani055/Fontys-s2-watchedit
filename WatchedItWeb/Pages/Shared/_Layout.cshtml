@@ -1,4 +1,5 @@
 ﻿@using ClassLibraries.services;
+@using ClassLibraries.models;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
                 <a class="logo" asp-page="/Index">W a t c h e d I T</a>
                 <nav>
                     <ul>
-                        @if (UserService.loggedUser?.IsAdmin == true)
+                        @if (Context.Session.IsAdmin())
                         {
                             <li>
                                 <a class="admin-control" asp-page="/Movies/AddMovie" asp-route-m="true">Add movie</a>
@@ -34,7 +35,7 @@
                         <li>
                             <a asp-page="/Serie/AllSeries">All series</a>
                         </li>
-                        @if (UserService.loggedUser == null)
+                        @if (Context.Session.GetLoggedUser() == null)
                         {
                             <li>
                                 <a asp-page="/Login">Login</a>
@@ -46,7 +47,7 @@
                         else
                         {
                             <li>
-                                <p>Welcome, @UserService.loggedUser.Username</p>
+                                <p>Welcome, @Context.Session.GetLoggedUser().Username</p>
                             </li>
                             <li>
                                 <a class="alt-link" asp-page="/Logout">Logout</a>

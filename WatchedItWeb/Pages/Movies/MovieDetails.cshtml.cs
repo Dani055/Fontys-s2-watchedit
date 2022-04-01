@@ -53,7 +53,7 @@ namespace WatchedItWeb.Pages.Movies
         {
             try
             {
-                MovieService.DeleteMovieOrEpisode(movieId);
+                MovieService.DeleteMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId);
                 if (m)
                 {
                     _notyf.Success("Movie deleted");

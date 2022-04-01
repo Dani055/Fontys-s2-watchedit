@@ -26,7 +26,7 @@ namespace WatchedIT_Desktop.forms
         }
         private void HideUI()
         {
-            if (!UserService.loggedUser.IsAdmin)
+            if (!AuthClass.loggedUser.IsAdmin)
             {
                 btnYeet.Visible = false;
                 btnEdit.Visible = false;
@@ -110,7 +110,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                if (SeriesService.DeleteSeries(series.Id))
+                if (SeriesService.DeleteSeries(AuthClass.loggedUser, series.Id))
                 {
                     MessageHelper.ShowInfo("Series deleted successfully!");
                     Utils.UpdateContent = true;

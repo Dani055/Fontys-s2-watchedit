@@ -25,6 +25,10 @@ namespace WatchedItWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
             services.AddRazorPages();
         }
 
@@ -46,7 +50,7 @@ namespace WatchedItWeb
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

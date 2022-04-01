@@ -42,7 +42,7 @@ namespace WatchedIT_Desktop.forms
         }
         private void HideUI()
         {
-            if (!UserService.loggedUser.IsAdmin)
+            if (!AuthClass.loggedUser.IsAdmin)
             {
                 btnDelete.Visible = false;
                 btnEdit.Visible = false;
@@ -84,7 +84,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                if (MovieService.DeleteMovieOrEpisode(movie.Id))
+                if (MovieService.DeleteMovieOrEpisode(AuthClass.loggedUser, movie.Id))
                 {
                     if (isMovie)
                     {

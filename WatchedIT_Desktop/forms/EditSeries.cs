@@ -44,7 +44,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                if (SeriesService.EditSeries(loadedSeries.Id, name, yearStr, url, genre, desc, actors, producers))
+                if (SeriesService.EditSeries(AuthClass.loggedUser, loadedSeries.Id, name, yearStr, url, genre, desc, actors, producers))
                 {
                     MessageHelper.ShowInfo("Series edited successfully!");
                     Utils.UpdateContent = true;

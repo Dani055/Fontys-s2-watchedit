@@ -65,13 +65,13 @@ namespace WatchedIT_Desktop.forms
             {
                 if (isMovie)
                 {
-                    result = MovieService.AddMovie(name, yearStr, url, genre, producers, desc, actors, durationStr);
+                    result = MovieService.AddMovie(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr);
                 }
                 else
                 {
                     int season = Convert.ToInt32(tbSeason.Value);
                     int episode = Convert.ToInt32(tbEpisode.Value);
-                    result = EpisodeService.AddEpisode(name, yearStr, url, genre, producers, desc, actors, durationStr, season, episode, seriesId);
+                    result = EpisodeService.AddEpisode(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr, season, episode, seriesId);
                 }
                 if (result)
                 {

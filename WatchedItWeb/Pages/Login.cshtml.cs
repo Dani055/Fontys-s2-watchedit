@@ -15,20 +15,22 @@ namespace WatchedItWeb.Pages
         [BindProperty]
         public User user { get; set; }
         private readonly INotyfService _notyf;
+        public User loggedUser { get; set; }
         public LoginModel (INotyfService notyf)
         {
             _notyf = notyf;
         }
         public void OnGet()
         {
-
         }
         public IActionResult OnPost()
         {
             try
             {
-                if (UserService.Login(user.Username, user.Password))
+                User result = UserService.Login(user.Username, user.Password);
+                if (result != null)
                 {
+                    HttpContext.Session.SetObject("loggedUser", result);
                     return RedirectToPage("/Index");
                 }
                 else

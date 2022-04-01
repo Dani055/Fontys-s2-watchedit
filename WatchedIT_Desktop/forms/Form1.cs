@@ -28,11 +28,12 @@ namespace WatchedIT_Desktop
 
             try
             {
-                bool result = UserService.Login(username, password);
-                if (result)
+                User result = UserService.Login(username, password);
+                if (result != null)
                 {
                     tbUsername.Text = "";
                     tbPassword.Text = "";
+                    AuthClass.loggedUser = result;
                     Home home = new Home();
                     this.Hide();
                     home.ShowDialog();

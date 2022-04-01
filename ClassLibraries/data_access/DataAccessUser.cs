@@ -12,15 +12,14 @@ namespace ClassLibraries.data_access
     public static class DataAccessUser
     {
 
-        public static User LoginQuery (string username, string password)
+        public static User LoginQuery (string username)
         {
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM user WHERE username = @username and password = @password";
+                string sql = "SELECT * FROM user WHERE username = @username";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@username", username);
-                cmd.Parameters.AddWithValue("@password", password);
 
                 conn.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();

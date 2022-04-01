@@ -74,7 +74,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM movie WHERE seriesId = @seriesId";
+                string sql = "SELECT * FROM watchedit_episodes_view WHERE seriesId = @seriesId";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@seriesId", seriesid);
                 List<Episode> episodes = new List<Episode>();
@@ -115,7 +115,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "Select * from movie WHERE id = @ID";
+                string sql = "Select * from watchedit_episodes_view where id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
                 Episode e;

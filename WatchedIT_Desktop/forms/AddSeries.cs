@@ -32,7 +32,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                if (SeriesService.AddSeries(name, yearStr, url, genre, desc, actors, producers))
+                if (SeriesService.AddSeries(AuthClass.loggedUser, name, yearStr, url, genre, desc, actors, producers))
                 {
                     MessageHelper.ShowInfo("Series added successfully!");
                     Utils.UpdateContent = true;

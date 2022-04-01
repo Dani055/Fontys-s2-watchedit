@@ -12,7 +12,8 @@ namespace WatchedItWeb.Pages
     {
         public IActionResult OnGet()
         {
-            UserService.loggedUser = null;
+            HttpContext.Session.Clear();
+            Response.Cookies.Delete(".AspNetCore.Session");
             return RedirectToPage("/Index");
         }
     }

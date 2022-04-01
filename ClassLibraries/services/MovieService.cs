@@ -11,12 +11,11 @@ namespace ClassLibraries.services
 {
     public static class MovieService
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
-        public static bool AddMovie(string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr)
+        public static bool AddMovie(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr)
         {
             DateTime year;
             TimeSpan duration;
-
+            UserService.IsAdmin(loggedUser);
             ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);
@@ -26,10 +25,6 @@ namespace ClassLibraries.services
         }
         public static bool ValidateMovie(string name, string genre, string producer, string actors, string yearStr, string durationStr)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
             if (String.IsNullOrEmpty(name) || name.Length < 3)
             {
                 throw new Exception("Name must be at least 3 characters long!");
@@ -69,10 +64,11 @@ namespace ClassLibraries.services
             }
             return true;
         }
-        public static bool EditMovieOrEpisode(int id, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, bool isMovie, int season, int episode)
+        public static bool EditMovieOrEpisode(User loggedUser, int id, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, bool isMovie, int season, int episode)
         {
             DateTime year;
             TimeSpan duration;
+            UserService.IsAdmin(loggedUser);
             ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);
@@ -95,12 +91,9 @@ namespace ClassLibraries.services
             return DataAccessMovie.GetMovieByIdQuery(id);
         }
 
-        public static bool DeleteMovieOrEpisode(int id)
+        public static bool DeleteMovieOrEpisode(User loggedUser, int id)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessMovie.DeleteMovieOrEpisodeQuery(id);
 
         }
@@ -111,21 +104,15 @@ namespace ClassLibraries.services
         }
 
         //FOR UNIT TESTING
-        public static bool DeleteLastMovie()
+        public static bool DeleteLastMovie(User loggedUser)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessMovie.DeleteLastMovieQuery();
 
         }
-        public static int GetLastMovieID()
+        public static int GetLastMovieID(User loggedUser)
         {
-            if (!UserService.loggedUser.IsAdmin)
-            {
-                throw new Exception("You are not authorized!");
-            }
+            UserService.IsAdmin(loggedUser);
             return DataAccessMovie.GetLastMovieIdQuery();
         }
         //

@@ -24,20 +24,20 @@ namespace WatchedIT_Desktop.forms
         public Home()
         {
             InitializeComponent();
-            lblUsername.Text = "Welcome, " + UserService.loggedUser.Username;
+            lblUsername.Text = "Welcome, " + AuthClass.loggedUser.Username;
             GetMovies();
             HideUI();
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            UserService.loggedUser = null;
+            AuthClass.loggedUser = null;
             closedByButton = true;
             this.Dispose();
         }
         private void HideUI()
         {
-            if (!UserService.loggedUser.IsAdmin)
+            if (!AuthClass.loggedUser.IsAdmin)
             {
                 btnAddSeries.Visible = false;
                 btnAddMovie.Visible = false;

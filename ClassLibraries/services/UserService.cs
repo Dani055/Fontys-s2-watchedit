@@ -12,22 +12,41 @@ namespace ClassLibraries.services
 {
     public static class UserService
     {
-        public static User loggedUser { get; set; } = null;
 
-        public static bool Login(string username, string password)
+        public static User Login(string username, string password)
         {
-            User user = DataAccessUser.LoginQuery(username, password);
-            loggedUser = user;
-            return true;
+            User user = DataAccessUser.LoginQuery(username);
+            bool match = Utils.Verify(password, user.Password);
+            if (!match)
+            {
+                throw new Exception("Wrong username or password!");
+            }
+            return user;
         }
-
+        
         public static bool Register(string username, string password, string firstname, string lastname, string email, string imageurl)
         {
             ValidateUser(username, password, firstname, lastname, email, imageurl);
-            return DataAccessUser.RegisterQuery(username, password, firstname, lastname, email, imageurl);
+            string hashedPass = Utils.Hash(password);
+            return DataAccessUser.RegisterQuery(username, hashedPass, firstname, lastname, email, imageurl);
 
         }
-
+        public static bool IsAuth(User user)
+        {
+            if (user == null)
+            {
+                throw new Exception("You are not authenticated");
+            }
+            return true;
+        }
+        public static bool IsAdmin(User user)
+        {
+            if (user == null || user.IsAdmin == false)
+            {
+                throw new Exception("You are not authorized");
+            }
+            return true;
+        }
         public static bool DeleteUser(string username)
         {
             return DataAccessUser.DeleteQuery(username);

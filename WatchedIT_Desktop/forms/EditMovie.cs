@@ -81,7 +81,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                if (MovieService.EditMovieOrEpisode(movie.Id, name, yearStr, url, genre, producers, desc, actors, durationStr, isMovie, season, episode))
+                if (MovieService.EditMovieOrEpisode(AuthClass.loggedUser, movie.Id, name, yearStr, url, genre, producers, desc, actors, durationStr, isMovie, season, episode))
                 {
                     if (isMovie)
                     {

@@ -26,6 +26,11 @@ namespace WatchedItWeb.Pages.Movies
         }
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetLoggedUser() == null || HttpContext.Session.GetLoggedUser().IsAdmin == false)
+            {
+                _notyf.Error("You are not authorized");
+                return RedirectToPage("/Index");
+            }
             try
             {
                 if (m)
@@ -56,7 +61,7 @@ namespace WatchedItWeb.Pages.Movies
             {                
                 if (m)
                 {
-                    MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, 0, 0);
+                    MovieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, 0, 0);
                     _notyf.Success("Movie edited.");
                 }
                 else
@@ -72,7 +77,7 @@ namespace WatchedItWeb.Pages.Movies
 
                     int episode = Convert.ToInt32(Request.Form["episode"]);
                     int season = Convert.ToInt32(Request.Form["season"]);
-                    MovieService.EditMovieOrEpisode(movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
+                    MovieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
                     _notyf.Success("Episode edited.");
                 }
                 return RedirectToPage("/Movies/MovieDetails", new { m = m, movieId = movieId });

@@ -44,7 +44,7 @@ namespace WatchedItWeb.Pages.Serie
         {
             try
             {
-                SeriesService.DeleteSeries(seriesId);
+                SeriesService.DeleteSeries(HttpContext.Session.GetLoggedUser(), seriesId);
                 _notyf.Success("Series deleted");
                 return RedirectToPage("/Serie/AllSeries");
             }

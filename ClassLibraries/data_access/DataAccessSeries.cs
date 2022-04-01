@@ -65,7 +65,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM series ORDER BY id desc LIMIT 4 OFFSET @offset";
+                string sql = "SELECT * FROM watchedit_series_view LIMIT 4 OFFSET @offset";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@offset", offset);
 
@@ -102,7 +102,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM series WHERE name like @keyword";
+                string sql = "SELECT * FROM watchedit_series_view WHERE name like @keyword";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
 
@@ -139,7 +139,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "Select * from series WHERE id = @ID";
+                string sql = "Select * from watchedit_series_view WHERE id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
                 Series s;

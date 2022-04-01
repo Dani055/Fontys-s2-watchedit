@@ -11,12 +11,11 @@ namespace ClassLibraries.services
 {
     public static class EpisodeService
     {
-        private static MySqlConnection conn = new MySqlConnection(Utils.conString);
-
-        public static bool AddEpisode(string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, int season, int episode, int seriesId)
+        public static bool AddEpisode(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, int season, int episode, int seriesId)
         {
             DateTime year;
             TimeSpan duration;
+            UserService.IsAdmin(loggedUser);
             MovieService.ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);

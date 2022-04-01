@@ -43,7 +43,7 @@
                     }
                 </div>
             </div>
-            @if (UserService.loggedUser?.IsAdmin == true)
+            @if (HttpContext.Session.GetLoggedUser()?.IsAdmin == true)
             {
                 <div class="controls">
                     <a asp-page="/Movies/EditMovie" asp-route-movieId="@Model.movie.Id" asp-route-m="@(Model.movie.GetType() == typeof(Episode) ? false : true)">Edit</a>

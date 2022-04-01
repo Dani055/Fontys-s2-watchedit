@@ -67,7 +67,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM movie where seriesId is NULL ORDER BY id desc LIMIT 4 OFFSET @offset";
+                string sql = "SELECT * FROM watchedit_movies_view LIMIT 4 OFFSET @offset";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@offset", offset);
                 List<Movie> movies = new List<Movie>();
@@ -104,7 +104,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "Select * from movie WHERE id = @ID";
+                string sql = "Select * from watchedit_movies_view WHERE id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
                 Movie m;
@@ -163,7 +163,7 @@ namespace ClassLibraries.data_access
             MySqlConnection conn = new MySqlConnection(Utils.conString);
             try
             {
-                string sql = "SELECT * FROM movie where seriesId is NULL and name like @keyword";
+                string sql = "SELECT * FROM watchedit_movies_view where name like @keyword";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
 
