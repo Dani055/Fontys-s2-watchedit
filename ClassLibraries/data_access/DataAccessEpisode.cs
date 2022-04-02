@@ -93,7 +93,7 @@ namespace ClassLibraries.data_access
                     string actors = reader["actors"].ToString();
                     string producer = reader["producer"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int rating = reader.GetInt16("rating");
+                    double rating = reader.GetDouble("rating");
                     int season = int.Parse(reader["season"].ToString());
                     int episode = int.Parse(reader["episode"].ToString());
                     int seriesId = int.Parse(reader["episode"].ToString());
@@ -134,7 +134,7 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int rating = reader.GetInt16("rating");
+                    double rating = reader.GetDouble("rating");
                     bool res;
                     int seriesId;
                     res = int.TryParse(reader["seriesId"].ToString(), out seriesId);

@@ -81,8 +81,12 @@ h3.category {
     flex: 0 0 100%;
     padding-bottom: 1em;
 }
-
+.load-more{
+    padding-top: 1em;
+    display: block;
+}
 .row a.load-more {
+    padding-top: 0;
     text-align: center;
     flex: 0 0 100%;
     font-size: 1.2em;
@@ -299,7 +303,7 @@ form.flat {
         max-width: 60px;
     }
 
-    form.flat button {
+    form.flat button, button.delete-review {
         padding: 0.5em 1em;
         border-radius: 3px;
         border: 2px solid #F24236;
@@ -307,8 +311,11 @@ form.flat {
         color: #FFFEE0;
         transition: color 0.2s ease-in, background-color 0.2s ease-in;
     }
+    button.delete-review{
+        margin-left: 1em;
+    }
 
-form.flat button:hover {
+form.flat button:hover, button.delete-review:hover {
     background-color: rgb(255, 249, 249);
     color: #F24236;
     cursor: pointer;
@@ -406,9 +413,12 @@ form.flat button:hover {
 .leave-review {
     padding: 1em;
 }
-
+.reviews{
+    flex: 0 0 100%;
+}
 .reviews h3 {
-    padding-bottom: 1em;
+    padding: 1em 0;
+
 }
 
 .review-header {

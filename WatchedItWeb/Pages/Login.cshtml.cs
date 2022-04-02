@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using ClassLibraries.models;
 using ClassLibraries.services;
 
@@ -31,6 +29,7 @@ namespace WatchedItWeb.Pages
                 if (result != null)
                 {
                     HttpContext.Session.SetObject("loggedUser", result);
+/*                    HttpContext.Session.SetInt32("userId", result.Id);*/
                     return RedirectToPage("/Index");
                 }
                 else

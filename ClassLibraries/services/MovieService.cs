@@ -102,7 +102,21 @@ namespace ClassLibraries.services
         {
             return DataAccessMovie.SearchMoviesQuery(keyword.Trim());
         }
-
+        public static List<Movie> GetMostRatedMovies(int offset)
+        {
+            return DataAccessMovie.GetMostRatedMoviesQuery(offset);
+        }
+        public static void UpdateMovieRating(int movieId)
+        {
+            List<Review> reviews = DataAccessReview.GetReviewsByMovieIdQuery(movieId);
+            double totalRating = 0;
+            foreach (Review r in reviews)
+            {
+                totalRating += r.Rating;
+            }
+            double avgRating = totalRating / reviews.Count;
+            DataAccessMovie.EditMovieQuery(movieId, avgRating);
+        }
         //FOR UNIT TESTING
         public static bool DeleteLastMovie(User loggedUser)
         {

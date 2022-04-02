@@ -1,6 +1,5 @@
 ﻿@page "{m}/{movieId}"
 @model WatchedItWeb.Pages.Movies.MovieDetailsModel
-@using ClassLibraries.services
 @using ClassLibraries.models
 @{
 }
@@ -12,12 +11,15 @@
             </div>
         </div>
         <div class="movie-description">
-            <h3>@Model.movie.Name - @if (Model.movie is Episode){
+            <h3>
+                @Model.movie.Name - @if (Model.movie is Episode)
+            {
                 @:Season
                 @(((Episode)Model.movie).SeasonNo.ToString());
                 @:Episode
                 @(((Episode)Model.movie).EpisodeNo.ToString());
-            }</h3>
+            }
+            </h3>
             <div class="desc-header">
                 <p>@Model.movie.Year.Year</p>
                 <p>@Model.movie.Genre</p>
@@ -56,57 +58,64 @@
                     </form>
                 </div>
             }
-
-            <div class="leave-review">
-                <h4>Leave review</h4>
-                <form action="" class="flat">
-                    <div class="media">
-                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
-                    </div>
-                    <textarea placeholder="Description" class="review-desc" type="text"></textarea>
-                    <input placeholder="rating" class="stars" type="text" name="" id="" max="">
-                    <button type="submit">Send</button>
-                </form>
-            </div>
+            @if (HttpContext.Session.GetLoggedUser() != null)
+            {
+                <div class="leave-review">
+                    <h4>Leave review</h4>
+                    <form method="post" class="flat">
+                        <div class="media">
+                            <img src="@HttpContext.Session.GetLoggedUser().ImageUrl" onerror=this.src="../../../images/default-user-image.png">
+                        </div>
+                        <textarea placeholder="Description" class="review-desc" type="text" asp-for="review.Description"></textarea>
+                        <input placeholder="rating" class="stars" type="number" asp-for="review.Rating" min="1" max="5">
+                        <button type="submit" asp-page-handler="OnSubmitReview">Send</button>
+                    </form>
+                </div>
+            }
         </div>
         <div class="reviews">
             <h3>Reviews</h3>
-            <div class="review">
-                <div class="review-header">
-                    <div class="media">
-                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+            @foreach (Review r in Model.reviews)
+            {
+                <div class="review">
+                    <div class="review-header">
+                        <div class="media">
+                            <img src="@r.UserImg" onerror=this.src ="../../../images/default-user-image.png">
+                        </div>
+                        @if (r.UserId == HttpContext.Session.GetLoggedUser()?.Id)
+                        {
+                            <p>You</p>
+                        }
+                        else
+                        {
+                            <p>@r.FirstName @r.LastName</p>
+                        }
+
+                        <p>@r.Rating/5</p>
+
+                        @if (HttpContext.Session.GetLoggedUser()?.IsAdmin == true || HttpContext.Session.GetLoggedUser()?.Id == r.UserId)
+                        {
+                            <form method="post">
+                                <input type="hidden" name="reviewId" value="@r.Id" />
+                                <button class="delete-review" type="submit" asp-page-handler="OnDeleteReview">Delete</button>
+                            </form>
+                        }
+
                     </div>
-                    <p>Jane Doe</p>
-                    <p>5/5</p>
-                </div>
-                <div class="review-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
-                </div>
-            </div>
-            <div class="review">
-                <div class="review-header">
-                    <div class="media">
-                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    <div class="review-content">
+                        <p>@r.Description</p>
                     </div>
-                    <p>Jane Doe</p>
-                    <p>5/5</p>
                 </div>
-                <div class="review-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
-                </div>
-            </div>
-            <div class="review">
-                <div class="review-header">
-                    <div class="media">
-                        <img src="https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
-                    </div>
-                    <p>Jane Doe</p>
-                    <p>5/5</p>
-                </div>
-                <div class="review-content">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit fugit nesciunt eaque praesentium placeat numquam corrupti nam qui assumenda earum vero in ipsa, repellat culpa nobis dolorem quidem rerum commodi.</p>
-                </div>
-            </div>
+            }
+            @if (Model.reviews.Count == 0)
+            {
+                <p>This movie currently has no reviews.</p>
+            }
+            else
+            {
+                <a asp-route-currentpage="@(Model.CurrentPage + 1)" class="load-more">Load more...</a>
+            }
+
         </div>
     </div>
 </div>

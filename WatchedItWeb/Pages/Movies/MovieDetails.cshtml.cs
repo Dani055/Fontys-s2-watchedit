@@ -6,18 +6,33 @@ using AspNetCoreHero.ToastNotification.Abstractions;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WatchedItWeb.Pages.Movies
 {
     public class MovieDetailsModel : PageModel
     {
+        private readonly INotyfService _notyf;
+
         [BindProperty(SupportsGet = true)]
         public int movieId { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public bool m { get; set; }
-        private readonly INotyfService _notyf;
+
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 0;
+
+        [BindProperty]
+        public Review review { get; set; }
+
         public Movie movie { get; set; }
+        public List<Review> reviews { get; set; } = new List<Review>();
+
+
+
+
         public MovieDetailsModel(INotyfService notyf)
         {
             _notyf = notyf;
@@ -39,6 +54,20 @@ namespace WatchedItWeb.Pages.Movies
                 {
                     _notyf.Error("Resource not found!");
                     return RedirectToPage("/Movies/AllMovies");
+                }
+                if (HttpContext.Session.GetLoggedUser() != null)
+                {
+                    Review ownReview = ReviewService.GetReview(HttpContext.Session.GetLoggedUser(), movieId);
+                    if (ownReview != null)
+                    {
+                        reviews.Add(ownReview);
+                    }
+                }
+                List<Review> loadedReviews = new List<Review>();
+                for (int i = 0; i <= CurrentPage; i++)
+                {
+                    loadedReviews = ReviewService.GetReviews(HttpContext.Session.GetLoggedUser() == null ? 0 : HttpContext.Session.GetLoggedUser().Id, movieId, i * 4);
+                    reviews.AddRange(loadedReviews);
                 }
                 return Page();
             }
@@ -69,9 +98,38 @@ namespace WatchedItWeb.Pages.Movies
             catch (Exception ex)
             {
                 _notyf.Error(ex.Message);
-                return Page();
+                return RedirectToPage($"/Movies/MovieDetails", new { m = m, movieId = movieId });
             }
 
+        }
+        public IActionResult OnPostOnSubmitReview()
+        {
+            try
+            {
+                ReviewService.PostReview(HttpContext.Session.GetLoggedUser(), movieId, review.Description, review.Rating);
+                _notyf.Success("Review posted");
+                return RedirectToPage($"/Movies/MovieDetails", new { m = m, movieId = movieId });
+            }
+            catch (Exception ex)
+            {
+                _notyf.Error(ex.Message);
+                return RedirectToPage($"/Movies/MovieDetails", new { m = m, movieId = movieId});
+            }
+        }
+        public IActionResult OnPostOnDeleteReview()
+        {
+            try
+            {
+                int reviewId = Convert.ToInt32(Request.Form["reviewId"]);
+                ReviewService.DeleteReview(HttpContext.Session.GetLoggedUser(), reviewId);
+                _notyf.Success("Review deleted");
+                return RedirectToPage($"/Movies/MovieDetails", new { m = m, movieId = movieId });
+            }
+            catch (Exception ex)
+            {
+                _notyf.Error(ex.Message);
+                return RedirectToPage($"/Movies/MovieDetails", new { m = m, movieId = movieId });
+            }  
         }
     }
 }

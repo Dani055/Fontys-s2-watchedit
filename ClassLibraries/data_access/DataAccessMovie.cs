@@ -36,6 +36,26 @@ namespace ClassLibraries.data_access
             }
         }
 
+        public static bool EditMovieQuery(int id, double rating)
+        {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            try
+            {
+                string sql = "UPDATE movie SET rating = @rating WHERE id = @id;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@rating", rating);
+
+                conn.Open();
+                int result = cmd.ExecuteNonQuery();
+                return true;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
         public static bool EditMovieQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
             MySqlConnection conn = new MySqlConnection(Utils.conString);
@@ -85,7 +105,7 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int rating = reader.GetInt16("rating");
+                    double rating = reader.GetDouble("rating");
 
                     Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
                     movies.Add(m);
@@ -123,7 +143,7 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int rating = reader.GetInt16("rating");
+                    double rating = reader.GetDouble("rating");
                     string seriesId = reader["seriesId"].ToString();
                     if (seriesId != null && seriesId != "")
                     {
@@ -183,7 +203,44 @@ namespace ClassLibraries.data_access
                     string desc = reader["description"].ToString();
                     string actors = reader["actors"].ToString();
                     TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
-                    int rating = reader.GetInt16("rating");
+                    double rating = reader.GetDouble("rating");
+
+                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
+                    movies.Add(m);
+
+                }
+                reader.Close();
+                return movies;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public static List<Movie> GetMostRatedMoviesQuery(int offset)
+        {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            try
+            {
+                string sql = "SELECT * FROM watchedit_movies_view ORDER BY rating desc LIMIT 4 OFFSET @offset";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@offset", offset);
+                List<Movie> movies = new List<Movie>();
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32("id");
+                    string name = reader.GetString("name");
+                    DateTime year = DateTime.Parse(reader.GetString("year"));
+                    string url = reader["imageUrl"].ToString();
+                    string genre = reader.GetString("genre");
+                    string producer = reader["producer"].ToString();
+                    string desc = reader["description"].ToString();
+                    string actors = reader["actors"].ToString();
+                    TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    double rating = reader.GetDouble("rating");
 
                     Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
                     movies.Add(m);

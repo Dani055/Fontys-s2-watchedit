@@ -15,7 +15,7 @@ namespace ClassLibraries.models
         {
 
         }
-        public Episode(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration, int rating, int seriesId, int season, int episode) : base(id, name, year, imageurl, genre, producer, desc, actors, duration, rating)
+        public Episode(int id, string name, DateTime year, string imageurl, string genre, string producer, string desc, string actors, TimeSpan duration, double rating, int seriesId, int season, int episode) : base(id, name, year, imageurl, genre, producer, desc, actors, duration, rating)
         {
             SeriesId = seriesId;
             SeasonNo = season;
