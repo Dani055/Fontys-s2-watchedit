@@ -34,5 +34,8 @@
     <Compile Update="user_controls\MovieCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="user_controls\ReviewCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

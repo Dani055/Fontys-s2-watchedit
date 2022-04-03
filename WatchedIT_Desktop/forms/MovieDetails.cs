@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using ClassLibraries;
 using ClassLibraries.models;
 using ClassLibraries.services;
+using WatchedIT_Desktop.user_controls;
 
 namespace WatchedIT_Desktop.forms
 {
     public partial class MovieDetails : Form
     {
         private Movie movie = null;
+        private List<Review> reviews = new List<Review>();
         private bool isMovie = true;
         public MovieDetails(int id, bool ismovie)
         {
@@ -35,10 +37,10 @@ namespace WatchedIT_Desktop.forms
             catch (Exception ex)
             {
                 MessageHelper.ShowError(ex.Message);
-            }
-
-            HideUI();
+            }            
             PopulateInfo();
+            HideUI();
+
         }
         private void HideUI()
         {
@@ -46,6 +48,23 @@ namespace WatchedIT_Desktop.forms
             {
                 btnDelete.Visible = false;
                 btnEdit.Visible = false;
+            }
+            if (reviews.Count == 0)
+            {
+                if (movie is Episode)
+                {
+                    lblNoRev.Text = "This episode currently has no reviews";
+                }
+                else
+                {
+                    lblNoRev.Text = "This movie currently has no reviews";
+                }
+                lblLoadReviews.Visible = false;
+            }
+            else
+            {
+                lblNoRev.Text = "";
+                lblLoadReviews.Visible = true;
             }
         }
         private void PopulateInfo()
@@ -78,6 +97,7 @@ namespace WatchedIT_Desktop.forms
                     lblName.Text = movie.Name + ": Season " + ((Episode)movie).SeasonNo + " - Episode " + ((Episode)movie).EpisodeNo;
                 }
             }
+            LoadReviews();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -132,6 +152,50 @@ namespace WatchedIT_Desktop.forms
 
                 PopulateInfo();
             }
+        }
+        private void LoadReviews()
+        {
+            try
+            {
+                Review ownReview = ReviewService.GetReview(AuthClass.loggedUser, movie.Id);
+                if (ownReview != null)
+                {
+                    reviews.Add(ownReview);
+                }
+                reviews.AddRange(ReviewService.GetReviews(AuthClass.loggedUser.Id, movie.Id, 0));
+                flwReviews.Controls.Clear();
+                foreach (Review r in reviews)
+                {
+                    ReviewCard card = new ReviewCard(r.Id, r.UserId, r.FirstName, r.LastName, r.UserImg, r.Description, r.Rating);
+                    flwReviews.Controls.Add(card);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex.Message);
+            }
+        }
+        private void LoadMoreReviews()
+        {
+            try
+            {
+                List<Review> loadedReviews = ReviewService.GetReviews(AuthClass.loggedUser.Id, movie.Id, reviews.Count);
+                reviews.AddRange(loadedReviews);
+                foreach (Review r in loadedReviews)
+                {
+                    ReviewCard card = new ReviewCard(r.Id, r.UserId, r.FirstName, r.LastName, r.UserImg, r.Description, r.Rating);
+                    flwReviews.Controls.Add(card);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageHelper.ShowError(ex.Message);
+            }
+        }
+
+        private void lblLoadReviews_Click(object sender, EventArgs e)
+        {
+            LoadMoreReviews();
         }
     }
 }

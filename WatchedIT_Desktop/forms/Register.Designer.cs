@@ -120,6 +120,7 @@ namespace WatchedIT_Desktop.forms
             // 
             this.tbPass.Location = new System.Drawing.Point(143, 122);
             this.tbPass.Name = "tbPass";
+            this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(145, 27);
             this.tbPass.TabIndex = 8;
             // 

@@ -69,6 +69,7 @@ namespace WatchedIT_Desktop
             // 
             this.tbPassword.Location = new System.Drawing.Point(62, 141);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(181, 27);
             this.tbPassword.TabIndex = 6;
             // 

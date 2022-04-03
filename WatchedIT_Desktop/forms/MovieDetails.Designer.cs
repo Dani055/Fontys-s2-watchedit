@@ -44,8 +44,13 @@ namespace WatchedIT_Desktop.forms
             this.lblRating = new System.Windows.Forms.Label();
             this.panelDesc = new System.Windows.Forms.Panel();
             this.lblDesc = new System.Windows.Forms.Label();
+            this.lblNoRev = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flwReviews = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblLoadReviews = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).BeginInit();
             this.panelDesc.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbPhoto
@@ -177,12 +182,56 @@ namespace WatchedIT_Desktop.forms
             this.lblDesc.TabIndex = 18;
             this.lblDesc.Text = "Description";
             // 
+            // lblNoRev
+            // 
+            this.lblNoRev.AutoSize = true;
+            this.lblNoRev.Location = new System.Drawing.Point(56, 619);
+            this.lblNoRev.Name = "lblNoRev";
+            this.lblNoRev.Size = new System.Drawing.Size(23, 20);
+            this.lblNoRev.TabIndex = 31;
+            this.lblNoRev.Text = "as";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.flwReviews);
+            this.panel1.Controls.Add(this.lblLoadReviews);
+            this.panel1.Location = new System.Drawing.Point(56, 642);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1000, 214);
+            this.panel1.TabIndex = 32;
+            // 
+            // flwReviews
+            // 
+            this.flwReviews.AutoScroll = true;
+            this.flwReviews.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flwReviews.Location = new System.Drawing.Point(0, 0);
+            this.flwReviews.Name = "flwReviews";
+            this.flwReviews.Size = new System.Drawing.Size(1000, 173);
+            this.flwReviews.TabIndex = 32;
+            // 
+            // lblLoadReviews
+            // 
+            this.lblLoadReviews.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblLoadReviews.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblLoadReviews.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblLoadReviews.Location = new System.Drawing.Point(0, 173);
+            this.lblLoadReviews.Name = "lblLoadReviews";
+            this.lblLoadReviews.Size = new System.Drawing.Size(1000, 41);
+            this.lblLoadReviews.TabIndex = 31;
+            this.lblLoadReviews.Text = "Load more...";
+            this.lblLoadReviews.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLoadReviews.Click += new System.EventHandler(this.lblLoadReviews_Click);
+            // 
             // MovieDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1099, 625);
+            this.ClientSize = new System.Drawing.Size(1099, 867);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lblNoRev);
             this.Controls.Add(this.panelDesc);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
@@ -202,6 +251,7 @@ namespace WatchedIT_Desktop.forms
             this.Text = "MovieDetails";
             ((System.ComponentModel.ISupportInitialize)(this.pbPhoto)).EndInit();
             this.panelDesc.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,5 +273,9 @@ namespace WatchedIT_Desktop.forms
         private System.Windows.Forms.Label lblRating;
         private System.Windows.Forms.Panel panelDesc;
         private System.Windows.Forms.Label lblDesc;
+        private System.Windows.Forms.Label lblNoRev;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblLoadReviews;
+        private System.Windows.Forms.FlowLayoutPanel flwReviews;
     }
 }
