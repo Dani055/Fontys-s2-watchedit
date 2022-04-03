@@ -68,6 +68,29 @@ namespace ClassLibraries.services
         {
             return DataAccessSeries.SearchSeriesQuery(keyword.Trim());
         }
+        public static List<Series> FilterSeries(string keyword, int yearFrom, int yearTo, string genre, string sort)
+        {
+            DateTime yearMin;
+            if (yearFrom < 1000)
+            {
+                yearMin = DateTime.MinValue;
+            }
+            else
+            {
+                yearMin = DateTime.Parse(yearFrom.ToString() + "-01-01");
+            }
+            DateTime yearMax;
+            if (yearTo < 1000)
+            {
+                yearMax = DateTime.MaxValue;
+            }
+            else
+            {
+                yearMax = DateTime.Parse(yearTo.ToString() + "-01-01");
+            }
+
+            return DataAccessSeries.FilterSeriesQuery(keyword, yearMin, yearMax, genre, sort);
+        }
         public static Series GetSeriesById(int id)
         {
             return DataAccessSeries.GetSeriesByIdQuery(id);

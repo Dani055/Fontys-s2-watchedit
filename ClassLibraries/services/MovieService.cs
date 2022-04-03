@@ -102,6 +102,32 @@ namespace ClassLibraries.services
         {
             return DataAccessMovie.SearchMoviesQuery(keyword.Trim());
         }
+        public static List<Movie> FilterMovies(string keyword, int yearFrom, int yearTo, int ratingMin, int ratingMax, string genre ,string sort)
+        {
+            DateTime yearMin;
+            if (yearFrom < 1000)
+            {
+                yearMin = DateTime.MinValue;
+            }
+            else
+            {
+                yearMin = DateTime.Parse(yearFrom.ToString() + "-01-01");
+            }
+            DateTime yearMax;
+            if (yearTo < 1000)
+            {
+                yearMax = DateTime.MaxValue;
+            }
+            else
+            {
+                yearMax = DateTime.Parse(yearTo.ToString() + "-01-01");
+            }
+            if (ratingMax == 0)
+            {
+                ratingMax = 5;
+            }
+            return DataAccessMovie.FilterMoviesQuery(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
+        }
         public static List<Movie> GetMostRatedMovies(int offset)
         {
             return DataAccessMovie.GetMostRatedMoviesQuery(offset);

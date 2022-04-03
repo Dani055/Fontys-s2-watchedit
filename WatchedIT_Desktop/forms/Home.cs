@@ -19,6 +19,7 @@ namespace WatchedIT_Desktop.forms
         private List<Movie> movies = new List<Movie>();
         private List<Series> series = new List<Series>();
         bool closedByButton = false;
+        bool filterApplied = false;
         string currentlyShowing = "Movies";
 
         public Home()
@@ -67,11 +68,11 @@ namespace WatchedIT_Desktop.forms
             flowLayoutPanel1.Controls.Clear();
             DisplayMovies();
         }
-        private void SearchMovies(string keyword)
+        private void FilterMovies(string keyword, int yearMin, int yearMax, int ratingMin, int ratingMax, string genre, string sort)
         {
             try
             {
-                movies = MovieService.SearchMovies(keyword);
+                movies = MovieService.FilterMovies(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
             }
             catch (Exception ex)
             {
@@ -82,10 +83,6 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetMoreMovies()
         {
-            if (tbSearch.Text != "")
-            {
-                return;
-            }
             try
             {
                 List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
@@ -133,10 +130,6 @@ namespace WatchedIT_Desktop.forms
         }
         private void GetMoreSeries()
         {
-            if (tbSearch.Text != "")
-            {
-                return;
-            }
 
             try
             {
@@ -157,11 +150,11 @@ namespace WatchedIT_Desktop.forms
             }
 
         }
-        private void SearchSeries(string keyword)
+        private void FilterSeries(string keyword, int yearMin, int yearMax, string genre, string sort)
         {
             try
             {
-                series = SeriesService.SearchSeries(keyword);
+                series = SeriesService.FilterSeries(keyword, yearMin, yearMax, genre, sort);
             }
             catch (Exception ex)
             {
@@ -244,24 +237,36 @@ namespace WatchedIT_Desktop.forms
 
         private void btnShowMovies_Click(object sender, EventArgs e)
         {
-            if (currentlyShowing != "Movies")
+            if (currentlyShowing != "Movies" || filterApplied)
             {
                 currentlyShowing = "Movies";
+                btnSearch.Text = "Search movies";
+                nmRatingTo.Enabled = true;
+                nmRatingFrom.Enabled = true;
+                filterApplied = false;
                 GetMovies();
             }
         }
 
         private void btnShowSeries_Click(object sender, EventArgs e)
         {
-            if (currentlyShowing != "Series")
+            if (currentlyShowing != "Series" || filterApplied)
             {
                 currentlyShowing = "Series";
+                btnSearch.Text = "Search series";
+                nmRatingTo.Enabled = false;
+                nmRatingFrom.Enabled = false;
+                filterApplied = false;
                 GetSeries();
             }
         }
 
         private void lblLoadMore_Click(object sender, EventArgs e)
         {
+            if (filterApplied)
+            {
+                return;
+            }
             if (currentlyShowing == "Movies")
             {
                 GetMoreMovies();
@@ -275,13 +280,36 @@ namespace WatchedIT_Desktop.forms
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = tbSearch.Text.Trim();
-            if (currentlyShowing == "Movies")
+            int yearMin = (int)nmYearFrom.Value;
+            int yearMax = (int)nmYearTo.Value;
+            int ratingMin = (int)nmRatingFrom.Value;
+            int ratingMax = (int)nmRatingTo.Value;
+            string genre = tbGenre.Text.Trim();
+            string sort = "";
+            if (rbNameAsc.Checked)
             {
-                SearchMovies(keyword);
+                sort = "order by name asc";
+            }
+            else if (rbNameDesc.Checked)
+            {
+                sort = "order by name desc";
+            }
+            else if (rbRatingAsc.Checked)
+            {
+                sort = "order by rating asc";
             }
             else
             {
-                SearchSeries(keyword);
+                sort = "order by rating desc";
+            }
+            filterApplied = true;
+            if (currentlyShowing == "Movies")
+            {
+                FilterMovies(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
+            }
+            else
+            {
+                FilterSeries(keyword, yearMin, yearMax, genre, sort);
             }
         }
     }

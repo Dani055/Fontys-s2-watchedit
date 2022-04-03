@@ -134,6 +134,46 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
+        public static List<Series> FilterSeriesQuery(string keyword, DateTime yearFrom, DateTime yearTo, string genreLike, string sort)
+        {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            try
+            {
+                string sql = "SELECT * FROM series where year >= @yearFrom and year <= @yearTo and genre like @genre and (name like @keyword or description like @keyword) " + sort;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@yearFrom", yearFrom.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@yearTo", yearTo.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@genre", "%" + genreLike + "%");
+                cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                List<Series> series = new List<Series>();
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    int id = reader.GetInt32("id");
+                    string name = reader.GetString("name");
+                    DateTime year = DateTime.Parse(reader.GetString("year"));
+                    string url = reader["imageUrl"].ToString();
+                    string genre = reader.GetString("genre");
+                    string desc = reader["description"].ToString();
+                    string actors = reader["actors"].ToString();
+                    string producer = reader["producer"].ToString();
+
+                    Series s = new Series(id, name, year, url, genre, producer, desc, actors);
+                    series.Add(s);
+
+                }
+                reader.Close();
+                return series;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public static Series GetSeriesByIdQuery(int id)
         {
             MySqlConnection conn = new MySqlConnection(Utils.conString);

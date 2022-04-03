@@ -217,6 +217,50 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
+        public static List<Movie> FilterMoviesQuery(string keyword, DateTime yearFrom, DateTime yearTo, int ratingMin, int ratingMax,string genreLike, string sort)
+        {
+            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            try
+            {
+                string sql = "SELECT * FROM movie where seriesId is null and year >= @yearFrom and year <= @yearTo and rating >= @ratingMin and rating <= @ratingMax and genre like @genre and (name like @keyword or description like @keyword) " + sort;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@yearFrom", yearFrom.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@yearTo", yearTo.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@ratingMin", ratingMin);
+                cmd.Parameters.AddWithValue("@ratingMax", ratingMax);
+                cmd.Parameters.AddWithValue("@genre", "%" + genreLike + "%");
+                cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                List<Movie> movies = new List<Movie>();
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    int id = reader.GetInt32("id");
+                    string name = reader.GetString("name");
+                    DateTime year = DateTime.Parse(reader.GetString("year"));
+                    string url = reader["imageUrl"].ToString();
+                    string genre = reader.GetString("genre");
+                    string producer = reader["producer"].ToString();
+                    string desc = reader["description"].ToString();
+                    string actors = reader["actors"].ToString();
+                    TimeSpan duration = TimeSpan.Parse(reader["duration"].ToString());
+                    double rating = reader.GetDouble("rating");
+
+                    Movie m = new Movie(id, name, year, url, genre, producer, desc, actors, duration, rating);
+                    movies.Add(m);
+
+                }
+                reader.Close();
+                return movies;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public static List<Movie> GetMostRatedMoviesQuery(int offset)
         {
             MySqlConnection conn = new MySqlConnection(Utils.conString);
