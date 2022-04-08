@@ -8,12 +8,15 @@ using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ClassLibraries.interfaces;
 
 namespace WatchedItWeb.Pages.Movies
 {
     public class MovieDetailsModel : PageModel
     {
         private readonly INotyfService _notyf;
+        private readonly IMovieService _movieService;
+        private readonly IEpisodeService _episodeService;
 
         [BindProperty(SupportsGet = true)]
         public int movieId { get; set; }
@@ -33,9 +36,11 @@ namespace WatchedItWeb.Pages.Movies
 
 
 
-        public MovieDetailsModel(INotyfService notyf)
+        public MovieDetailsModel(INotyfService notyf, IMovieService movieService, IEpisodeService episodeService)
         {
             _notyf = notyf;
+            _movieService = movieService;
+            _episodeService = episodeService;
         }
         public IActionResult OnGet()
         {
@@ -43,11 +48,11 @@ namespace WatchedItWeb.Pages.Movies
             {
                 if (m)
                 {
-                    movie = MovieService.GetMovieById(movieId);
+                    movie = _movieService.GetMovieById(movieId);
                 }
                 else
                 {
-                    movie = EpisodeService.GetEpisodeById(movieId);
+                    movie = _episodeService.GetEpisodeById(movieId);
                 }
         
                 if (movie == null)
@@ -82,7 +87,7 @@ namespace WatchedItWeb.Pages.Movies
         {
             try
             {
-                MovieService.DeleteMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId);
+                _movieService.DeleteMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId);
                 if (m)
                 {
                     _notyf.Success("Movie deleted");

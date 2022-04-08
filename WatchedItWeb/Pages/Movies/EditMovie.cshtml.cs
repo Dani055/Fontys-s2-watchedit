@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +13,23 @@ namespace WatchedItWeb.Pages.Movies
 {
     public class EditMovieModel : PageModel
     {
+        private readonly INotyfService _notyf;
+        private readonly IMovieService _movieService;
+        private readonly IEpisodeService _episodeService;
+
         [BindProperty]
         public Movie movie { get; set; }
-        private readonly INotyfService _notyf;
+
         [BindProperty(SupportsGet = true)]
         public bool m { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int movieId { get; set; }
-        public EditMovieModel(INotyfService notyf)
+        public EditMovieModel(INotyfService notyf, IMovieService movieService, IEpisodeService episodeService)
         {
             _notyf = notyf;
+            _movieService = movieService;
+            _episodeService = episodeService;
         }
         public IActionResult OnGet()
         {
@@ -35,11 +42,11 @@ namespace WatchedItWeb.Pages.Movies
             {
                 if (m)
                 {
-                    movie = MovieService.GetMovieById(movieId);
+                    movie = _movieService.GetMovieById(movieId);
                 }
                 else
                 {
-                    movie = EpisodeService.GetEpisodeById(movieId);
+                    movie = _episodeService.GetEpisodeById(movieId);
                 }
 
                 if (movie == null)
@@ -61,7 +68,7 @@ namespace WatchedItWeb.Pages.Movies
             {                
                 if (m)
                 {
-                    MovieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, 0, 0);
+                    _movieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, 0, 0);
                     _notyf.Success("Movie edited.");
                 }
                 else
@@ -77,7 +84,7 @@ namespace WatchedItWeb.Pages.Movies
 
                     int episode = Convert.ToInt32(Request.Form["episode"]);
                     int season = Convert.ToInt32(Request.Form["season"]);
-                    MovieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
+                    _movieService.EditMovieOrEpisode(HttpContext.Session.GetLoggedUser(), movieId, movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), m, season, episode);
                     _notyf.Success("Episode edited.");
                 }
                 return RedirectToPage("/Movies/MovieDetails", new { m = m, movieId = movieId });

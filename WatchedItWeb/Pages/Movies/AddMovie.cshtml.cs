@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,17 +13,23 @@ namespace WatchedItWeb.Pages.Movies
 {
     public class AddMovieModel : PageModel
     {
+        private readonly INotyfService _notyf;
+        private readonly IMovieService _movieService;
+        private readonly IEpisodeService _episodeService;
+
         [BindProperty]
         public Movie movie { get; set; }
-        private readonly INotyfService _notyf;
+        
         [BindProperty(SupportsGet = true)]
         public bool m { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int seriesId { get; set; }
-        public AddMovieModel(INotyfService notyf)
+        public AddMovieModel(INotyfService notyf, IMovieService movieService, IEpisodeService episodeService)
         {
             _notyf = notyf;
+            _movieService = movieService;
+            _episodeService = episodeService;
         }
         public IActionResult OnGet()
         {
@@ -65,7 +72,7 @@ namespace WatchedItWeb.Pages.Movies
             {
                 if (m)
                 {
-                    MovieService.AddMovie(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString());
+                    _movieService.AddMovie(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString());
                     _notyf.Success("Movie added!");
                     return RedirectToPage("/Movies/AllMovies");
                 }
@@ -81,7 +88,7 @@ namespace WatchedItWeb.Pages.Movies
                     }
                     int episode = Convert.ToInt32(Request.Form["episode"]);
                     int season = Convert.ToInt32(Request.Form["season"]);
-                    EpisodeService.AddEpisode(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId); ;
+                    _episodeService.AddEpisode(HttpContext.Session.GetLoggedUser(), movie.Name, movie.Year.ToString(), movie.ImageUrl, movie.Genre, movie.Producer, movie.Description, movie.Actors, movie.Duration.ToString(), season, episode, seriesId); ;
                     _notyf.Success("Episode added!");
                     return RedirectToPage("/Serie/SeriesDetails" , new { seriesId = seriesId });
                 }

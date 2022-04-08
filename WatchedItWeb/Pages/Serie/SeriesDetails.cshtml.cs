@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,16 @@ namespace WatchedItWeb.Pages.Serie
     public class SeriesDetailsModel : PageModel
     {
         private readonly INotyfService _notyf;
+        private readonly IEpisodeService _episodeService;
+
         [BindProperty(SupportsGet = true)]
         public int seriesId { get; set; }
         public Series series { get; private set; }
         public List<Episode> episodes { get; private set; }
-        public SeriesDetailsModel(INotyfService notyf)
+        public SeriesDetailsModel(INotyfService notyf, IEpisodeService episodeService)
         {
             _notyf = notyf;
+            _episodeService = episodeService;
         }
         public IActionResult OnGet()
         {
@@ -31,7 +35,7 @@ namespace WatchedItWeb.Pages.Serie
                     _notyf.Error("Series not found!");
                     return RedirectToPage("/Serie/AllSeries");
                 }
-                episodes = EpisodeService.GetEpisodes(series.Id);
+                episodes = _episodeService.GetEpisodes(series.Id);
                 return Page();
             }
             catch (Exception ex)

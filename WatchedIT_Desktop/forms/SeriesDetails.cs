@@ -11,16 +11,20 @@ using ClassLibraries;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using WatchedIT_Desktop.user_controls;
+using Microsoft.Extensions.DependencyInjection;
+using ClassLibraries.interfaces;
 
 namespace WatchedIT_Desktop.forms
 {
     public partial class SeriesDetails : Form
     {
+        private readonly IEpisodeService _episodeService;
         private Series series = null;
         private List<Episode> episodes = new List<Episode>();
         public SeriesDetails(int id)
         {
             InitializeComponent();
+            _episodeService = Program.ServiceProvider.GetService<IEpisodeService>();
             PopulateInfo(id);
             HideUI();
         }
@@ -66,7 +70,7 @@ namespace WatchedIT_Desktop.forms
 
             try
             {
-                episodes = EpisodeService.GetEpisodes(series.Id);
+                episodes = _episodeService.GetEpisodes(series.Id);
             }
             catch (Exception ex)
             {

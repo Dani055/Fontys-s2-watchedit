@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification;
+using ClassLibraries.data_access;
+using ClassLibraries.interfaces;
+using ClassLibraries.services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,12 @@ namespace WatchedItWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
+            
+            services.AddSingleton<IDataAccessEpisode, DataAccessEpisode>();
+            services.AddSingleton<IDataAccessMovie, DataAccessMovie>();
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IEpisodeService, EpisodeService>();
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);

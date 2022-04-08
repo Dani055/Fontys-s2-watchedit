@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraries;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WatchedIT_Desktop.forms
 {
@@ -17,10 +19,14 @@ namespace WatchedIT_Desktop.forms
     {
         private bool isMovie = true;
         private int seriesId;
+        private readonly IMovieService _movieService;
+        private readonly IEpisodeService _episodeService;
 
         public AddMovie()
         {
             InitializeComponent();
+            _movieService = Program.ServiceProvider.GetService<IMovieService>();
+            _episodeService = Program.ServiceProvider.GetService<IEpisodeService>();
             HideUI();
 
         }
@@ -65,13 +71,13 @@ namespace WatchedIT_Desktop.forms
             {
                 if (isMovie)
                 {
-                    result = MovieService.AddMovie(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr);
+                    result = _movieService.AddMovie(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr);
                 }
                 else
                 {
                     int season = Convert.ToInt32(tbSeason.Value);
                     int episode = Convert.ToInt32(tbEpisode.Value);
-                    result = EpisodeService.AddEpisode(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr, season, episode, seriesId);
+                    result = _episodeService.AddEpisode(AuthClass.loggedUser, name, yearStr, url, genre, producers, desc, actors, durationStr, season, episode, seriesId);
                 }
                 if (result)
                 {

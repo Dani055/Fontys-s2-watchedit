@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using MySql.Data.MySqlClient;
 
 namespace ClassLibraries.data_access
 {
-    public static class DataAccessMovie
+    public class DataAccessMovie : IDataAccessMovie
     {
-        public static bool AddMovieQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
+        private readonly IDBSettings dBSettings = new DBSettings();
+        public bool AddMovieQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration); ";
@@ -36,9 +38,9 @@ namespace ClassLibraries.data_access
             }
         }
 
-        public static bool EditMovieQuery(int id, double rating)
+        public bool EditMovieQuery(int id, double rating)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "UPDATE movie SET rating = @rating WHERE id = @id;";
@@ -56,9 +58,9 @@ namespace ClassLibraries.data_access
             }
 
         }
-        public static bool EditMovieQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
+        public bool EditMovieQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration WHERE id = @id;";
@@ -82,9 +84,9 @@ namespace ClassLibraries.data_access
             }
             
         }
-        public static List<Movie> GetMoviesQuery(int offset)
+        public List<Movie> GetMoviesQuery(int offset)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT * FROM watchedit_movies_view LIMIT 4 OFFSET @offset";
@@ -119,9 +121,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static Movie GetMovieByIdQuery(int id)
+        public Movie GetMovieByIdQuery(int id)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "Select * from watchedit_movies_view WHERE id = @ID";
@@ -159,9 +161,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static bool DeleteMovieOrEpisodeQuery(int id)
+        public bool DeleteMovieOrEpisodeQuery(int id)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "DELETE FROM movie WHERE id = @ID";
@@ -178,9 +180,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static List<Movie> SearchMoviesQuery(string keyword)
+        public List<Movie> SearchMoviesQuery(string keyword)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT * FROM watchedit_movies_view where name like @keyword";
@@ -217,9 +219,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static List<Movie> FilterMoviesQuery(string keyword, DateTime yearFrom, DateTime yearTo, int ratingMin, int ratingMax,string genreLike, string sort)
+        public List<Movie> FilterMoviesQuery(string keyword, DateTime yearFrom, DateTime yearTo, int ratingMin, int ratingMax,string genreLike, string sort)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT * FROM movie where seriesId is null and year >= @yearFrom and year <= @yearTo and rating >= @ratingMin and rating <= @ratingMax and genre like @genre and (name like @keyword or description like @keyword) " + sort;
@@ -261,9 +263,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static List<Movie> GetMostRatedMoviesQuery(int offset)
+        public List<Movie> GetMostRatedMoviesQuery(int offset)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT * FROM watchedit_movies_view ORDER BY rating desc LIMIT 4 OFFSET @offset";
@@ -298,9 +300,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static bool DeleteLastMovieQuery()
+        public bool DeleteLastMovieQuery()
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "delete from Movie order by id desc limit 1";
@@ -316,9 +318,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static int GetLastMovieIdQuery()
+        public int GetLastMovieIdQuery()
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT MAX(ID) FROM Movie";

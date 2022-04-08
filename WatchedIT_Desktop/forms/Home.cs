@@ -8,14 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraries;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using WatchedIT_Desktop.user_controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WatchedIT_Desktop.forms
 {
     public partial class Home : Form
     {
+        private readonly IMovieService _movieService;
         private List<Movie> movies = new List<Movie>();
         private List<Series> series = new List<Series>();
         bool closedByButton = false;
@@ -25,6 +28,8 @@ namespace WatchedIT_Desktop.forms
         public Home()
         {
             InitializeComponent();
+            _movieService = Program.ServiceProvider.GetService<IMovieService>();
+            
             lblUsername.Text = "Welcome, " + AuthClass.loggedUser.Username;
             GetMovies();
             HideUI();
@@ -59,7 +64,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                movies = MovieService.GetMovies(0);
+                movies = _movieService.GetMovies(0);
             }
             catch (Exception ex)
             {
@@ -72,7 +77,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                movies = MovieService.FilterMovies(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
+                movies = _movieService.FilterMovies(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
             }
             catch (Exception ex)
             {
@@ -85,7 +90,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                List<Movie> loadedMovies = MovieService.GetMovies(movies.Count);
+                List<Movie> loadedMovies = _movieService.GetMovies(movies.Count);
 
                 foreach (Movie m in loadedMovies)
                 {

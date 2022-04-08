@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using MySql.Data.MySqlClient;
 
 namespace ClassLibraries.data_access
 {
-    public static class DataAccessEpisode
+    public class DataAccessEpisode : IDataAccessEpisode
     {
-
-        public static bool AddEpisodeQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
+        private readonly IDBSettings dBSettings = new DBSettings();
+        public bool AddEpisodeQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
@@ -40,9 +41,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static bool EditEpisodeQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode)
+        public bool EditEpisodeQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration, season = @season, episode = @episode WHERE id = @id;";
@@ -69,9 +70,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static List<Episode> GetEpisodesQuery(int seriesid)
+        public List<Episode> GetEpisodesQuery(int seriesid)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "SELECT * FROM watchedit_episodes_view WHERE seriesId = @seriesId";
@@ -110,9 +111,9 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public static Episode GetEpisodeByIdQuery(int id)
+        public Episode GetEpisodeByIdQuery(int id)
         {
-            MySqlConnection conn = new MySqlConnection(Utils.conString);
+            MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
                 string sql = "Select * from watchedit_episodes_view where id = @ID";

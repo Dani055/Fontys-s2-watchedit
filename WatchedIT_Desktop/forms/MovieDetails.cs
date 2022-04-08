@@ -8,30 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraries;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using WatchedIT_Desktop.user_controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WatchedIT_Desktop.forms
 {
     public partial class MovieDetails : Form
     {
+        private readonly IMovieService _movieService;
+        private readonly IEpisodeService _episodeService;
         private Movie movie = null;
         private List<Review> reviews = new List<Review>();
         private bool isMovie = true;
         public MovieDetails(int id, bool ismovie)
         {
             InitializeComponent();
+            _movieService = Program.ServiceProvider.GetService<IMovieService>();
+            _episodeService = Program.ServiceProvider.GetService<IEpisodeService>();
             isMovie = ismovie;
             try
             {
                 if (!isMovie)
                 {
-                    movie = EpisodeService.GetEpisodeById(id);
+                    movie = _episodeService.GetEpisodeById(id);
                 }
                 else
                 {
-                    movie = MovieService.GetMovieById(id);
+                    movie = _movieService.GetMovieById(id);
                 }
             }
             catch (Exception ex)
@@ -104,7 +110,7 @@ namespace WatchedIT_Desktop.forms
         {
             try
             {
-                if (MovieService.DeleteMovieOrEpisode(AuthClass.loggedUser, movie.Id))
+                if (_movieService.DeleteMovieOrEpisode(AuthClass.loggedUser, movie.Id))
                 {
                     if (isMovie)
                     {
@@ -137,11 +143,11 @@ namespace WatchedIT_Desktop.forms
                 {
                     if (!isMovie)
                     {
-                        movie = EpisodeService.GetEpisodeById(movie.Id);
+                        movie = _episodeService.GetEpisodeById(movie.Id);
                     }
                     else
                     {
-                        movie = MovieService.GetMovieById(movie.Id);
+                        movie = _movieService.GetMovieById(movie.Id);
                     }
                 }
                 catch (Exception ex)

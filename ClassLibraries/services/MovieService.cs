@@ -4,14 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibraries.data_access;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using MySql.Data.MySqlClient;
 
 namespace ClassLibraries.services
 {
-    public static class MovieService
+    public class MovieService : IMovieService
     {
-        public static bool AddMovie(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr)
+        private readonly IDataAccessMovie _dataAccessMovie;
+        private readonly IDataAccessEpisode dataAccessEpisode;
+        public MovieService(IDataAccessMovie dataAccessMovie, IDataAccessEpisode dataAccessEpisode)
+        {
+            _dataAccessMovie = dataAccessMovie;
+            this.dataAccessEpisode = dataAccessEpisode;
+        }
+        public bool AddMovie(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr)
         {
             DateTime year;
             TimeSpan duration;
@@ -20,10 +28,10 @@ namespace ClassLibraries.services
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);
 
-            return DataAccessMovie.AddMovieQuery(name, year, url, genre, producer, desc, actors, duration);
+            return _dataAccessMovie.AddMovieQuery(name, year, url, genre, producer, desc, actors, duration);
 
         }
-        public static bool ValidateMovie(string name, string genre, string producer, string actors, string yearStr, string durationStr)
+        public bool ValidateMovie(string name, string genre, string producer, string actors, string yearStr, string durationStr)
         {
             if (String.IsNullOrEmpty(name) || name.Length < 3)
             {
@@ -64,7 +72,7 @@ namespace ClassLibraries.services
             }
             return true;
         }
-        public static bool EditMovieOrEpisode(User loggedUser, int id, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, bool isMovie, int season, int episode)
+        public bool EditMovieOrEpisode(User loggedUser, int id, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, bool isMovie, int season, int episode)
         {
             DateTime year;
             TimeSpan duration;
@@ -75,34 +83,34 @@ namespace ClassLibraries.services
 
             if (isMovie)
             {
-                return DataAccessMovie.EditMovieQuery(id, name, year, url, genre, producer, desc, actors, duration);
+                return _dataAccessMovie.EditMovieQuery(id, name, year, url, genre, producer, desc, actors, duration);
             }
             else
             {
-                return DataAccessEpisode.EditEpisodeQuery(id, name, year, url, genre, producer, desc, actors, duration, season, episode);
+                return dataAccessEpisode.EditEpisodeQuery(id, name, year, url, genre, producer, desc, actors, duration, season, episode);
             }
         }
-        public static List<Movie> GetMovies(int offset)
+        public List<Movie> GetMovies(int offset)
         {
-            return DataAccessMovie.GetMoviesQuery(offset);
+            return _dataAccessMovie.GetMoviesQuery(offset);
         }
-        public static Movie GetMovieById(int id)
+        public Movie GetMovieById(int id)
         {
-            return DataAccessMovie.GetMovieByIdQuery(id);
+            return _dataAccessMovie.GetMovieByIdQuery(id);
         }
 
-        public static bool DeleteMovieOrEpisode(User loggedUser, int id)
+        public bool DeleteMovieOrEpisode(User loggedUser, int id)
         {
             UserService.IsAdmin(loggedUser);
-            return DataAccessMovie.DeleteMovieOrEpisodeQuery(id);
+            return _dataAccessMovie.DeleteMovieOrEpisodeQuery(id);
 
         }
 
-        public static List<Movie> SearchMovies(string keyword)
+        public List<Movie> SearchMovies(string keyword)
         {
-            return DataAccessMovie.SearchMoviesQuery(keyword.Trim());
+            return _dataAccessMovie.SearchMoviesQuery(keyword.Trim());
         }
-        public static List<Movie> FilterMovies(string keyword, int yearFrom, int yearTo, int ratingMin, int ratingMax, string genre ,string sort)
+        public List<Movie> FilterMovies(string keyword, int yearFrom, int yearTo, int ratingMin, int ratingMax, string genre ,string sort)
         {
             DateTime yearMin;
             if (yearFrom < 1000)
@@ -126,13 +134,13 @@ namespace ClassLibraries.services
             {
                 ratingMax = 5;
             }
-            return DataAccessMovie.FilterMoviesQuery(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
+            return _dataAccessMovie.FilterMoviesQuery(keyword, yearMin, yearMax, ratingMin, ratingMax, genre, sort);
         }
-        public static List<Movie> GetMostRatedMovies(int offset)
+        public List<Movie> GetMostRatedMovies(int offset)
         {
-            return DataAccessMovie.GetMostRatedMoviesQuery(offset);
+            return _dataAccessMovie.GetMostRatedMoviesQuery(offset);
         }
-        public static void UpdateMovieRating(int movieId)
+        public void UpdateMovieRating(int movieId)
         {
             List<Review> reviews = DataAccessReview.GetReviewsByMovieIdQuery(movieId);
             double totalRating = 0;
@@ -141,19 +149,19 @@ namespace ClassLibraries.services
                 totalRating += r.Rating;
             }
             double avgRating = totalRating / reviews.Count;
-            DataAccessMovie.EditMovieQuery(movieId, avgRating);
+            _dataAccessMovie.EditMovieQuery(movieId, avgRating);
         }
         //FOR UNIT TESTING
-        public static bool DeleteLastMovie(User loggedUser)
+        public bool DeleteLastMovie(User loggedUser)
         {
             UserService.IsAdmin(loggedUser);
-            return DataAccessMovie.DeleteLastMovieQuery();
+            return _dataAccessMovie.DeleteLastMovieQuery();
 
         }
-        public static int GetLastMovieID(User loggedUser)
+        public int GetLastMovieID(User loggedUser)
         {
             UserService.IsAdmin(loggedUser);
-            return DataAccessMovie.GetLastMovieIdQuery();
+            return _dataAccessMovie.GetLastMovieIdQuery();
         }
         //
     }

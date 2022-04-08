@@ -4,32 +4,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClassLibraries.data_access;
+using ClassLibraries.interfaces;
 using ClassLibraries.models;
 using MySql.Data.MySqlClient;
 
 namespace ClassLibraries.services
 {
-    public static class EpisodeService
+    public class EpisodeService : IEpisodeService
     {
-        public static bool AddEpisode(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, int season, int episode, int seriesId)
+        private readonly IMovieService movieService;
+        private readonly IDataAccessEpisode dataAccessEpisode;
+        public EpisodeService(IMovieService movieService, IDataAccessEpisode dataAccessEpisode)
+        {
+            this.movieService = movieService;
+            this.dataAccessEpisode = dataAccessEpisode;
+        }
+        public bool AddEpisode(User loggedUser, string name, string yearStr, string url, string genre, string producer, string desc, string actors, string durationStr, int season, int episode, int seriesId)
         {
             DateTime year;
             TimeSpan duration;
             UserService.IsAdmin(loggedUser);
-            MovieService.ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
+            movieService.ValidateMovie(name, genre, producer, actors, yearStr, durationStr);
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);
 
-            return DataAccessEpisode.AddEpisodeQuery(name, year, url, genre, producer, desc, actors, duration, season, episode, seriesId);
+            return dataAccessEpisode.AddEpisodeQuery(name, year, url, genre, producer, desc, actors, duration, season, episode, seriesId);
         }
 
-        public static List<Episode> GetEpisodes(int seriesid)
+        public List<Episode> GetEpisodes(int seriesid)
         {
-            return DataAccessEpisode.GetEpisodesQuery(seriesid);
+            return dataAccessEpisode.GetEpisodesQuery(seriesid);
         }
-        public static Episode GetEpisodeById(int id)
+        public Episode GetEpisodeById(int id)
         {
-            return DataAccessEpisode.GetEpisodeByIdQuery(id);
+            return dataAccessEpisode.GetEpisodeByIdQuery(id);
         }
 
     }

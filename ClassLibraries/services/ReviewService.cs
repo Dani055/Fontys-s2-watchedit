@@ -10,6 +10,7 @@ namespace ClassLibraries.services
 {
     public static class ReviewService
     {
+        private static MovieService movieService = new MovieService(new DataAccessMovie(), new DataAccessEpisode());
         public static bool PostReview(User loggedUser, int movieId, string description, int rating)
         {
             if (loggedUser == null)
@@ -23,7 +24,7 @@ namespace ClassLibraries.services
             }
             if (DataAccessReview.PostReviewQuery(loggedUser.Id, movieId, description, rating))
             {
-                MovieService.UpdateMovieRating(movieId);
+                movieService.UpdateMovieRating(movieId);
                 return true;
             }
             return false;
@@ -55,7 +56,7 @@ namespace ClassLibraries.services
                 }
                 if (DataAccessReview.DeleteReviewQuery(id))
                 {
-                    MovieService.UpdateMovieRating(rev.MovieId);
+                    movieService.UpdateMovieRating(rev.MovieId);
                     return true;
                 }
                 return false;
