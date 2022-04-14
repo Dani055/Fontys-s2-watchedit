@@ -119,3 +119,4 @@ C:\Users\Nitro\Desktop\s2-watchedit\UnitTestsWatchedIt\obj\Debug\net5.0\UnitTest
 C:\Users\Nitro\Desktop\s2-watchedit\UnitTestsWatchedIt\obj\Debug\net5.0\ref\UnitTestsWatchedIt.dll
 C:\Users\Nitro\Desktop\s2-watchedit\UnitTestsWatchedIt\obj\Debug\net5.0\UnitTestsWatchedIt.pdb
 C:\Users\Nitro\Desktop\s2-watchedit\UnitTestsWatchedIt\obj\Debug\net5.0\UnitTestsWatchedIt.genruntimeconfig.cache
+C:\Users\Nitro\Desktop\s2-watchedit\UnitTestsWatchedIt\bin\Debug\net5.0\FluentAssertions.dll

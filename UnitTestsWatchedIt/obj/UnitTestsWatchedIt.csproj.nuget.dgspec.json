@@ -104,6 +104,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.6.0, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
               "version": "[2.2.3, )"

@@ -10,6 +10,7 @@ using ClassLibraries;
 using ClassLibraries.models;
 using ClassLibraries.services;
 using ClassLibraries.interfaces;
+using ClassLibraries.data_access;
 
 namespace WatchedItWeb.Pages
 {
@@ -18,6 +19,7 @@ namespace WatchedItWeb.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly INotyfService _notyf;
         private readonly IMovieService _movieService;
+        public byte[] Imagestr { get; set; }
         public List<Movie> BestRated { get; set; } = new List<Movie>();
         public List<Movie> Newest { get; set; } = new List<Movie>();
         [BindProperty(SupportsGet = true)]

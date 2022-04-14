@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "0HUinPzNuTHyqmbPEKdz/2FiHWF6DIRSWOysPw/XhD95OR9NwUPZXbZLX+5gNzHU6AKzttnadH+ik2ewnXn6Ng==",
+  "dgSpecHash": "U0YBdeSL2eEsNJXPEZgT5cfzLPmd7vqU2WiLNw/cMErdhdIA7UtFNhgI2PJDiu6bNxaMvqlHbbG821IRMvhLwQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nitro\\Desktop\\s2-watchedit\\UnitTestsWatchedIt\\UnitTestsWatchedIt.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nitro\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Nitro\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
+    "C:\\Users\\Nitro\\.nuget\\packages\\fluentassertions\\6.6.0\\fluentassertions.6.6.0.nupkg.sha512",
     "C:\\Users\\Nitro\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",
     "C:\\Users\\Nitro\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
     "C:\\Users\\Nitro\\.nuget\\packages\\k4os.compression.lz4.streams\\1.2.6\\k4os.compression.lz4.streams.1.2.6.nupkg.sha512",

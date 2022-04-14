@@ -10,7 +10,7 @@ namespace ClassLibraries.services
 {
     public static class ReviewService
     {
-        private static MovieService movieService = new MovieService(new DataAccessMovie(), new DataAccessEpisode());
+        private static MovieService movieService = new MovieService(new DataAccessMovie(new DBSettings()), new DataAccessEpisode(new DBSettings()));
         public static bool PostReview(User loggedUser, int movieId, string description, int rating)
         {
             if (loggedUser == null)

@@ -35,6 +35,7 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
+
         public static bool EditSeriesQuery(int id, string name, DateTime year, string url, string genre, string desc, string actors, string producer)
         {
             MySqlConnection conn = new MySqlConnection(Utils.conString);

@@ -9,16 +9,16 @@ namespace ClassLibraries.interfaces
 {
     public interface IDataAccessEpisode
     {
-        public bool AddEpisodeQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId);
+        public bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId);
 
 
-        public bool EditEpisodeQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode);
+        public bool EditEpisode(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode);
 
 
-        public List<Episode> GetEpisodesQuery(int seriesid);
+        public List<Episode> GetEpisodes(int seriesid);
 
 
-        public Episode GetEpisodeByIdQuery(int id);
+        public Episode GetEpisodeById(int id);
        
     }
 }

@@ -11,13 +11,17 @@ namespace ClassLibraries.data_access
 {
     public class DataAccessEpisode : IDataAccessEpisode
     {
-        private readonly IDBSettings dBSettings = new DBSettings();
-        public bool AddEpisodeQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
+        private readonly IDBSettings dBSettings;
+        public DataAccessEpisode(IDBSettings dbsettings)
+        {
+            dBSettings = dbsettings;
+        }
+        public bool AddEpisode(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode, int seriesId)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "INSERT INTO movie (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
+                string sql = $"INSERT INTO {dBSettings.MovieTable()} (name, year, imageUrl, genre, producer, description, actors, duration, season, episode, seriesId) VALUES(@name, @year, @imageUrl, @genre, @producer, @description, @actors, @duration, @season, @episode, @seriesId); ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 cmd.Parameters.AddWithValue("@name", name);
@@ -41,12 +45,12 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public bool EditEpisodeQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode)
+        public bool EditEpisode(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration, int season, int episode)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "UPDATE movie SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration, season = @season, episode = @episode WHERE id = @id;";
+                string sql = $"UPDATE {dBSettings.MovieTable()} SET name = @name, year = @year, imageUrl = @imageUrl, genre = @genre, description = @description, producer = @producer, actors = @actors, duration = @duration, season = @season, episode = @episode WHERE id = @id;";
 
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", id);
@@ -70,12 +74,12 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public List<Episode> GetEpisodesQuery(int seriesid)
+        public List<Episode> GetEpisodes(int seriesid)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "SELECT * FROM watchedit_episodes_view WHERE seriesId = @seriesId";
+                string sql = $"SELECT * FROM {dBSettings.MovieTable()} WHERE seriesId = @seriesId";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@seriesId", seriesid);
                 List<Episode> episodes = new List<Episode>();
@@ -111,12 +115,12 @@ namespace ClassLibraries.data_access
                 conn.Close();
             }
         }
-        public Episode GetEpisodeByIdQuery(int id)
+        public Episode GetEpisodeById(int id)
         {
             MySqlConnection conn = new MySqlConnection(dBSettings.GetConString());
             try
             {
-                string sql = "Select * from watchedit_episodes_view where id = @ID";
+                string sql = $"Select * from {dBSettings.MovieTable()} where id = @ID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@ID", id);
                 Episode e;

@@ -28,7 +28,8 @@ namespace WatchedItWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddNotyf(config => { config.DurationInSeconds = 5; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
-            
+
+            services.AddSingleton<IDBSettings, DBSettings>();
             services.AddSingleton<IDataAccessEpisode, DataAccessEpisode>();
             services.AddSingleton<IDataAccessMovie, DataAccessMovie>();
             services.AddScoped<IMovieService, MovieService>();

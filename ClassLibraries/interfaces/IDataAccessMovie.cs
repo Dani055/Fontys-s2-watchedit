@@ -9,29 +9,29 @@ namespace ClassLibraries.interfaces
 {
     public interface IDataAccessMovie
     {
-        public bool AddMovieQuery(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration);
+        public bool AddMovie(string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration);
 
 
-        public bool EditMovieQuery(int id, double rating);
+        public bool EditMovie(int id, double rating);
 
-        public bool EditMovieQuery(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration);
+        public bool EditMovie(int id, string name, DateTime year, string url, string genre, string producer, string desc, string actors, TimeSpan duration);
 
-        public List<Movie> GetMoviesQuery(int offset);
+        public List<Movie> GetMovies(int offset);
 
-        public Movie GetMovieByIdQuery(int id);
+        public Movie GetMovieById(int id);
 
-        public bool DeleteMovieOrEpisodeQuery(int id);
+        public bool DeleteMovieOrEpisode(int id);
 
-        public List<Movie> SearchMoviesQuery(string keyword);
+        public List<Movie> SearchMovies(string keyword);
 
-        public List<Movie> FilterMoviesQuery(string keyword, DateTime yearFrom, DateTime yearTo, int ratingMin, int ratingMax, string genreLike, string sort);
+        public List<Movie> FilterMovies(string keyword, DateTime yearFrom, DateTime yearTo, int ratingMin, int ratingMax, string genreLike, string sort);
 
-        public List<Movie> GetMostRatedMoviesQuery(int offset);
+        public List<Movie> GetMostRatedMovies(int offset);
 
 
-        public bool DeleteLastMovieQuery();
+        public bool DeleteLastMovie();
 
-        public int GetLastMovieIdQuery();
+        public int GetLastMovieId();
         
     }
 }

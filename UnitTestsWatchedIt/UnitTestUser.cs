@@ -22,25 +22,27 @@ namespace UnitTestsWatchedIt
             Assert.AreEqual("email@email.com", u.Email);
             Assert.AreEqual("www.com", u.ImageUrl);
         }
+
+        #region "Old unit tests with static services. Consider looking at unit tests for movie"
         [TestMethod]
         public void TestLogin()
         {
-            UserService.Login("jrdn", "123");
-            Assert.IsNotNull(UserService.loggedUser);
+            User user = UserService.Login("jrdn", "123");
+            Assert.IsNotNull(user);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestLoginIncorrect()
         {
-            UserService.Login("asd", "asd");
+            User user = UserService.Login("asd", "asd");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void RegisterUsernameShort()
         {
-            UserService.Register("","123","123","123","123", "123");
+            UserService.Register("", "123", "123", "123", "123", "123");
         }
 
         [TestMethod]
@@ -74,8 +76,10 @@ namespace UnitTestsWatchedIt
         [TestMethod]
         public void Register()
         {
-            UserService.Register("123", "123", "123", "123", "123@123", "123");
+            UserService.Register("123", "123", "123", "123", "123@123.com", "123");
             UserService.DeleteUser("123");
         }
+        #endregion
+
     }
 }

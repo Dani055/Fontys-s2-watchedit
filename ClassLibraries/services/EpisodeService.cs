@@ -28,16 +28,16 @@ namespace ClassLibraries.services
             DateTime.TryParse(yearStr, out year);
             TimeSpan.TryParse(durationStr, out duration);
 
-            return dataAccessEpisode.AddEpisodeQuery(name, year, url, genre, producer, desc, actors, duration, season, episode, seriesId);
+            return dataAccessEpisode.AddEpisode(name, year, url, genre, producer, desc, actors, duration, season, episode, seriesId);
         }
 
         public List<Episode> GetEpisodes(int seriesid)
         {
-            return dataAccessEpisode.GetEpisodesQuery(seriesid);
+            return dataAccessEpisode.GetEpisodes(seriesid);
         }
         public Episode GetEpisodeById(int id)
         {
-            return dataAccessEpisode.GetEpisodeByIdQuery(id);
+            return dataAccessEpisode.GetEpisodeById(id);
         }
 
     }

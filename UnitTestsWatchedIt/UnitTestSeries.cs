@@ -26,62 +26,63 @@ namespace UnitTestsWatchedIt
             Assert.AreEqual("actors", s.Actors);
         }
 
+        #region "Old unit tests with static services. Consider looking at unit tests for movie"
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesUnauthorized()
         {
-            UserService.Login("bust", "123");
-            SeriesService.AddSeries("The Withcer", "2019-01-01", "image", "Action/Fantasy", "description", "actors", "producer");
+            User user = UserService.Login("bust", "123");
+            SeriesService.AddSeries(user, "The Withcer", "2019-01-01", "image", "Action/Fantasy", "description", "actors", "producer");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesNameShort()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("Th", "2019-01-01", "image", "Action/Fantasy", "description", "actors", "producer");
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "Th", "2019-01-01", "image", "Action/Fantasy", "description", "actors", "producer");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesGenreShort()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "2019-01-01", "image", "", "description", "actors", "producer");
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "2019-01-01", "image", "", "description", "actors", "producer");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesProducerShort()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "2019-01-01", "image", "genre", "description", "actors", "");
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "2019-01-01", "image", "genre", "description", "actors", "");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesActorsShort()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "2019-01-01", "image", "genre", "description", "", "producer");
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "2019-01-01", "image", "genre", "description", "", "producer");
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestAddSeriesDateIncorrect()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "date", "image", "genre", "description", "actors", "producer");
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "date", "image", "genre", "description", "actors", "producer");
         }
 
         //NOT TESTING INPUT VALIDATION OR AUTHORIZATION BECAUSE ValidateSeries() IS A SHARED METHOD
         [TestMethod]
         public void TestEditSeries()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "2019-01-01", "image", "genre", "description", "actors", "producer");
-            SeriesService.EditSeries(SeriesService.GetLastSeriesId(), "New name", "2022-01-01", "url@url", "New genre", "new description", "new actors", "new producers");
-            SeriesService.DeleteLastSeries();
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "2019-01-01", "image", "genre", "description", "actors", "producer");
+            SeriesService.EditSeries(user, SeriesService.GetLastSeriesId(user), "New name", "2022-01-01", "url@url", "New genre", "new description", "new actors", "new producers");
+            SeriesService.DeleteLastSeries(user);
         }
 
         [TestMethod]
@@ -98,24 +99,26 @@ namespace UnitTestsWatchedIt
         [TestMethod]
         public void TestGetSeriesById()
         {
-            SeriesService.GetSeriesById(SeriesService.GetLastSeriesId());
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.GetSeriesById(SeriesService.GetLastSeriesId(user));
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
         public void TestDeleteSeriesUnauthorized()
         {
-            UserService.Login("bust", "123");
-            SeriesService.DeleteSeries(12);
+            User user = UserService.Login("bust", "123");
+            SeriesService.DeleteSeries(user, 12);
 
         }
 
         [TestMethod]
         public void TestDeleteSeries()
         {
-            UserService.Login("jrdn", "123");
-            SeriesService.AddSeries("The Witcher", "2019-01-01", "image", "genre", "description", "actors", "producer");
-            SeriesService.DeleteSeries(SeriesService.GetLastSeriesId());
+            User user = UserService.Login("jrdn", "123");
+            SeriesService.AddSeries(user, "The Witcher", "2019-01-01", "image", "genre", "description", "actors", "producer");
+            SeriesService.DeleteSeries(user, SeriesService.GetLastSeriesId(user));
         }
+        #endregion
     }
 }

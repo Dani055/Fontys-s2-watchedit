@@ -20,6 +20,7 @@ namespace WatchedIT_Desktop
         {
             return new HostBuilder().ConfigureServices(services =>
             {
+                services.AddSingleton<IDBSettings, DBSettings>();
                 services.AddSingleton<IDataAccessEpisode, DataAccessEpisode>();
                 services.AddSingleton<IDataAccessMovie, DataAccessMovie>();
                 services.AddScoped<IMovieService, MovieService>();
