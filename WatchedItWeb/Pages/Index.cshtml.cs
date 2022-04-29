@@ -35,6 +35,18 @@ namespace WatchedItWeb.Pages
 
         public void OnGet()
         {
+            if (HttpContext.Session.GetMovie() != null && HttpContext.Session.GetMovie() is Episode)
+            {
+                _notyf.Success(((Episode)HttpContext.Session.GetMovie()).EpisodeNo.ToString());
+            }
+            else
+            {
+                if (HttpContext.Session.GetMovie() != null)
+                {
+                    _notyf.Error(((Episode)HttpContext.Session.GetMovie()).SeasonNo.ToString());
+                }
+                
+            }
             try
             {
                 List<Movie> loadedMoviesBestRated = new List<Movie>();

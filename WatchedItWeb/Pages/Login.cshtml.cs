@@ -29,7 +29,7 @@ namespace WatchedItWeb.Pages
                 if (result != null)
                 {
                     HttpContext.Session.SetObject("loggedUser", result);
-/*                    HttpContext.Session.SetInt32("userId", result.Id);*/
+                    HttpContext.Session.SetObject("movie", new Episode(1,"asd",DateTime.MaxValue, "", "asd", "asd", "desc", "asd", TimeSpan.MinValue, 3, 2, 1, 9));
                     return RedirectToPage("/Index");
                 }
                 else
