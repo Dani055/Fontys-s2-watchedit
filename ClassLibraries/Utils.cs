@@ -8,7 +8,7 @@ namespace ClassLibraries
 {
     public static class Utils
     {
-        public static string conString { get; } = "server=studmysql01.fhict.local;database=dbi476740;uid=dbi476740;password=123rty;";
+        public static string conString { get; } = "Your connection string here";
         public static bool UpdateContent { get; set; } = false;
     }
 }
